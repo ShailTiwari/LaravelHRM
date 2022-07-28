@@ -104,7 +104,7 @@
                   />
                    @if ($errors->has('email'))
                     <span class="text-danger">{{ $errors->first('email') }}</span>
-                @endif
+                  @endif
 
                 </div>
                 <div class="mb-3 form-password-toggle">
@@ -124,7 +124,7 @@
                             aria-describedby="basic-default-password2"
                     />
                      <span id="basic-default-password2" class="input-group-text cursor-pointer"
-                            ><i class="bx bx-hide"></i
+                            ><i id="showhide" class="bx bx-hide"></i
                           ></span>
 
                   </div> @if ($errors->has('password'))
@@ -170,6 +170,24 @@
 
     <!-- Main JS -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+  
+   $('#basic-default-password2').on('click', function(){
+      var passInput=$("#basic-default-password12");
+      var passeye=$("#showhide");
+      if(passInput.attr('type')==='password')
+        {
+          passInput.attr('type','text');
+          passeye.attr('class','bx bx-show');
+      }else{
+         passInput.attr('type','password');
+          passeye.attr('class','bx bx-hide');
+
+      }
+  })
+})
+    </script>
 
   </body>
 </html>

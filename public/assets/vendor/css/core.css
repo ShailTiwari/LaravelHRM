@@ -3906,7 +3906,7 @@ textarea.form-control-lg {
   margin-bottom: 0;
   background-color: transparent;
   border-bottom: 0 solid #d9dee3;*/
-
+padding: 0.5rem 1.5rem;
   font-size: 15px;
 font-weight: 400;
 line-height: 1.2;

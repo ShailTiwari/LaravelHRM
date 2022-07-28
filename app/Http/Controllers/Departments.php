@@ -7,10 +7,15 @@ use App\Models\Department;
 
 class Departments extends Controller
 {
+      public function __construct() {
+        $this->page_name="Department";
+    }
+
      public function index()
     {
+       // $page_name="Department";
         $data= Department::paginate(100);
-        return view('department_list',['members'=>$data]);
+        return view('department_list',['page_name'=>$this->page_name,'members'=>$data]);
     }
 
      public function create(Request $request)

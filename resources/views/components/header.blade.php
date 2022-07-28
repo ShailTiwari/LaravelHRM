@@ -68,7 +68,7 @@
 
            <nav class="navbar navbar-expand-lg navbar-light bg-light mb-0">
                 <div class="container-fluid">
-                  <a class="navbar-brand danger" href="javascript:void(0)">Dashboard</a>
+                  <a class="navbar-brand danger" href="">{{$title}}</a>
                   <button
                     class="navbar-toggler"
                     type="button"

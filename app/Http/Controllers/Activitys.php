@@ -7,12 +7,17 @@ use App\Models\Activity;
 use App\Models\Event;
 
 class Activitys extends Controller
-{
+{  public function __construct() 
+    {
+        $this->page_name="Activitys";
+    }
 
      public function index(Request $request)
      {
         $posts = Activity::orderBy('order','asc')->get();
-        return view('activity',compact('posts'));
+
+        return view('activity',['page_name'=>$this->page_name,'posts'=>$posts]);
+        //return view('activity',compact('posts'));
      }
 
     public function updateOrder(Request $request){

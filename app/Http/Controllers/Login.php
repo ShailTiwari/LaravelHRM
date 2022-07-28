@@ -71,8 +71,8 @@ class Login extends Controller
 
   public function ragister(Request $request)
     { 
-                      $request->validate(['name' => 'required',
-                           'email' => 'required',
+                      $request->validate(['name' => 'required|max:255',
+                           'email' => 'required|unique:users|max:255',
                            'password' => 'required',
                            ]);
                         $User= new User;

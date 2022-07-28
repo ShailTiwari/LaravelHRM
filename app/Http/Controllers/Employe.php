@@ -6,13 +6,25 @@ use Illuminate\Http\Request;
 use App\Models\Employee;
 
 class Employe extends Controller
-{
+{ 
+
+    public function __construct() 
+    {
+        $this->page_name="Employee";
+    }
+     public function employee_list()
+    {
+        $data= Employee::all();
+        return view('employee_list',['page_name'=>$this->page_name,'members'=>$data]);
+    }
+
+    
     public function employee_profile($id)
     {
         //return $id;
          $data=Employee::find($id);
          $user=Employee::where(['id'=>$id])->first();
-         return view('employee_profile',['member'=>$user]);
+         return view('employee_profile',['page_name'=>$this->page_name,'member'=>$user]);
     }
 
       public function create_employee_profile(Request $request)

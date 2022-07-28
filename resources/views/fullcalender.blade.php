@@ -1,4 +1,4 @@
-    <x-header/>
+    <x-header  title={{$page_name}}/>
     <x-sidebar/>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

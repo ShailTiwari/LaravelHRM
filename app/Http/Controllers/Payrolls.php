@@ -6,11 +6,15 @@ use Illuminate\Http\Request;
 use App\Models\Payroll;
 
 class Payrolls extends Controller
-{
+{ 
+    public function __construct() 
+    {
+        $this->page_name="Payroll";
+    }
     public function index()
     {
         $data= Payroll::paginate(100);
-        return view('payroll_list',['members'=>$data]);
+        return view('payroll_list',['page_name'=>$this->page_name,'members'=>$data]);
     }
 
      public function create(Request $request)

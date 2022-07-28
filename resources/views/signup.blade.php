@@ -69,12 +69,15 @@
                   <input
                     type="text"
                     class="form-control"
-                    id="email"
+                    id="name"
                     name="name"
                     placeholder="Enter your email or username"
                     autofocus
                   />
                 </div>
+                  @if ($errors->has('name'))
+                    <span class="text-danger">{{ $errors->first('name') }}</span>
+                  @endif
                  <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
                   <input
@@ -84,7 +87,9 @@
                     name="email"
                     placeholder="Enter your email or username"
                     autofocus
-                  />
+                  /> @if ($errors->has('email'))
+                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                  @endif
                 </div>
 
                 <div class="mb-3 form-password-toggle">
@@ -94,14 +99,19 @@
                   <div class="input-group input-group-merge">
                     <input
                       type="password"
-                      id="password"
+                      id="basic-default-password12"
                       class="form-control"
                       name="password"
                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                       aria-describedby="password"
                     />
-                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                  </div>
+                   <span id="basic-default-password2" class="input-group-text cursor-pointer"
+                            ><i id="showhide" class="bx bx-hide"></i
+                          ></span>
+                  </div> 
+                  @if ($errors->has('password'))
+                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                  @endif
                 </div>
                  <div class="mb-3">
                   <div class="form-check">
@@ -135,20 +145,27 @@
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/popper/popper.js') }}"></script>
-    <script src="{{ asset('assets/vendor/js/bootstrap.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
-    <script src="{{ asset('assets/vendor/js/menu.js') }}"></script>
-    <!-- endbuild -->
-
-    <!-- Vendors JS -->
-
     <!-- Main JS -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
     <!-- Page JS -->
-
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+  
+   $('#basic-default-password2').on('click', function(){
+      var passInput=$("#basic-default-password12");
+      var passeye=$("#showhide");
+      if(passInput.attr('type')==='password')
+        {
+          passInput.attr('type','text');
+          passeye.attr('class','bx bx-show');
+      }else{
+         passInput.attr('type','password');
+          passeye.attr('class','bx bx-hide');
+         
+      }
+  })
+})
+    </script>
   </body>
 </html>

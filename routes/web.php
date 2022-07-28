@@ -9,6 +9,7 @@ use App\Http\Controllers\Events;
 use App\Http\Controllers\Activitys;
 use App\Http\Controllers\Holidays;
 use App\Http\Controllers\Payrolls;
+use App\Http\Controllers\Attendances;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,13 +55,19 @@ Route::get('payroll_edit/{id}', [Payrolls::class, 'edit']);
 Route::get('payroll_delete/{id}', [Payrolls::class, 'delete']);
 
 
-Route::get('employee', [Dashboard::class, 'employee_list']);
+Route::get('employee', [Employe::class, 'employee_list']);
 Route::post('create_employee_profile', [Employe::class, 'create_employee_profile'])->name('create_employee_profile'); 
 Route::get('employee_edit/{id}', [Employe::class, 'employee_profile']); 
 Route::post('update_employee_profile', [Employe::class, 'update_employee_profile'])->name('update_employee_profile'); 
 Route::get('employee_delete/{id}',[Employe::class, 'delete'] );
 
 
+
+Route::get('Attendance', [Attendances::class, 'Attendance_list']);
+Route::post('create_attendance', [Attendances::class, 'create_attendance'])->name('create_attendance'); 
+Route::get('Attendance_edit/{id}', [Attendances::class, 'Attendance_profile']); 
+Route::post('update_Attendance_profile', [Attendances::class, 'update_Attendance_profile'])->name('update_Attendance_profile'); 
+Route::get('Attendance_delete/{id}',[Attendances::class, 'delete'] );
 
 
 

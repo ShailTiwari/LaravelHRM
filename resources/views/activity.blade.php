@@ -1,4 +1,4 @@
-    <x-header/>
+    <x-header  title={{$page_name}}/>
     <x-sidebar/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="row mt-5">

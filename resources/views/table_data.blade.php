@@ -1,4 +1,4 @@
-    <x-header/>
+    <x-header  title={{$page_name}}/>
     <x-sidebar/>
   <div class="container-xxl flex-grow-1 container-p-y">
    <!-- Basic Bootstrap Table -->
