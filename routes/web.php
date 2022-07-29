@@ -10,6 +10,7 @@ use App\Http\Controllers\Activitys;
 use App\Http\Controllers\Holidays;
 use App\Http\Controllers\Payrolls;
 use App\Http\Controllers\Attendances;
+use App\Http\Controllers\Projects;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +72,17 @@ Route::get('Attendance_delete/{id}',[Attendances::class, 'delete'] );
 
 
 
+
+Route::get('project', [Projects::class, 'project_list']);
+Route::post('create_projects', [Projects::class, 'create_projects'])->name('create_projects'); 
+Route::get('projects_edit/{id}', [Projects::class, 'projects_profile']); 
+Route::post('update_projects_profile', [Projects::class, 'update_projects_profile'])->name('update_projects_profile'); 
+Route::get('projects_delete/{id}',[Projects::class, 'delete'] );
+
+
+
+
+
 Route::get('holiday', [Holidays::class, 'index']);
 /*Route::post('create_holiday_profile', [Holidays::class, 'create_employee_profile'])->name('create_employee_profile'); 
 Route::get('employee_edit/{id}', [Holidays::class, 'employee_profile']); 
@@ -90,7 +102,7 @@ Route::post('activity_save', [Activitys::class,'updateOrder'])->name('activity_s
 
 Route::get('accunts', [login::class, 'getData'])->name('getData');
 Route::get('report', [login::class, 'getData'])->name('getData');
-Route::get('project', [login::class, 'getData'])->name('getData');
+//Route::get('project', [login::class, 'getData'])->name('getData');
     
 
 Route::get('profile/{id}', [Dashboard::class, 'profile']); 

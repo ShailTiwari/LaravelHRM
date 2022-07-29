@@ -22,14 +22,16 @@ class Activitys extends Controller
 
     public function updateOrder(Request $request){
         foreach ($request->order as $key => $order) 
-        {
-            
-            //return response()->json($order['id']);
-
+        {            
+            // return response()->json($request);
                  $data= new Activity();
                  $data=Activity::find($order['id']);
+                 $data->ticketid=$order['ticketid'];
+                 $data->taskstatus=$order['status'];
+                 $data->head_id=$order['head_id'];
                  $data->order=$order['order'];
                  $event =$data->update();
+                // return response()->json($data);
         }
 
         return response('Update Successfully.', 200);
