@@ -1,11 +1,131 @@
     <x-header  title={{$page_name}}/>
     <x-sidebar/>
     <div class="container-xxl flex-grow-1 container-p-y">
+
+        <!-- Large Modal -->
+          <div class="modal fade" id="largeModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel3">Create Task</h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                  <form id="formAccountSettings" method="POST"action="{{ route('create_activity') }}" enctype="multipart/form-data">
+                          @csrf
+                <div class="modal-body">  
+                  <div class="row g-2">
+                    <div class="col mb-0">
+                      <label for="emailLarge" class="form-label">Project*</label>
+                       <select name="project" class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+                          <option selected>Select Project</option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+                    </div>
+
+                    <div class="col mb-0">
+                      <label for="dobLarge" class="form-label">Issue type*</label>
+                       <select  name="type" class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+                          <option selected>Select Type</option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+                    </div>
+                  </div>
+
+
+
+                  <div class="row">
+                    <div class="col mb-3">
+                      <label for="nameLarge" class="form-label">Summary*</label>
+                      <input name="summary"  type="text" id="nameLarge" class="form-control" placeholder="Enter Summary" />
+                    </div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col mb-3">
+                      <label for="nameLarge" class="form-label">Description*</label>
+                     <textarea  name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                  </div>
+
+
+                  <div class="row g-2">
+                    <div class="col mb-0">
+                      <label for="emailLarge" class="form-label">Assignee</label> 
+                      <select  name="assignee" class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+                          <option value="0" selected>Select Assignee</option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+                    </div>
+                    <div class="col mb-0">
+                      <label for="dobLarge" class="form-label">Reporter</label>
+                      <select  name="reporter" class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+                          <option value="0" selected>Select Reporter</option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+                    </div>
+                  </div>
+                  <div class="row g-2">
+                    <div class="col mb-0">
+                      <label for="emailLarge" class="form-label">Labels</label> 
+                      <select  name="labels" class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+                          <option value="0" selected>Select Labels</option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+                    </div>
+                    <div class="col mb-0">
+                      <label for="dobLarge" class="form-label">Flagged</label>
+                      <select  name="flagged" class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+                          <option value="0" selected>Select Flagged</option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Close
+                  </button>
+                  <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+                 </form>
+              </div>
+            </div>
+          </div>
+
+
+
+
    
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <div id="demo" class="row">
 
-  <div class="card col-4 mb-4 btn-secondary">
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          data-bs-toggle="modal"
+                          data-bs-target="#largeModal"
+                        >
+                          Add Task
+                        </button>
+
+  <div class="card col-4 mb-4 activity-secondary">
    <h5 class="d-inline card-header">TO DO</h5>
     <div id="items-1" class="list-group col">
        @foreach($posts as $post)
@@ -19,7 +139,7 @@
                       <h5 class="text-nowrap mb-2">{{ $post->title }}</h5>
                     </div>
                     <div class="mt-sm-auto">
-                      <h3 class="mb-0">{{ $post->description }}</h3>
+                       <p class="card-text"> {{ $post->description }} </p>
                     </div>
                   </div>
                   <div id="profileReportChartt">
@@ -39,7 +159,7 @@
 
 
 
-  <div class="card col-4 mb-4 btn-warning">
+  <div class="card col-4 mb-4 activity-secondary">
    <h5 class="d-inline card-header">IN PROGRESS</h5>
     <div id="items-2" class="list-group col">
          @foreach($posts as $post)
@@ -53,7 +173,7 @@
                       <h5 class="text-nowrap mb-2">{{ $post->title }}</h5>
                     </div>
                     <div class="mt-sm-auto">
-                      <h3 class="mb-0">{{ $post->description }}</h3>
+                       <p class="card-text"> {{ $post->description }} </p>
                     </div>
                   </div>
                   <div id="profileReportChartt">
@@ -71,7 +191,7 @@
   </div>
 
 
-  <div class="card col-4 mb-4 btn-success">
+  <div class="card col-4 mb-4 activity-done">
    <h5 class="d-inline card-header">DONE</h5>
     <div id="items-3" class="list-group col">
          @foreach($posts as $post)
@@ -85,7 +205,7 @@
                       <h5 class="text-nowrap mb-2">{{ $post->title }}</h5>
                     </div>
                     <div class="mt-sm-auto">
-                      <h3 class="mb-0">{{ $post->description }}</h3>
+                       <p class="card-text"> {{ $post->description }} </p>
                     </div>
                   </div>
                   <div id="profileReportChartt">

@@ -26,16 +26,42 @@ class Activitys extends Controller
             // return response()->json($request);
                  $data= new Activity();
                  $data=Activity::find($order['id']);
-                 $data->ticketid=$order['ticketid'];
                  $data->taskstatus=$order['status'];
-                 $data->head_id=$order['head_id'];
                  $data->order=$order['order'];
+                // $data->ticketid=$order['ticketid'];
+                // $data->head_id=$order['head_id'];
                  $event =$data->update();
                 // return response()->json($data);
         }
 
         return response('Update Successfully.', 200);
     }
+
+
+
+      public function create_activity_profile(Request $request)
+    { 
+         $data= new Activity();
+         $data->project=$request->project;
+         $data->key='AP-T';
+         $data->icon_picture='';
+         $data->type=$request->type;
+         $data->summary=$request->summary;
+         $data->description=$request->description;
+         $data->assignee=$request->assignee;
+         $data->reporter=$request->reporter;
+         $data->labels=$request->labels;
+         $data->flagged=$request->flagged;
+         $data->start=date('Y-m-d');
+         $data->options='1';
+         $data->isconfirm='1';
+         $data->remarks='';
+         $data->save();
+        return redirect('activity');                      
+    }
+
+
+
     
 
 

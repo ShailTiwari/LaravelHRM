@@ -74,8 +74,8 @@ Route::get('Attendance_delete/{id}',[Attendances::class, 'delete'] );
 
 
 Route::get('project', [Projects::class, 'project_list']);
-Route::post('create_projects', [Projects::class, 'create_projects'])->name('create_projects'); 
-Route::get('projects_edit/{id}', [Projects::class, 'projects_profile']); 
+Route::post('create_projects', [Projects::class, 'create_project_profile'])->name('create_projects'); 
+Route::get('projects_edit/{id}', [Projects::class, 'project_profile']); 
 Route::post('update_projects_profile', [Projects::class, 'update_projects_profile'])->name('update_projects_profile'); 
 Route::get('projects_delete/{id}',[Projects::class, 'delete'] );
 
@@ -98,6 +98,8 @@ Route::post('event_save', [Events::class,'ajax_event_save'])->name('ajax_event_s
 
 Route::get('activity', [Activitys::class, 'index'])->name('index');
 Route::post('activity_save', [Activitys::class,'updateOrder'])->name('activity_save');  
+Route::post('create_activity', [Activitys::class, 'create_activity_profile'])->name('create_activity'); 
+Route::get('activity_edit/{id}', [Activitys::class, 'activity_profile']); 
 
 
 Route::get('accunts', [login::class, 'getData'])->name('getData');

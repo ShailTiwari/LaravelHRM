@@ -149,7 +149,7 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="profile/{{session()->get('user')['id']}}">
+                      <a class="dropdown-item" href="/profile/{{session()->get('user')['id']}}">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle">My Profile</span>
                       </a>

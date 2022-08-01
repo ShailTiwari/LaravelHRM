@@ -1,6 +1,143 @@
     <x-header  title={{$page_name}}/>
     <x-sidebar/>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <div class="container-xxl flex-grow-1 container-p-y">
+      <!-- Large Modal -->
+          <div class="modal fade" id="largeModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel3">Create Task</h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                 <form id="formAccountSettings" method="POST"action="{{ route('create_projects') }}" enctype="multipart/form-data">
+                          @csrf
+                <div class="modal-body">  
+                          <h4 class="mb-0">Add project details</h4>
+                           <h6 class="mb-0">You can change these details anytime in your project settings.</h6>
+                         </hr>
+
+
+                            <div class="d-flex align-items-start align-items-sm-center gap-4">
+                        <img
+                        id="preview-image"
+                          src="{{ url('img/1.png') }}"
+                          alt="user-avatar"
+                          class="d-block rounded"
+                          height="100"
+                          width="100"
+
+                        />
+                        <div class="button-wrapper">
+                          <label for="upload" class="me-2 mb-8" tabindex="0">
+                            <span class="d-none d-sm-block">Project Icon</span>
+                            <i class="bx bx-upload d-block d-sm-none"></i>
+                            <input
+                              type="file"
+                              id="image"
+                              class="account-file-input"
+                              name="image"
+                              accept="image/png, image/jpeg"
+                            />
+                          </label>
+                          <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
+                        </div>
+                      </div>
+
+
+
+
+                        <div class="row">
+                          <div class="mb-3 col-md-6">
+                            <label for="firstName" class="form-label">Name*</label> 
+                            <input
+                              class="form-control"
+                              type="text"
+                              id="title"
+                              name="title"
+                               value=""
+                              autofocus
+                            />
+                          </div>
+                          <div class="mb-3 col-md-6">
+                            <label for="lastName" class="form-label">Key*</label>
+                            <input class="form-control" type="text" name="key" id="key" value="" />
+                          </div>
+                         
+
+
+                           <div class="mb-3 col-md-6">
+                            <label class="form-label" for="category">Category</label>
+                            <select id="category" name="category" class="select2 form-select">
+                              <option value="0">Select</option>
+                              <option value="1">Software</option>
+                              <option value="2">Product</option>
+                              <option value="3">Services</option>
+                            </select>
+                          </div>
+
+                           <div class="mb-3 col-md-6">
+                            <label class="form-label" for="lead">Project lead</label>
+                            <select id="lead" name="lead" class="select2 form-select">
+                              <option value="0">Select</option>
+                              <option value="1">ABC</option>
+                              <option value="2">XYZ</option>
+                            </select>
+                          </div>
+
+                           <div class="mb-3 col-md-6">
+                            <label class="form-label" for="default_assigned">Default assignee</label>
+                            <select id="default_assigned" name="default_assigned" class="select2 form-select">
+                              <option value="0">Unassigneed</option>
+                              <option value="1">Project lead</option>
+                            </select>
+                          </div>
+                            <div class="mb-3">
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
+                              <label class="form-check-label" for="terms-conditions">
+                                Connect repositories, documents, and more
+                                <a href="javascript:void(0);">Sync your team's work from other tools with this project for better visibility, access, and automation.</a>
+                              </label>
+                            </div>
+                          </div>
+
+                         
+
+                        </div>
+                        <div class="mt-2">
+                          <button type="submit" class="btn btn-primary me-2">Save</button>
+                          <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Close
+                  </button>
+                  <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+                 </form>
+              </div>
+            </div>
+          </div>
+
+
+
+                          <button
+                          type="button"
+                          class="btn btn-primary"
+                          data-bs-toggle="modal"
+                          data-bs-target="#largeModal"
+                           >
+                          Create Project
+                        </button>
+
+
 
                     
               <div class="row">
@@ -131,7 +268,7 @@
                         
               <!-- Basic Bootstrap Table -->
               <div class="card">
-                <h5 class="d-inline card-header">Employee List</h5>
+                <h5 class="d-inline card-header">Projects List</h5>
                 <!-- <div class="d-inline"> 
                      <form class="d-flex">
                         <div class="input-group">
@@ -148,8 +285,11 @@
                     <thead>
                       <tr>
                         <th></th>
-                        <th>Name</th>
-                        <th>Email</th>
+                        <th>Title</th>
+                        <th>key</th>
+                        <th>Date</th>
+                        <th>description</th>
+                        <th>category</th>
                         <th>Status</th>
                         <th>Action</th>
                       </tr>
@@ -163,24 +303,26 @@
                               data-bs-toggle="tooltip"
                               data-popup="tooltip-custom"
                               data-bs-placement="top"
-                              class="avatar avatar-xs pull-up"
-                              title="Lilian Fuller"
+                              class="avatar avatar-xs"
+                              title="{{$member['title']}}"
                             >
-                              <img src="{{ url('img/'.$member['profile_picture']) }}" alt="Avatar" class="rounded-circle" />
+                              <img src="{{ url('img/project_img/'.$member['icon_picture']) }}" alt="icon" class="rounded-circle" />
                             </li>
                           </ul>
                         </td>
 
-                      <td><i class="fab fa-angular fa-lg text-danger"></i> <strong>{{$member['name']}}</strong></td>
-                      <td><i class="fab fa-angular "></i> <strong>{{$member['email']}}</strong></td>
-                       
-                        <td><span class="badge bg-primary">Active</span></td>
+                      <td><i class="fab fa-angular fa-lg text-danger"></i> <strong>{{$member['title']}}</strong></td>
+                      <td><i class="fab fa-angular fa-lg text-danger"></i>{{$member['key']}}</td>
+                      <td><i class="fab fa-angular fa-lg text-danger"></i>{{$member['start']}}</td>
+                      <td><i class="fab fa-angular fa-lg text-danger"></i>{{$member['description']}}</td>
+                      <td><i class="fab fa-angular fa-lg text-danger"></i>{{$member['category']}}</td>
+                        <td><span class="badge bg-primary">{{$member['isactive']}}</span></td>
                         <td>
                           <div class="">
-                          <a href="employee_edit/{{$member['id']}}" class="btn rounded-pill btn-icon btn-outline-primary"> <span class="tf-icons bx bx-edit-alt"></span>
+                          <a href="projects_edit/{{$member['id']}}" class="btn rounded-pill btn-icon btn-outline-primary"> <span class="tf-icons bx bx-edit-alt"></span>
                           </a> 
 
-                          <a href="employee_delete/{{$member['id']}}" class="btn rounded-pill btn-icon btn-outline-primary"> <span class="tf-icons bx bx-trash me-1 text-danger"></span>
+                          <a href="projects_delete/{{$member['id']}}" class="btn rounded-pill btn-icon btn-outline-primary delete-confirm"> <span class="tf-icons bx bx-trash me-1 text-danger"></span>
                           </a>  
                           </div>
                         </td>
@@ -194,105 +336,7 @@
                       </div>
                       <div class="tab-pane fade" id="navs-top-profile" role="tabpanel">
                          <div class="card-body">
-                      <form id="formAccountSettings" method="POST"action="{{ route('create_employee_profile') }}" enctype="multipart/form-data">
-                          @csrf
-                          <h2 class="mb-0">Add project details</h2>
-                           <h6 class="mb-0">You can change these details anytime in your project settings.</h6>
-                         </hr>
-
-
-                            <div class="d-flex align-items-start align-items-sm-center gap-4">
-                        <img
-                        id="preview-image"
-                          src="{{ url('img/1.png') }}"
-                          alt="user-avatar"
-                          class="d-block rounded"
-                          height="100"
-                          width="100"
-
-                        />
-                        <div class="button-wrapper">
-                          <label for="upload" class="me-2 mb-8" tabindex="0">
-                            <span class="d-none d-sm-block">Project Icon</span>
-                            <i class="bx bx-upload d-block d-sm-none"></i>
-                            <input
-                              type="file"
-                              id="image"
-                              class="account-file-input"
-                              name="image"
-                              accept="image/png, image/jpeg"
-                            />
-                          </label>
-                          <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
-                        </div>
-                      </div>
-
-
-
-
-                        <div class="row">
-                          <div class="mb-3 col-md-6">
-                            <label for="firstName" class="form-label">Name*</label> 
-                            <input
-                              class="form-control"
-                              type="text"
-                              id="name"
-                              name="name"
-                               value=""
-                              autofocus
-                            />
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="lastName" class="form-label">Key*</label>
-                            <input class="form-control" type="text" name="lastname" id="lastname" value="" />
-                          </div>
-                         
-
-
-                           <div class="mb-3 col-md-6">
-                            <label class="form-label" for="department">Category</label>
-                            <select id="department" name="department" class="select2 form-select">
-                              <option value="0">Select</option>
-                              <option value="1">Software</option>
-                              <option value="2">Product</option>
-                              <option value="3">Services</option>
-                            </select>
-                          </div>
-
-                           <div class="mb-3 col-md-6">
-                            <label class="form-label" for="department">Project lead</label>
-                            <select id="department" name="department" class="select2 form-select">
-                              <option value="0">Select</option>
-                              <option value="1">ABC</option>
-                              <option value="2">XYZ</option>
-                            </select>
-                          </div>
-
-                           <div class="mb-3 col-md-6">
-                            <label class="form-label" for="department">Default assignee</label>
-                            <select id="department" name="department" class="select2 form-select">
-                              <option value="0">Unassigneed</option>
-                              <option value="1">Project lead</option>
-                            </select>
-                          </div>
-                            <div class="mb-3">
-                            <div class="form-check">
-                              <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
-                              <label class="form-check-label" for="terms-conditions">
-                                Connect repositories, documents, and more
-                                <a href="javascript:void(0);">Sync your team's work from other tools with this project for better visibility, access, and automation.</a>
-                              </label>
-                            </div>
-                          </div>
-
-                         
-
-                        </div>
-                        <div class="mt-2">
-                          <button type="submit" class="btn btn-primary me-2">Save</button>
-                          <button type="reset" class="btn btn-outline-secondary">Cancel</button>
-                        </div>
-                      </form>
+                     
                     </div>
                       </div>
                     </div>
@@ -311,3 +355,20 @@
                       reader.readAsDataURL(this.files[0]);                     
                      });
                     </script>
+
+                    <!-- Delete Confirmation -->
+                    <script type="text/javascript">
+                      $('.delete-confirm').on('click', function (event) {
+                        event.preventDefault();
+                        const url = $(this).attr('href');
+                        swal({
+                            title: 'Are you sure?',
+                            text: 'This record and it`s details will be permanantly deleted!',
+                            icon: 'warning',
+                            buttons: ["Cancel", "Yes!"],
+                        }).then(function(value) {
+                            if (value) {
+                                window.location.href = url;
+                            }
+                        });
+});</script>
