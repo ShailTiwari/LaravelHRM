@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Activity;
 use App\Models\Event;
+use Illuminate\Support\Facades\DB;
 
 class Activitys extends Controller
 {  public function __construct() 
@@ -12,12 +13,58 @@ class Activitys extends Controller
         $this->page_name="Activitys";
     }
 
-     public function index(Request $request)
+
+
+
+ public function index(Request $request)
      {
+        $projects = DB::select('select * from projects');
+        $issues = DB::select('select * from issues');
+        $assignee = DB::select('select * from employees');
+        $reporter = DB::select('select * from employees');
+        $labels = DB::select('select * from labels');
+        $flagges = DB::select('select * from flagges');
         $posts = Activity::orderBy('order','asc')->get();
 
-        return view('activity',['page_name'=>$this->page_name,'posts'=>$posts]);
-        //return view('activity',compact('posts'));
+
+        return view('work_list',
+            ['page_name'=>$this->page_name,
+            'posts'=>$posts,
+            'projects'=>$projects,
+            'issues'=>$issues,
+            'assignee'=>$assignee,
+            'reporter'=>$reporter,
+            'labels'=>$labels,
+            'flagges'=>$flagges]);
+
+     }
+
+
+
+
+     public function projects_view($projectname,$id)
+     {        
+        $projects = DB::select('select * from projects');
+        $task_status = DB::select('select * from task_status');
+        $issues = DB::select('select * from issues');
+        $assignee = DB::select('select * from employees');
+        $reporter = DB::select('select * from employees');
+        $labels = DB::select('select * from labels');
+        $flagges = DB::select('select * from flagges');
+        $posts = Activity::where('project', $id)
+                             ->orderBy('order','asc')
+                             ->get();
+        return view('activity',
+            ['page_name'=>$this->page_name,
+            'posts'=>$posts,
+            'projects'=>$projects,
+            'issues'=>$issues,
+            'assignee'=>$assignee,
+            'reporter'=>$reporter,
+            'labels'=>$labels,
+            'flagges'=>$flagges,
+            'task_status'=>$task_status]);
+
      }
 
     public function updateOrder(Request $request){

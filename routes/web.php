@@ -97,6 +97,7 @@ Route::post('event_save', [Events::class,'ajax_event_save'])->name('ajax_event_s
 
 
 Route::get('activity', [Activitys::class, 'index'])->name('index');
+Route::get('projects/activity/{projectname}/{id}', [Activitys::class, 'projects_view'])->name('projects_view');
 Route::post('activity_save', [Activitys::class,'updateOrder'])->name('activity_save');  
 Route::post('create_activity', [Activitys::class, 'create_activity_profile'])->name('create_activity'); 
 Route::get('activity_edit/{id}', [Activitys::class, 'activity_profile']); 
