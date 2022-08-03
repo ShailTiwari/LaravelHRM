@@ -1,7 +1,11 @@
     <x-header  title={{$page_name}}/>
     <x-sidebar/>
+    <style type="text/css">
+      .scrolling-wrapper{
+        overflow-x: auto;
+        }
+    </style>
     <div class="container-xxl flex-grow-1 container-p-y">
-
         <!-- Large Modal -->
           <div class="modal fade" id="largeModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
@@ -104,11 +108,115 @@
           </div>
 
 
+        <!-- Edit Large Modal -->
+          <div class="modal fade" id="editlargeModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel3">Edit Task</h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                  <form id="formAccountSettings" method="POST"action="{{ route('update_activity') }}" enctype="multipart/form-data">
+                          @csrf
+                <div class="modal-body">  
+                  <div class="row g-2">
+                    <div class="col mb-0">
+                      <label for="emailLarge" class="form-label">Project*</label>
+                      <input type="hidden" name="id" id="id" value="">
+                       <select name="project" id="project" class="form-select"  aria-label="Default select example">
+                         @foreach($projects as $project)
+                          <option value="{{$project->id}}" >{{$project->title}}</option>                          
+                         @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col mb-0">
+                      <label for="dobLarge" class="form-label">Issue type*</label>
+                       <select  name="type" id="type" class="form-select"  aria-label="Default select example">
+                         @foreach($issues as $issue)
+                          <option value="{{$issue->id}}" >{{$issue->title}}</option>                          
+                         @endforeach
+                        </select>
+                    </div>
+                  </div>
+
+
+
+                  <div class="row">
+                    <div class="col mb-3">
+                      <label for="nameLarge" class="form-label">Summary*</label>
+                      <input name="summary"  type="text" id="summary" class="form-control" placeholder="Enter Summary" />
+                    </div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col mb-3">
+                      <label for="nameLarge" class="form-label">Description*</label>
+                     <textarea  name="description" class="form-control" id="description" rows="3"></textarea>
+                    </div>
+                  </div>
+
+
+                  <div class="row g-2">
+                    <div class="col mb-0">
+                      <label for="emailLarge" class="form-label">Assignee</label> 
+                      <select  name="assignee" id="assignee" class="form-select"  aria-label="Default select example">
+                         @foreach($assignee as $assign)
+                          <option value="{{$assign->id}}" >{{$assign->name}}</option>                          
+                         @endforeach
+                        </select>
+                    </div>
+                    <div class="col mb-0">
+                      <label for="dobLarge" class="form-label">Reporter</label>
+                      <select  name="reporter" id="reporter"  class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+                         @foreach($reporter as $report)
+                          <option value="{{$report->id}}" > {{$report->name}} </option>                          
+                         @endforeach
+                        </select>
+                    </div>
+                  </div>
+                  <div class="row g-2">
+                    <div class="col mb-0">
+                      <label for="emailLarge" class="form-label">Labels</label> 
+                      <select  name="labels"  id="labels" class="form-select" aria-label="Default select example">
+                         @foreach($labels as $label)
+                          <option value="{{$label->id}}" >{{$label->title}}</option>                          
+                         @endforeach
+                        </select>
+                    </div>
+                    <div class="col mb-0">
+                      <label for="dobLarge" class="form-label">Flagged</label>
+                      <select  name="flagged" class="form-select" id="flagged" aria-label="Default select example">
+                         @foreach($flagges as $flagge)
+                          <option value="{{$flagge->id}}" >{{$flagge->title}}</option>                          
+                         @endforeach
+                        </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Close
+                  </button>
+                  <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+                 </form>
+              </div>
+            </div>
+          </div>
+
+
+
 
 
    
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <div id="demo" class="row">
+    <div id="demo" class="scrolling-wrapper overflow-hidden row flex-row flex-nowrap mt-4 pb-4 pt-2">
        @foreach($task_status as $status)
   <div class="card col-4 mb-4 activity-secondary">
    <h5 class="d-inline card-header">{{$status->title}}</h5>
@@ -140,11 +248,14 @@
                               </button>
                               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
                                 <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Remove Flag</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Add Label</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Copy issue link</a>
                                 <a class="dropdown-item" href="javascript:void(0);">Delete</a>
                               </div>
                             </div>
                           </div>
-                          <a href="projects/activity/{{$project->key}}/{{$project->id}}">
+                          <a data-id="{{ $post->id }}"  data-bs-toggle="modal" class="gfgselect" data-bs-target="#editlargeModal" >
                           <span class="fw-semibold d-block mb-1">{{ $post->key }}</span>
                           <h6 class="card-title mb-2">{{ $post->summary }}</h6>                            
                           </a>
@@ -352,7 +463,7 @@ $('#get-order').click(function()
     $.ajax({
             type: "POST",
             dataType: "json",
-             url: SITEURL + "/activity_save",
+            url: SITEURL + "/activity_save",
             data: {
               order: order,
               _token: token
@@ -379,7 +490,57 @@ function reportActivity()
   updatePostOrder();
     console.log('The sort order has changed and update in databse');
 };
-
   </script>
+
+
+
+   <script>
+            $(function () {
+                     // ON SELECTING ROW
+                $(".gfgselect").click(function () 
+                {
+                    $("#type").val();
+                    $("#project").val();
+                    $('#summary').val();
+                    $('#description').val();
+                    $('#summary').val(); 
+                    $("#assignee").val();
+                    $("#reporter").val();
+                    $("#flagged").val();
+                    $("#labels").val();
+
+                    var SITEURL = "{{ url('/') }}"; 
+                    var token = $('meta[name="csrf-token"]').attr('content');
+                    var id = $(this).data('id');
+                    $.ajax({
+                            type: "POST",
+                            dataType: "json",
+                            url: SITEURL + "/activity_info_get",
+                            data: {
+                               id: id,
+                              _token: token
+                            },
+                            success: function(response) {
+                                if (response.status == "success") {
+                                  console.log(response.description);
+                                } 
+                                else {
+                                  console.log(response.description);
+                                  $("#id").val(response.id);
+                                  $("#type").val(response.type);
+                                  $("#project").val(response.project);
+                                  $('#summary').val(response.summary);
+                                  $('#description').val(response.description);
+                                  $("#assignee").val(response.assignee);
+                                  $("#reporter").val(response.reporter);
+                                  $("#flagged").val(response.flagged);
+                                  $("#labels").val(response.labels);
+
+                                }
+                            }
+                          });
+                });
+            });
+        </script>
 </body>
 </html>

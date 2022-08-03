@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Project;
+use Illuminate\Support\Facades\DB;
 
 class Projects extends Controller
 {
@@ -13,9 +14,16 @@ class Projects extends Controller
     }
      public function project_list()
     {
-        $data= Project::all();
-        return view('project_list',['page_name'=>$this->page_name,'members'=>$data]);
+        $projects= Project::all(); 
+        $project_category = DB::select('select * from project_category');
+        $assignee = DB::select('select * from employees');
+        return view('project_list',
+            ['page_name'=>$this->page_name,
+            'members'=>$projects,
+            'project_category'=>$project_category,
+            'assignee'=>$assignee]);
     }
+       
     
     public function project_profile($id)
     {

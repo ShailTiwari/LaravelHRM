@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\login;
 use App\Http\Controllers\Dashboard;
@@ -11,7 +10,6 @@ use App\Http\Controllers\Holidays;
 use App\Http\Controllers\Payrolls;
 use App\Http\Controllers\Attendances;
 use App\Http\Controllers\Projects;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,13 +27,10 @@ Route::get('signup', [login::class, 'signup'])->name('signup');
 Route::post('post-login', [login::class, 'postLogin'])->name('login.post'); 
 Route::get('logout', [login::class, 'logout'])->name('logout');
 Route::post('post-signup', [login::class, 'ragister'])->name('ragister.post'); 
-
-
 Route::get('forgot_password', [login::class, 'forgot_password'])->name('forgot_password');
 Route::post('forgot_password_post', [login::class, 'forgot_password_post'])->name('forgot.post'); 
 Route::get('reset-password/{token}', [login::class, 'getPassword'])->name('getPassword');
 Route::post('reset-password', [login::class, 'updatePassword'])->name('updatePassword'); 
-
 
 
 Route::group(['middleware'=>['logincheck']],function()
@@ -48,13 +43,10 @@ Route::post('department_add', [Departments::class, 'create'])->name('department_
 Route::get('department_edit/{id}', [Departments::class, 'edit']);
 Route::get('department_delete/{id}', [Departments::class, 'delete']);
 
-
-
 Route::get('payroll', [Payrolls::class, 'index']);
 Route::post('payroll_add', [Payrolls::class, 'create'])->name('payroll_add'); 
 Route::get('payroll_edit/{id}', [Payrolls::class, 'edit']);
 Route::get('payroll_delete/{id}', [Payrolls::class, 'delete']);
-
 
 Route::get('employee', [Employe::class, 'employee_list']);
 Route::post('create_employee_profile', [Employe::class, 'create_employee_profile'])->name('create_employee_profile'); 
@@ -62,16 +54,11 @@ Route::get('employee_edit/{id}', [Employe::class, 'employee_profile']);
 Route::post('update_employee_profile', [Employe::class, 'update_employee_profile'])->name('update_employee_profile'); 
 Route::get('employee_delete/{id}',[Employe::class, 'delete'] );
 
-
-
 Route::get('Attendance', [Attendances::class, 'Attendance_list']);
 Route::post('create_attendance', [Attendances::class, 'create_attendance'])->name('create_attendance'); 
 Route::get('Attendance_edit/{id}', [Attendances::class, 'Attendance_profile']); 
 Route::post('update_Attendance_profile', [Attendances::class, 'update_Attendance_profile'])->name('update_Attendance_profile'); 
 Route::get('Attendance_delete/{id}',[Attendances::class, 'delete'] );
-
-
-
 
 Route::get('project', [Projects::class, 'project_list']);
 Route::post('create_projects', [Projects::class, 'create_project_profile'])->name('create_projects'); 
@@ -79,34 +66,26 @@ Route::get('projects_edit/{id}', [Projects::class, 'project_profile']);
 Route::post('update_projects_profile', [Projects::class, 'update_projects_profile'])->name('update_projects_profile'); 
 Route::get('projects_delete/{id}',[Projects::class, 'delete'] );
 
-
-
-
-
 Route::get('holiday', [Holidays::class, 'index']);
 /*Route::post('create_holiday_profile', [Holidays::class, 'create_employee_profile'])->name('create_employee_profile'); 
 Route::get('employee_edit/{id}', [Holidays::class, 'employee_profile']); 
 Route::post('update_employee_profile', [Holidays::class, 'update_employee_profile'])->name('update_employee_profile'); 
 Route::get('employee_delete/{id}',[Holidays::class, 'delete'] );*/
 
-
-
-
 Route::get('event', [Events::class,'index'])->name('index');
 Route::post('event_save', [Events::class,'ajax_event_save'])->name('ajax_event_save');  
 
-
 Route::get('activity', [Activitys::class, 'index'])->name('index');
 Route::get('projects/activity/{projectname}/{id}', [Activitys::class, 'projects_view'])->name('projects_view');
+Route::post('activity_info_get', [Activitys::class,'get_activity_info'])->name('activity_info_get');  
 Route::post('activity_save', [Activitys::class,'updateOrder'])->name('activity_save');  
 Route::post('create_activity', [Activitys::class, 'create_activity_profile'])->name('create_activity'); 
+Route::post('update_activity', [Activitys::class, 'update_activity_profile'])->name('update_activity'); 
 Route::get('activity_edit/{id}', [Activitys::class, 'activity_profile']); 
-
 
 Route::get('accunts', [login::class, 'getData'])->name('getData');
 Route::get('report', [login::class, 'getData'])->name('getData');
-//Route::get('project', [login::class, 'getData'])->name('getData');
-    
+//Route::get('project', [login::class, 'getData'])->name('getData');    
 
 Route::get('profile/{id}', [Dashboard::class, 'profile']); 
 Route::get('delete/{id}',[Dashboard::class, 'delete'] );

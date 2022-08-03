@@ -74,19 +74,18 @@
                            <div class="mb-3 col-md-6">
                             <label class="form-label" for="category">Category</label>
                             <select id="category" name="category" class="select2 form-select">
-                              <option value="0">Select</option>
-                              <option value="1">Software</option>
-                              <option value="2">Product</option>
-                              <option value="3">Services</option>
+                               @foreach($project_category as $category)
+                                <option value="{{$category->id}}" >{{$category->title}}</option>
+                               @endforeach
                             </select>
                           </div>
 
                            <div class="mb-3 col-md-6">
                             <label class="form-label" for="lead">Project lead</label>
                             <select id="lead" name="lead" class="select2 form-select">
-                              <option value="0">Select</option>
-                              <option value="1">ABC</option>
-                              <option value="2">XYZ</option>
+                               @foreach($assignee as $lead)
+                                <option value="{{$lead->id}}" >{{$lead->name}}</option>
+                               @endforeach
                             </select>
                           </div>
 
@@ -94,7 +93,9 @@
                             <label class="form-label" for="default_assigned">Default assignee</label>
                             <select id="default_assigned" name="default_assigned" class="select2 form-select">
                               <option value="0">Unassigneed</option>
-                              <option value="1">Project lead</option>
+                              @foreach($assignee as $lead)
+                                <option value="{{$lead->id}}" >{{$lead->name}}</option>
+                               @endforeach
                             </select>
                           </div>
                             <div class="mb-3">

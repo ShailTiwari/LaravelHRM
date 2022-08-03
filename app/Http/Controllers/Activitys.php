@@ -108,7 +108,39 @@ class Activitys extends Controller
     }
 
 
+public function get_activity_info(Request $request)
+    {
 
+       // return response()->json($request->order);
+        $projects = DB::select('SELECT * from projects');
+        $Activity = Activity::where('id', $request->id)
+                             ->first();
+        return response()->json($Activity);
+       // return response($Activity);
+    }
+
+
+     public function update_activity_profile(Request $request)
+    { 
+         $data= new Activity();
+         $data=Activity::find($request->id);
+         $data->project=$request->project;
+         $data->key='AP-T';
+         $data->icon_picture='';
+         $data->type=$request->type;
+         $data->summary=$request->summary;
+         $data->description=$request->description;
+         $data->assignee=$request->assignee;
+         $data->reporter=$request->reporter;
+         $data->labels=$request->labels;
+         $data->flagged=$request->flagged;
+         $data->start=date('Y-m-d');
+         $data->options='1';
+         $data->isconfirm='1';
+         $data->remarks='';
+         $data->save();
+          return back();;                      
+    }
     
 
 
