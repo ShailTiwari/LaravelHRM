@@ -20,8 +20,8 @@
              @foreach($loggedInUser as $member)
            <li class="menu-item">
               <a href="/{{$member['route']}}" class="menu-link">
-                 <i class="menu-icon tf-icons bx bx-layout"></i>
-                <!-- <i class="{{$member['icon']}}"></i> -->
+                 <!-- <i class="menu-icon tf-icons bx bx-layout"></i> -->
+                 <i class="menu-icon tf-icons bx bx-{{$member['icon']}}"></i>
                 <div data-i18n="Analytics">{{$member['name']}}</div>
               </a>
             </li>            

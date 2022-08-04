@@ -1,139 +1,111 @@
     <x-header  title={{$page_name}}/>
     <x-sidebar/>
     <div class="container-xxl flex-grow-1 container-p-y">
-      <div class="col-xl-12">
-                  <div class="nav-align-top">
-                    <ul class="nav nav-tabs" role="tablist">
-                      <li class="nav-item">
+
+              <div class="card mb-4">
+                <div class="card-body">
+                  <div class="row gy-3">
+                     <!-- End Offcanvas -->
+                    <div class="col-lg-3 col-md-6">                      
+                      <div class="mt-3">
+                        <input
+                          class="form-control"
+                          type="text"
+                          placeholder="Search..."
+                        >                     
+                      </div>
+                    </div> 
+
+                    <div class="col-lg-2 col-md-6">
+                      <div class="mt-3">
                         <button
+                          class="btn btn-primary"
                           type="button"
-                          class="nav-link active"
-                          role="tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#navs-top-home"
-                          aria-controls="navs-top-home"
-                          aria-selected="true"
+                          data-bs-toggle="offcanvas"
+                          data-bs-target="#offcanvasEnd"
+                          aria-controls="offcanvasEnd"
                         >
-                          List
-                        </button>
-                      </li>
-                      <li class="nav-item">
-                        <button
-                          type="button"
-                          class="nav-link"
-                          role="tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#navs-top-profile"
-                          aria-controls="navs-top-profile"
-                          aria-selected="false"
-                        >
-                          Add New
-                        </button>
-                      </li>
-                    </ul>
-                    <div class="tab-content">
-                      <div class="tab-pane fade show active" id="navs-top-home" role="tabpanel">
-                        
-              <!-- Basic Bootstrap Table -->
-              <div class="card">
-                <h5 class="d-inline card-header">Department List</h5>
-                <!-- <div class="d-inline"> 
-                     <form class="d-flex">
-                        <div class="input-group">
-                          <span class="input-group-text"><i class="tf-icons bx bx-search"></i></span>
-                          <input type="text" class="form-control" placeholder="Search For..." />
-                        </div>
-                    </form>                  
-                </div> -->
-               
+                          Show
+                        </button>                       
+                      </div>
+                    </div>
+
+                     <!-- Default Offcanvas -->
+                    <div class="col-lg-2 col-md-6">
+                      <div class="mt-3">
+                       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal">New</button>                      
+                      </div>
+                    </div>
 
 
-                <div class="table-responsive text-nowrap">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th></th>
-                        <th>Name</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody class="table-border-bottom-0">
-                        @foreach($members as $member)
-                      <tr>
-                         <td>
-                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            <li
-                              data-bs-toggle="tooltip"
-                              data-popup="tooltip-custom"
-                              data-bs-placement="top"
-                              class="avatar avatar-xs pull-up"
-                              title="Lilian Fuller"
-                            >
-                              <img src="{{ url('img/'.$member['profile_picture']) }}" alt="Avatar" class="rounded-circle" />
-                            </li>
-                          </ul>
-                        </td>
 
-                      <td><i class="fab fa-angular fa-lg text-danger"></i> <strong>{{$member['name']}}</strong></td>
-                        <td><span class="badge bg-primary">Active</span></td>
-                        <td>
-                          <div class="demo-inline-spacing">
-                          <a href="department_edit/{{$member['id']}}" class="btn rounded-pill btn-icon btn-outline-primary"> <span class="tf-icons bx bx-edit-alt"></span>
-                          </a> 
-
-                          <a href="department_delete/{{$member['id']}}" class="btn rounded-pill btn-icon btn-outline-primary"> <span class="tf-icons bx bx-trash me-1 text-danger"></span>
-                          </a>  
-                          </div>
-                        </td>
-                      </tr>
-                        @endforeach   
-                    </tbody>
-                  </table>
+                  </div>
                 </div>
               </div>
-              <!--/ Basic Bootstrap Table -->
-                      </div>
-                      <div class="tab-pane fade" id="navs-top-profile" role="tabpanel">
-                         <div class="card-body">
-                      <form id="formAccountSettings" method="POST"action="{{ route('department_add') }}" enctype="multipart/form-data">
+
+
+
+
+
+
+        <!-- Large Modal -->
+          <div class="modal fade" id="largeModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel3">Create New Department</h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                 <form id="formAccountSettings" method="POST"action="{{ route('department_add') }}" enctype="multipart/form-data">
                           @csrf
-
-
+                <div class="modal-body"> 
                         <div class="row">
-
                           <div class="mb-3 col-md-6">
-                            <label for="lastName" class="form-label">Name</label>
-                            <input class="form-control" type="text" name="name" id="name" value="" />
+                            <label for="firstName" class="form-label">Name*</label> 
+                             <input class="form-control" type="text" name="name" id="name" value="" />
                           </div>
-
-
-
-                         
-                           <div class="mb-3 col-md-6">
-                            <label class="form-label" for="department">Status</label>
+                          <div class="mb-3 col-md-6">
+                            <label for="lastName" class="form-label">Status</label>
                             <select id="status" name="status" class="select2 form-select">
                               <option value="1">Active</option>
                               <option value="0">Inactive</option>
                             </select>
-                          </div>
-                           
+                          </div>  
+                        </div>
 
-                        </div>
-                        <div class="mt-2">
-                          <button type="submit" class="btn btn-primary me-2">Save</button>
-                          <button type="reset" class="btn btn-outline-secondary">Cancel</button>
-                        </div>
-                      </form>
-                    </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-    <x-footer/> 
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Close
+                  </button>
+                  <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+                 </form>
+              </div>
+            </div>
+          </div>
+
+ 
+
+      <div id="example-table"></div>
+
+       <x-footer/> 
 
 
                     <script type="text/javascript">
+                      function delete_row(e,cell)                      
+                      {
+                        alert(cell.getRow().getData().id);
+                        console.log(cell.getRow().getData().id);
+                      }                      
+
+
+
                       $('#image').change(function()
                       {                             
                       let reader = new FileReader();
@@ -142,4 +114,39 @@
                       }
                       reader.readAsDataURL(this.files[0]);                     
                      });
+                    </script>
+
+
+
+                    <script type="text/javascript">
+                    var deleteIcon = function(cell, formatterParams, onRendered)
+                    {
+                    return "<i class='bx bx-trash-alt me-1'></i>"; 
+                      /*return " <div class='dropdown'><button type='button' class='btn p-0 dropdown-toggle hide-arrow' data-bs-toggle='dropdown'>...  </div>";*/
+                    };
+
+
+
+                      var tabledata = '<?php echo $members ;?>';
+                      var table = new Tabulator("#example-table", {
+                          height:"411px",
+                          pagination:true, //enable.
+                          paginationSize:5, // this option can take any positive integer value  
+                          data:tabledata, //assign data to table
+                          layout:"fitColumns", //fit columns to width of table (optional)
+                          columns:[
+                          {title:"ID", field:"id", formatter:"rownum"},
+                          /*{title:"Icon", field:"profile_picture", formatter:"image", formatterParams:{
+                           height:"20px",
+                           width:"20px",
+                           urlPrefix:"{{ url('img/')}}",
+                          }},*/
+                          {title:"Name", field:"name",editor:"input"},
+                          {title:"Status", field:"isactive", hozAlign:"center", formatter:"tickCross", headerSort:false, headerVertical:false},
+                          {formatter:deleteIcon, width:40, hozAlign:"center", headerSort:false, cellClick:function(e, cell){
+                            delete_row(e,cell);
+                          }},
+
+                          ],
+                      });
                     </script>

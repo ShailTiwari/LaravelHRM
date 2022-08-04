@@ -191,7 +191,7 @@
                     </div>
                     <div class="col mb-0">
                       <label for="dobLarge" class="form-label">Flagged</label>
-                      <select  name="flagged" class="form-select" id="flagged" aria-label="Default select example">
+                       <select  name="flagged" class="form-select" id="flagged" aria-label="Default select example">
                          @foreach($flagges as $flagge)
                           <option value="{{$flagge->id}}" >{{$flagge->title}}</option>                          
                          @endforeach
@@ -216,14 +216,14 @@
 
    
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <div id="demo" class="scrolling-wrapper overflow-hidden row flex-row flex-nowrap mt-4 pb-4 pt-2">
+    <div id="demo" class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
        @foreach($task_status as $status)
   <div class="card col-4 mb-4 activity-secondary">
    <h5 class="d-inline card-header">{{$status->title}}</h5>
      <div id="items-{{$status->id}}" class="list-group col">
        @foreach($posts as $post)
         @if($post->taskstatus==$status->id)    
-                  <div id="{{ $post->id }}" data-id="{{ $post->id }}" data-myattr="1"  data-myatt="{{ $post->id }}"  class="">
+                  <div id="{{ $post->id }}" data-id="{{ $post->id }}" data-myattr="{{ $post->id }}"  data-myatt="{{ $post->id }}"  class="">
                     <div class="col-lg-12 col-md-12 col-6 mb-12">
                       <div class="card">
                         <div class="card-body">
@@ -301,6 +301,24 @@ $('#items-3').sortable({
     ghostClass: 'ghost',
     onSort: reportActivity,
 });
+
+
+// List 4
+$('#items-4').sortable({
+    group: 'list',
+    animation: 200,
+    ghostClass: 'ghost',
+    onSort: reportActivity,
+});
+
+
+// List 5
+$('#items-5').sortable({
+    group: 'list',
+    animation: 200,
+    ghostClass: 'ghost',
+    onSort: reportActivity,
+});
 /*Update status in database start*/
 function updatePostOrder() 
 {
@@ -344,7 +362,9 @@ function updatePostOrder()
  var sort3 = attrs;
 
    var sortnext = jQuery.merge( sort1, sort2 );
-   var sortarray = jQuery.merge( sortnext, sort3 );
+   var sortnextt = jQuery.merge( sort3, sort4 );
+   var sortnexttt = jQuery.merge( sortnext, sortnextt );
+   var sortarray = jQuery.merge( sortnexttt, sort5 );
    var SITEURL = "{{ url('/') }}"; 
    var order = []; 
    var token = $('meta[name="csrf-token"]').attr('content');
@@ -391,13 +411,7 @@ function updatePostOrder()
 // Arrays of "data-id"
 $('#get-order').click(function() 
 {
-   // var sort1 = $('#items-1').sortable('toArray');
-   // console.log(sort1);
-   // var sort2 = $('#items-2').sortable('toArray');
-   // console.log(sort2);
-   // var sort3 = $('#items-3').sortable('toArray');
-   // console.log(sort2);
-
+   
     var arr =  $('#items-1').sortable('toArray');
     var i, n;
     var attrs = [];
@@ -442,6 +456,33 @@ $('#get-order').click(function()
                  });
     }
  var sort3 = attrs;
+
+  var arr =  $('#items-4').sortable('toArray');
+    var i, n;
+    var attrs = [];
+    for (i = 0, n = arr.length; i < n; i++) {
+      attrs.push({
+                    orderid : i, 
+                    status : 4, 
+                    myattr : $('#' + arr[i]).data('myattr'), 
+                    myatt :$('#' + arr[i]).data('myatt'),
+                 });
+    }
+   var sort4 = attrs;
+
+
+  var arr =  $('#items-5').sortable('toArray');
+    var i, n;
+    var attrs = [];
+    for (i = 0, n = arr.length; i < n; i++) {
+      attrs.push({
+                    orderid : i, 
+                    status : 5, 
+                    myattr : $('#' + arr[i]).data('myattr'), 
+                    myatt :$('#' + arr[i]).data('myatt'),
+                 });
+    }
+   var sort5 = attrs;
 
    var sortnext = jQuery.merge( sort1, sort2 );
    var sortarray = jQuery.merge( sortnext, sort3 );

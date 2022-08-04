@@ -1,98 +1,118 @@
     <x-header  title={{$page_name}}/>
     <x-sidebar/>
     <div class="container-xxl flex-grow-1 container-p-y">
-      <div class="col-xl-12">
-                  <div class="nav-align-top">
-                    <ul class="nav nav-tabs" role="tablist">
-                      <li class="nav-item">
-                        <button
-                          type="button"
-                          class="nav-link active"
-                          role="tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#navs-top-home"
-                          aria-controls="navs-top-home"
-                          aria-selected="true"
-                        >
-                          List
-                        </button>
-                      </li>
-                      <li class="nav-item">
-                        <button
-                          type="button"
-                          class="nav-link"
-                          role="tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#navs-top-profile"
-                          aria-controls="navs-top-profile"
-                          aria-selected="false"
-                        >
-                          Add New
-                        </button>
-                      </li>
-                    </ul>
-                    <div class="tab-content">
-                      <div class="tab-pane fade show active" id="navs-top-home" role="tabpanel">
-                        
-              <!-- Basic Bootstrap Table -->
-              <div class="card">
-                <h5 class="d-inline card-header">Holidays List</h5>
-                <!-- <div class="d-inline"> 
-                     <form class="d-flex">
-                        <div class="input-group">
-                          <span class="input-group-text"><i class="tf-icons bx bx-search"></i></span>
-                          <input type="text" class="form-control" placeholder="Search For..." />
-                        </div>
-                    </form>                  
-                </div> -->
-               
 
-
-                <div class="table-responsive text-nowrap">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>Day</th>
-                        <th>Date</th>
-                        <th>Holiday</th>
-                        <th>Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody class="table-border-bottom-0">
-                        @foreach($members as $member)
-                      <tr>
-                          <td><i class="fab fa-angular fa-lg text-danger"></i> <strong>{{date('l', strtotime($member['start']));}}</strong></td>
-                          <td><i class="fab fa-angular "></i> <strong>{{date('d-m-Y', strtotime($member['start']));}}</strong></td>
-                          <td><i class="fab fa-angular "></i> <strong>{{$member['title']}}</strong></td>
-                          <td>
-                              <div class="demo-inline-spacing">
-                              <a href="employee_edit/{{$member['id']}}" class="btn rounded-pill btn-icon btn-outline-primary"> <span class="tf-icons bx bx-edit-alt"></span>
-                              </a> 
-
-                              <a href="employee_delete/{{$member['id']}}" class="btn rounded-pill btn-icon btn-outline-primary"> <span class="tf-icons bx bx-trash me-1 text-danger"></span>
-                              </a>  
-                              </div>
-                          </td>
-                      </tr>
-                        @endforeach   
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <!--/ Basic Bootstrap Table -->
+              <div class="card mb-4">
+                <div class="card-body">
+                  <div class="row gy-3">
+                     <!-- End Offcanvas -->
+                    <div class="col-lg-3 col-md-6">                      
+                      <div class="mt-3">
+                        <input
+                          class="form-control"
+                          type="text"
+                          placeholder="Search..."
+                        >                     
                       </div>
-                      <div class="tab-pane fade" id="navs-top-profile" role="tabpanel">
-                         <div class="card-body">
-                     
-                         </div>
+                    </div> 
+
+                    <div class="col-lg-2 col-md-6">
+                      <div class="mt-3">
+                        <button
+                          class="btn btn-primary"
+                          type="button"
+                          data-bs-toggle="offcanvas"
+                          data-bs-target="#offcanvasEnd"
+                          aria-controls="offcanvasEnd"
+                        >
+                          Show
+                        </button>                       
                       </div>
                     </div>
+
+                     <!-- Default Offcanvas -->
+                    <div class="col-lg-2 col-md-6">
+                      <div class="mt-3">
+                       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal">New</button>                      
+                      </div>
+                    </div>
+
+
+
                   </div>
                 </div>
-    <x-footer/> 
+              </div>
 
 
-                    <script type="text/javascript">
+
+
+
+
+        <!-- Large Modal -->
+          <div class="modal fade" id="largeModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel3">Add New</h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                 <form id="formAccountSettings" method="POST"action="{{ route('create_projects') }}" enctype="multipart/form-data">
+                          @csrf
+                 
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Close
+                  </button>
+                  <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+                 </form>
+              </div>
+            </div>
+          </div>
+
+ 
+
+      <div id="example-table"></div>
+
+       <x-footer/> 
+
+
+                    <script type="text/javascript">  
+
+                      function edit_row(e,cell)                      
+                      {
+                       var id=cell.getRow().getData().id;
+                       let url = 'projects_edit/'+id+'';
+                      // document.location.href=url;
+                        console.log(url);
+                      }   
+                      function delete_row(e,cell)                      
+                      {
+                       var id=cell.getRow().getData().id;
+                       let url = 'projects_delete/'+id+'';
+                      // document.location.href=url;
+                        console.log(url);
+                        swal({
+                            title: 'Are you sure?',
+                            text: 'This record and it`s details will be permanantly deleted!',
+                            icon: 'warning',
+                            buttons: ["Cancel", "Yes!"],
+                        }).then(function(value) {
+                            if (value) {
+                            //    window.location.href = url;
+                            }
+                        });
+
+
+                      }                      
+
+
+
                       $('#image').change(function()
                       {                             
                       let reader = new FileReader();
@@ -101,4 +121,42 @@
                       }
                       reader.readAsDataURL(this.files[0]);                     
                      });
+                    </script>
+
+
+
+                    <script type="text/javascript">
+                    var deleteIcon = function(cell, formatterParams, onRendered)
+                    {
+                    return "<i class='bx bx-trash-alt me-1'></i>"; 
+                    };
+                      var editIcon = function(cell, formatterParams, onRendered)
+                    {
+                    return "<i class='bx bx-edit-alt me-1'></i>"; 
+                    };
+
+
+
+                      var tabledata = '<?php echo $members ;?>';
+                      var table = new Tabulator("#example-table", {
+                          height:"411px",
+                          pagination:true, //enable.
+                          paginationSize:5, // this option can take any positive integer value  
+                          data:tabledata, //assign data to table
+                          layout:"fitColumns", //fit columns to width of table (optional)
+                          columns:[
+                          {title:"ID", field:"id", formatter:"rownum"},
+                          {title:"Day", field:"start",editor:"input"},
+                          {title:"Date", field:"start",editor:"input"},
+                          {title:"Holiday", field:"title",editor:"input"},
+                          {title:"Status", field:"isactive", hozAlign:"center", formatter:"tickCross", headerSort:false, headerVertical:false},
+                         /* {formatter:editIcon, width:40, hozAlign:"center", headerSort:false, cellClick:function(e, cell){
+                            edit_row(e,cell);
+                          }},*/
+                          {formatter:deleteIcon, width:40, hozAlign:"center", headerSort:false, cellClick:function(e, cell){
+                            delete_row(e,cell);
+                          }},
+
+                          ],
+                      });
                     </script>

@@ -53,6 +53,13 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('assets/js/config.js') }}"></script>
+
+    <!-- Tabulator -->
+    <link href="{{ asset('tabulator/dist/css/tabulator_bootstrap4.min.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="{{ asset('tabulator/dist/js/tabulator.js') }}"></script>
+    <!-- Sweet Alert  -->
+    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   </head>
 <body>
     <!-- Layout wrapper -->

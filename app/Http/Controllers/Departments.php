@@ -14,7 +14,7 @@ class Departments extends Controller
      public function index()
     {
        // $page_name="Department";
-        $data= Department::paginate(100);
+        $data= Department::all();
         return view('department_list',['page_name'=>$this->page_name,'members'=>$data]);
     }
 

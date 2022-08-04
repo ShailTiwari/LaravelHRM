@@ -1,13 +1,59 @@
     <x-header  title={{$page_name}}/>
     <x-sidebar/>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <div class="container-xxl flex-grow-1 container-p-y">
-      <!-- Large Modal -->
+
+              <div class="card mb-4">
+                <div class="card-body">
+                  <div class="row gy-3">
+                     <!-- End Offcanvas -->
+                    <div class="col-lg-3 col-md-6">                      
+                      <div class="mt-3">
+                        <input
+                          class="form-control"
+                          type="text"
+                          placeholder="Search..."
+                        >                     
+                      </div>
+                    </div> 
+
+                    <div class="col-lg-2 col-md-6">
+                      <div class="mt-3">
+                        <button
+                          class="btn btn-primary"
+                          type="button"
+                          data-bs-toggle="offcanvas"
+                          data-bs-target="#offcanvasEnd"
+                          aria-controls="offcanvasEnd"
+                        >
+                          Show
+                        </button>                       
+                      </div>
+                    </div>
+
+                     <!-- Default Offcanvas -->
+                    <div class="col-lg-2 col-md-6">
+                      <div class="mt-3">
+                       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal">New</button>                      
+                      </div>
+                    </div>
+
+
+
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+        <!-- Large Modal -->
           <div class="modal fade" id="largeModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel3">Create Task</h5>
+                  <h5 class="modal-title" id="exampleModalLabel3">Add New</h5>
                   <button
                     type="button"
                     class="btn-close"
@@ -17,7 +63,7 @@
                 </div>
                  <form id="formAccountSettings" method="POST"action="{{ route('create_projects') }}" enctype="multipart/form-data">
                           @csrf
-                <div class="modal-body">  
+                  <div class="modal-body">  
                           <h4 class="mb-0">Add project details</h4>
                            <h6 class="mb-0">You can change these details anytime in your project settings.</h6>
                          </hr>
@@ -127,241 +173,28 @@
             </div>
           </div>
 
+ 
+
+      <div id="example-table"></div>
+
+       <x-footer/> 
 
 
-                          <button
-                          type="button"
-                          class="btn btn-primary"
-                          data-bs-toggle="modal"
-                          data-bs-target="#largeModal"
-                           >
-                          Create Project
-                        </button>
+                    <script type="text/javascript">  
 
-
-
-                    
-              <div class="row">
-                <div class="col-3 mb-3">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
-                            <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
-                              <div class="card-title">
-                                <h5 class="text-nowrap mb-2"> Total Project </h5>
-                              </div>
-                              <div class="mt-sm-auto">
-                                <h3 class="mb-0">859</h3>
-                              </div>
-                            </div>
-                            <div id="profileReportChartt">
-                             <span class="avatar-initial rounded bg-label-primary"
-                              ><i class="bx bx-mobile-alt"></i
-                            ></span>
-                          </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                <div class="col-3 mb-3">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
-                            <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
-                              <div class="card-title">
-                                <h5 class="text-nowrap mb-2"> Pending  </h5>
-                              </div>
-                              <div class="mt-sm-auto">
-                                <h3 class="mb-0">113</h3>
-                              </div>
-                            </div>
-                            <div id="profileReportChartt">
-                               <span class="avatar-initial rounded bg-label-info"><i class="bx bx-home-alt"></i></span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                <div class="col-3 mb-3">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
-                            <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
-                              <div class="card-title">
-                                <h5 class="text-nowrap mb-2"> Running </h5>
-                              </div>
-                              <div class="mt-sm-auto">
-                                <h3 class="mb-0">609</h3>
-                              </div>
-                            </div>
-                            <div id="profileReportChartt">
-                              <span class="avatar-initial rounded bg-label-secondary"
-                              ><i class="bx bx-football"></i
-                            ></span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                <div class="col-3 mb-3">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
-                            <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
-                              <div class="card-title">
-                                <h5 class="text-nowrap mb-2"> Completed </h5>
-                              </div>
-                              <div class="mt-sm-auto">
-                                <h3 class="mb-0">250</h3>
-                              </div>
-                            </div>
-                            <div id="profileReportChartt">
-                             <span class="avatar-initial rounded bg-label-primary"
-                              ><i class="bx bx-mobile-alt"></i
-                            ></span>
-                          </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-
-
-
-                    
-
-
-
-      <div class="col-xl-12">
-                  <div class="nav-align-top">
-                    <ul class="nav nav-tabs" role="tablist">
-                      <li class="nav-item">
-                        <button
-                          type="button"
-                          class="nav-link active"
-                          role="tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#navs-top-home"
-                          aria-controls="navs-top-home"
-                          aria-selected="true"
-                        >
-                          List
-                        </button>
-                      </li>
-                      <li class="nav-item">
-                        <button
-                          type="button"
-                          class="nav-link"
-                          role="tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#navs-top-profile"
-                          aria-controls="navs-top-profile"
-                          aria-selected="false"
-                        >
-                          Add New
-                        </button>
-                      </li>
-                    </ul>
-                    <div class="tab-content">
-                      <div class="tab-pane fade show active" id="navs-top-home" role="tabpanel">
-                        
-              <!-- Basic Bootstrap Table -->
-              <div class="card">
-                <h5 class="d-inline card-header">Projects List</h5>
-                <!-- <div class="d-inline"> 
-                     <form class="d-flex">
-                        <div class="input-group">
-                          <span class="input-group-text"><i class="tf-icons bx bx-search"></i></span>
-                          <input type="text" class="form-control" placeholder="Search For..." />
-                        </div>
-                    </form>                  
-                </div> -->
-               
-
-
-                <div class="table-responsive text-nowrap">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th></th>
-                        <th>Title</th>
-                        <th>key</th>
-                        <th>Date</th>
-                        <th>description</th>
-                        <th>category</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody class="table-border-bottom-0">
-                        @foreach($members as $member)
-                      <tr>
-                         <td>
-                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            <li
-                              data-bs-toggle="tooltip"
-                              data-popup="tooltip-custom"
-                              data-bs-placement="top"
-                              class="avatar avatar-xs"
-                              title="{{$member['title']}}"
-                            >
-                              <img src="{{ url('img/project_img/'.$member['icon_picture']) }}" alt="icon" class="rounded-circle" />
-                            </li>
-                          </ul>
-                        </td>
-
-                      <td><i class="fab fa-angular fa-lg text-danger"></i> <strong>{{$member['title']}}</strong></td>
-                      <td><i class="fab fa-angular fa-lg text-danger"></i>{{$member['key']}}</td>
-                      <td><i class="fab fa-angular fa-lg text-danger"></i>{{$member['start']}}</td>
-                      <td><i class="fab fa-angular fa-lg text-danger"></i>{{$member['description']}}</td>
-                      <td><i class="fab fa-angular fa-lg text-danger"></i>{{$member['category']}}</td>
-                        <td><span class="badge bg-primary">{{$member['isactive']}}</span></td>
-                        <td>
-                          <div class="">
-                          <a href="projects_edit/{{$member['id']}}" class="btn rounded-pill btn-icon btn-outline-primary"> <span class="tf-icons bx bx-edit-alt"></span>
-                          </a> 
-
-                          <a href="projects_delete/{{$member['id']}}" class="btn rounded-pill btn-icon btn-outline-primary delete-confirm"> <span class="tf-icons bx bx-trash me-1 text-danger"></span>
-                          </a>  
-                          </div>
-                        </td>
-                      </tr>
-                        @endforeach   
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <!--/ Basic Bootstrap Table -->
-                      </div>
-                      <div class="tab-pane fade" id="navs-top-profile" role="tabpanel">
-                         <div class="card-body">
-                     
-                    </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-    <x-footer/> 
-
-
-                    <script type="text/javascript">
-                      $('#image').change(function()
-                      {                             
-                      let reader = new FileReader();
-                      reader.onload = (e) => { 
-                        $('#preview-image').attr('src', e.target.result); 
-                      }
-                      reader.readAsDataURL(this.files[0]);                     
-                     });
-                    </script>
-
-                    <!-- Delete Confirmation -->
-                    <script type="text/javascript">
-                      $('.delete-confirm').on('click', function (event) {
-                        event.preventDefault();
-                        const url = $(this).attr('href');
+                      function edit_row(e,cell)                      
+                      {
+                       var id=cell.getRow().getData().id;
+                       let url = 'projects_edit/'+id+'';
+                       document.location.href=url;
+                        console.log(url);
+                      }   
+                      function delete_row(e,cell)                      
+                      {
+                       var id=cell.getRow().getData().id;
+                       let url = 'projects_delete/'+id+'';
+                      // document.location.href=url;
+                        console.log(url);
                         swal({
                             title: 'Are you sure?',
                             text: 'This record and it`s details will be permanantly deleted!',
@@ -372,4 +205,63 @@
                                 window.location.href = url;
                             }
                         });
-});</script>
+
+
+                      }                      
+
+
+
+                      $('#image').change(function()
+                      {                             
+                      let reader = new FileReader();
+                      reader.onload = (e) => { 
+                        $('#preview-image').attr('src', e.target.result); 
+                      }
+                      reader.readAsDataURL(this.files[0]);                     
+                     });
+                    </script>
+
+
+
+                    <script type="text/javascript">
+                    var deleteIcon = function(cell, formatterParams, onRendered)
+                    {
+                    return "<i class='bx bx-trash-alt me-1'></i>"; 
+                    };
+                      var editIcon = function(cell, formatterParams, onRendered)
+                    {
+                    return "<i class='bx bx-edit-alt me-1'></i>"; 
+                    };
+
+
+
+                      var tabledata = '<?php echo $members ;?>';
+                      var table = new Tabulator("#example-table", {
+                          height:"411px",
+                          pagination:true, //enable.
+                          paginationSize:5, // this option can take any positive integer value  
+                          data:tabledata, //assign data to table
+                          layout:"fitColumns", //fit columns to width of table (optional)
+                          columns:[
+                          {title:"ID", field:"id", formatter:"rownum"},
+                          {title:"Icon", field:"icon_picture", formatter:"image", formatterParams:{
+                           height:"20px",
+                           width:"20px",
+                           urlPrefix:"{{ url('img/project_img/')}}/",
+                          }},
+                          {title:"Title", field:"title",editor:"input"},
+                          {title:"key", field:"key",editor:"input"},
+                          {title:"start", field:"start",editor:"input"},
+                          {title:"description", field:"description",editor:"input"},
+                          {title:"category", field:"category",editor:"input"},
+                          {title:"Status", field:"isactive", hozAlign:"center", formatter:"tickCross", headerSort:false, headerVertical:false},
+                          {formatter:editIcon, width:40, hozAlign:"center", headerSort:false, cellClick:function(e, cell){
+                            edit_row(e,cell);
+                          }},
+                          {formatter:deleteIcon, width:40, hozAlign:"center", headerSort:false, cellClick:function(e, cell){
+                            delete_row(e,cell);
+                          }},
+
+                          ],
+                      });
+                    </script>

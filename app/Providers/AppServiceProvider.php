@@ -27,7 +27,9 @@ class AppServiceProvider extends ServiceProvider
      public function boot()
     {
         $loggedInUser = 'shail';
-        $data= Sidebar::all();
+        $data = Sidebar::where('Isactive','1')
+                        ->orderBy('order', 'ASC')->get();
+
         View::share('loggedInUser', $data);
         View::share('loggedInUserr', $loggedInUser);
     }

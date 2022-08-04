@@ -10,7 +10,7 @@
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-7">
                         <div class="card-body">
-                          <h5 class="mb-4 card-title text-primary">Welcome {{session()->get('user')['name']}} ! </h5>
+                          <h3 class="mb-4 card-title text-primary">Welcome {{session()->get('user')['name']}} ! </h3>
                           <p class="mb-4">
                             Measure How Fast You’re Growing Monthly Recurring Revenue.
                           </p>
@@ -38,12 +38,8 @@
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                              <img
-                                src="../assets/img/icons/unicons/chart-success.png"
-                                alt="chart success"
-                                class="rounded"
-                              />
+                            <div class="avatar flex-shrink-0">                              
+                             <i class="bx bx-user"></i>
                             </div>
                             <div class="dropdown">
                               <button
@@ -72,12 +68,8 @@
                       <div class="card">
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                              <img
-                                src="../assets/img/icons/unicons/wallet-info.png"
-                                alt="Credit Card"
-                                class="rounded"
-                              />
+                            <div class="avatar flex-shrink-0">                       
+                             <i class="bx bx-user"></i>
                             </div>
                             <div class="dropdown">
                               <button
