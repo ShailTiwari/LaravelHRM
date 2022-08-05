@@ -85,7 +85,7 @@
                               class="form-control"
                               id="organization"
                               name="organization"
-                              value="Aloha"
+                              value="{{$member['company']}}"
                             />
                           </div>
                           <div class="mb-3 col-md-6">
@@ -97,6 +97,7 @@
                                 id="phoneNumber"
                                 name="phoneNumber"
                                 class="form-control"
+                                value="{{$member['phone_no']}}"
                                 placeholder=""
                               />
                             </div>
@@ -110,14 +111,15 @@
                             <input class="form-control" type="text" id="state" name="state" placeholder="California" />
                           </div>
                           <div class="mb-3 col-md-6">
-                            <label for="zipCode" class="form-label">Zip Code</label>
+                            <label for="zipCode" class="form-label">Salary</label>
                             <input
                               type="text"
                               class="form-control"
                               id="zipCode"
                               name="zipCode"
                               placeholder="231465"
-                              maxlength="6"
+                              maxlength="10" 
+                              value="{{$member['salary']}}" 
                             />
                           </div>
                            <div class="mb-3 col-md-6">

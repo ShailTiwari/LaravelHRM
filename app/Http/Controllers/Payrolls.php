@@ -13,7 +13,7 @@ class Payrolls extends Controller
     }
     public function index()
     {
-        $data= Payroll::paginate(100);
+        $data= Payroll::all();
         return view('payroll_list',['page_name'=>$this->page_name,'members'=>$data]);
     }
 

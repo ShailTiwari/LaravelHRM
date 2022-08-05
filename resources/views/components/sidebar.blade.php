@@ -16,16 +16,44 @@
           <div class="menu-inner-shadow"></div>
 
           <ul class="menu-inner py-1">
+          
+
             <!-- Dashboard -->
-             @foreach($loggedInUser as $member)
+             <!-- @foreach($loggedInUser as $member)
            <li class="menu-item">
               <a href="/{{$member['route']}}" class="menu-link">
-                 <!-- <i class="menu-icon tf-icons bx bx-layout"></i> -->
                  <i class="menu-icon tf-icons bx bx-{{$member['icon']}}"></i>
                 <div data-i18n="Analytics">{{$member['name']}}</div>
               </a>
             </li>            
-          @endforeach 
+          @endforeach  -->
+
+
+           @foreach($children as $member)
+           <li class="menu-item">
+              <a  
+              @if ($member->parent_id==0)  
+               href="{{$member->route}}" 
+               class="menu-link"
+              @else
+               class="menu-link menu-toggle"
+               @endif   >
+                <i class="menu-icon tf-icons bx bx-{{$member->icon}}"></i>
+                <div data-i18n="Account Settings">{{$member->name}}</div>
+              </a>
+              <ul class="menu-sub">
+                 @foreach($subchildren as $members)
+                <li class="menu-item">
+                  <a href="{{$member->route}}" class="menu-link">
+                    <div data-i18n="{{$members->name}}">{{$members->name}}</div>
+                  </a>
+                </li>
+            @endforeach 
+              </ul>
+            </li> 
+            @endforeach 
+
+
           </ul>
         </aside>
         <!-- / Menu -->

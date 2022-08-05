@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Employee;
+use Illuminate\Support\Facades\DB;
 
 class Employe extends Controller
 { 
@@ -14,9 +15,21 @@ class Employe extends Controller
     }
      public function employee_list()
     {
-        $data= Employee::all();
+        //$data= Employee::all();
+
+        $data = DB::select('select * from employees limit 10');
+       // return response($data);
         return view('employee_list',['page_name'=>$this->page_name,'members'=>$data]);
     }
+
+      public function employee_data()
+    {
+        $data = DB::select('select * from employees limit 1000');
+        return response($data);
+    }
+
+
+
 
     
     public function employee_profile($id)

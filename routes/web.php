@@ -49,6 +49,7 @@ Route::get('payroll_edit/{id}', [Payrolls::class, 'edit']);
 Route::get('payroll_delete/{id}', [Payrolls::class, 'delete']);
 
 Route::get('employee', [Employe::class, 'employee_list']);
+Route::get('employee_data', [Employe::class, 'employee_data']);
 Route::post('create_employee_profile', [Employe::class, 'create_employee_profile'])->name('create_employee_profile'); 
 Route::get('employee_edit/{id}', [Employe::class, 'employee_profile']); 
 Route::post('update_employee_profile', [Employe::class, 'update_employee_profile'])->name('update_employee_profile'); 

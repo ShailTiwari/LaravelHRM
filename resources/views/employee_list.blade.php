@@ -1,5 +1,6 @@
     <x-header  title={{$page_name}}/>
     <x-sidebar/>
+    <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
     <div class="container-xxl flex-grow-1 container-p-y">
 
               <div class="card mb-4">
@@ -36,6 +37,21 @@
                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal">New</button>                      
                       </div>
                     </div>
+                    <div class="col-lg-2 col-md-6">
+                      <div class="mt-3">
+                       <button type="button" class="btn btn-primary" id="ajax-trigger">Data Show</button>                      
+                      </div>
+                    </div>
+
+
+                    <div class="col-lg-2 col-md-6">
+                      <div class="mt-3">
+                       <button type="button" class="btn btn-warning" id="download-xlsx">Export</button>                      
+                      </div>
+                    </div>
+
+
+                    
 
 
 
@@ -253,6 +269,8 @@
 
 
 
+
+
                     <script type="text/javascript">
                     var deleteIcon = function(cell, formatterParams, onRendered)
                     {
@@ -264,20 +282,19 @@
                     };
 
 
-
-                      var tabledata = '<?php echo $members ;?>';
-                      var table = new Tabulator("#example-table", {
-                          height:"411px",
-                          pagination:true, //enable.
-                          paginationSize:5, // this option can take any positive integer value  
-                          data:tabledata, //assign data to table
-                          layout:"fitColumns", //fit columns to width of table (optional)
-                          columns:[
+                    //Build Tabulator
+                  var table = new Tabulator("#example-table", {
+                      height:"400px",
+                      layout:"fitColumns",
+                      placeholder:"No Data Set",
+                      pagination:true, //enable.
+                      paginationSize:50, // this option can take any positive integer value
+                      columns:[
                           {title:"ID", field:"id", formatter:"rownum"},
                           {title:"Icon", field:"profile_picture", formatter:"image", formatterParams:{
                            height:"20px",
                            width:"20px",
-                           urlPrefix:"{{ url('img/')}}/",
+                           //urlPrefix:"{{ url('img/')}}/",
                           }},
                           {title:"Name", field:"name",editor:"input"},
                           {title:"Email", field:"email",editor:"input"},
@@ -288,7 +305,19 @@
                           {formatter:deleteIcon, width:40, hozAlign:"center", headerSort:false, cellClick:function(e, cell){
                             delete_row(e,cell);
                           }},
+                      ],
+                  });
+                    
+                  
+                  //trigger AJAX load on "Load Data via AJAX" button click
+                  $("#ajax-trigger").click(function(){
+                      table.setData("http://127.0.0.1:8000/employee_data");
+                      
+                  });
 
-                          ],
-                      });
+                  //trigger download of data.xlsx file
+                    document.getElementById("download-xlsx").addEventListener("click", function(){
+                        table.download("xlsx", "data.xlsx", {sheetName:"Employee Data"});
+                    });
+
                     </script>
