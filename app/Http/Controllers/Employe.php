@@ -79,7 +79,6 @@ class Employe extends Controller
          $data->profile_picture=$filename;
         }
 
-
          $data->name=$request->name;
          $data->email=$request->email;
          $data->address=$request->address;

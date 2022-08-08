@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use App\Models\Attendance;
 
@@ -24,9 +25,6 @@ class Attendances extends Controller
                 ->orderByRaw('id DESC')
                 ->limit(1)
                 ->get();
-
-
-
         return view('Attendance_list',['page_name'=>$this->page_name,'last_attendance'=>$last_attendance,'members'=>$data]);
     }
 
@@ -55,6 +53,53 @@ class Attendances extends Controller
          return redirect('Attendance');                      
     }
 
+     public function auto_attendance(Request $request)
+    { 
+         $data= new Attendance();
+         $data->employee_id=session()->get('user')['id'];
+         if ($request->type=='1') 
+         {
+         $data->start=date('Y-m-d');
+         $data->puncin=date('H:i:s');
+         $data->puncout="00:00:00";
+         $data->work="00:00:00";
+         $data->break="00:00:00";
+         $data->overtime="00:00:00";  
+         $data->shifttime="08:00:00";
+         $data->remarks="Auto";
+
+                 if(Attendance::where('start', '=',date('Y-m-d'))->where('employee_id',session()->get('user')['id'])->count() > 0)
+                 {
+                 //$data->save();     
+                 return response(['code' => 201,'status' => 'success', 'msg' => 'Already exist.']);
+                 }
+                 else
+                 {
+
+                 $data->save();     
+                 return response(['code' => 200,'status' => 'success', 'msg' => 'Update Successfully.']);
+                 }
+         }
+         else
+         {
+            $Attendance = Attendance::where('start', '=',date('Y-m-d'))->where('employee_id',session()->get('user')['id'])->get();
+            $id=$Attendance[0]->id;
+
+
+         $data=Attendance::find($id);
+         $data->puncout=date('H:i:s');
+         $data->work="00:00:00";
+         $data->break="00:00:00";
+         $data->overtime="00:00:00";
+         $data->save();     
+         return response(['code' => 200,'status' => 'success', 'msg' => 'Update Successfully.']);
+                
+         }
+       
+
+
+
+    }
 
       public function update_Attendance_profile(Request $request)
     { 

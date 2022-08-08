@@ -255,7 +255,7 @@
                               </div>
                             </div>
                           </div>
-                          <a data-id="{{ $post->id }}"  data-bs-toggle="modal" class="gfgselect" data-bs-target="#editlargeModal" >
+                          <a data-id="{{ $post->id }}"  data-bs-toggle="modal" class="select_activity" data-bs-target="#editlargeModal" >
                           <span class="fw-semibold d-block mb-1">{{ $post->key }}</span>
                           <h6 class="card-title mb-2">{{ $post->summary }}</h6>                            
                           </a>
@@ -538,7 +538,7 @@ function reportActivity()
    <script>
             $(function () {
                      // ON SELECTING ROW
-                $(".gfgselect").click(function () 
+                $(".select_activity").click(function () 
                 {
                     $("#type").val();
                     $("#project").val();

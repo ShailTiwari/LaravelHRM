@@ -1,6 +1,64 @@
     <x-header  title={{$page_name}}/>
     <x-sidebar/>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="container-xxl flex-grow-1 container-p-y">
+
+        <!-- Large Modal -->
+          <div class="modal fade" id="largeModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel3">Add New</h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                 <form id="formAccountSettings" method="POST"action="{{ route('create_attendance') }}" enctype="multipart/form-data">
+                          @csrf
+                      <div class="modal-body"> 
+                         <div class="row">
+                          <div class="mb-3 col-md-6">
+                            <label for="firstName" class="form-label">Date</label> 
+                            <input
+                              class="form-control"
+                              type="date"
+                              id="name"
+                              name="start"
+                               value=""
+                              autofocus
+                            />
+                          </div>
+                          <div class="mb-3 col-md-6">
+                            <label for="lastName" class="form-label">Start Time</label>
+                            <input class="form-control" type="time" name="puncin" id="puncin" value="" />
+                          </div>
+                          <div class="mb-3 col-md-6">
+                            <label for="lastName" class="form-label">End Time</label>
+                            <input class="form-control" type="time" name="puncout" id="puncout" value="" />
+                          </div> 
+                          <div class="mb-3 col-md-6">
+                            <label for="address" class="form-label">Remarks</label>
+                            <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Remarks" value="" />
+                          </div>
+                        </div>
+                      </div>                 
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    Close
+                  </button>
+                  <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+                 </form>
+              </div>
+            </div>
+          </div>
+
+
+
+
 
               <div class="row">
                 <!-- Order Statistics -->
@@ -21,10 +79,16 @@
                         <div id="orderStatisticsChart"></div>
                       </div>
                       <ul class="p-0 m-0">
-                        <li class="d-flex mb-4 pb-1">
-                          
+                        <li class="d-flex mb-4 pb-1">                          
                           <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <button class="btn btn-lg btn-outline-warning">Punch Out</button>
+                            <button class="punch_attendence btn btn-lg btn-outline-danger">In</button>
+                          </div>
+
+                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                            <button class="punchout_attendence btn btn-lg btn-outline-warning">Out</button>
+                          </div>
+                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                            <button data-bs-toggle="modal" data-bs-target="#largeModal" class="btn btn-lg btn-outline-success">Manual</button>
                           </div>
                         </li>
                         <li class="d-flex mb-4 pb-1">
@@ -185,52 +249,9 @@
 
 
       <div class="col-xl-12">
-                  <div class="nav-align-top">
-                    <ul class="nav nav-tabs" role="tablist">
-                      <li class="nav-item">
-                        <button
-                          type="button"
-                          class="nav-link active"
-                          role="tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#navs-top-home"
-                          aria-controls="navs-top-home"
-                          aria-selected="true"
-                        >
-                          List
-                        </button>
-                      </li>
-                      <li class="nav-item">
-                        <button
-                          type="button"
-                          class="nav-link"
-                          role="tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#navs-top-profile"
-                          aria-controls="navs-top-profile"
-                          aria-selected="false"
-                        >
-                          Add New
-                        </button>
-                      </li>
-                    </ul>
-                    <div class="tab-content">
-                      <div class="tab-pane fade show active" id="navs-top-home" role="tabpanel">
-                        
-              <!-- Basic Bootstrap Table -->
+         <!-- Basic Bootstrap Table -->
               <div class="card">
                 <h5 class="d-inline card-header">Attendance List</h5>
-                <!-- <div class="d-inline"> 
-                     <form class="d-flex">
-                        <div class="input-group">
-                          <span class="input-group-text"><i class="tf-icons bx bx-search"></i></span>
-                          <input type="text" class="form-control" placeholder="Search For..." />
-                        </div>
-                    </form>                  
-                </div> -->
-               
-
-
                 <div class="table-responsive text-nowrap">
                   <table class="table">
                     <thead>
@@ -271,61 +292,68 @@
                 </div>
               </div>
               <!--/ Basic Bootstrap Table -->
-                      </div>
-                      <div class="tab-pane fade" id="navs-top-profile" role="tabpanel">
-                         <div class="card-body">
-                      <form id="formAccountSettings" method="POST"action="{{ route('create_attendance') }}" enctype="multipart/form-data">
-                          @csrf
-                        <div class="row">
+            </div>
+          <x-footer/>                  
 
-                          <div class="mb-3 col-md-6">
-                            <label for="firstName" class="form-label">Date</label> 
-                            <input
-                              class="form-control"
-                              type="date"
-                              id="name"
-                              name="start"
-                               value=""
-                              autofocus
-                            />
-                          </div>
+          <script>
+                $(function () {
+                     // ON SELECTING ROW
+                $(".punch_attendence").click(function () 
+                {
+                    var SITEURL = "{{ url('/') }}"; 
+                    var token = $('meta[name="csrf-token"]').attr('content');
+                    var type = '1';
 
-                          <div class="mb-3 col-md-6">
-                            <label for="lastName" class="form-label">Start Time</label>
-                            <input class="form-control" type="time" name="puncin" id="puncin" value="" />
-                          </div>
-
-                          <div class="mb-3 col-md-6">
-                            <label for="lastName" class="form-label">End Time</label>
-                            <input class="form-control" type="time" name="puncout" id="puncout" value="" />
-                          </div>                         
-
-                          <div class="mb-3 col-md-6">
-                            <label for="address" class="form-label">Remarks</label>
-                            <input type="text" class="form-control" id="remarks" name="remarks" placeholder="Remarks" value="" />
-                          </div>
-
-                        </div>
-                        <div class="mt-2">
-                          <button type="submit" class="btn btn-primary me-2">Save</button>
-                          <button type="reset" class="btn btn-outline-secondary">Cancel</button>
-                        </div>
-                      </form>
-                    </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-    <x-footer/> 
+                  $.ajax({
+                            type: "POST",
+                            dataType: "json",
+                            url: SITEURL + "/auto_attendance",
+                            data: {
+                               type: type,
+                              _token: token
+                            },
+                            success: function(response) {
+                                  console.log(response);
+                                if (response.status == "success") 
+                                {
+                                  alert(response.msg);
+                                } 
+                                else 
+                                {
+                                  console.log(response.msg);
+                                }
+                                  }
+                          });
+                    });
 
 
-                    <script type="text/javascript">
-                      $('#image').change(function()
-                      {                             
-                      let reader = new FileReader();
-                      reader.onload = (e) => { 
-                        $('#preview-image').attr('src', e.target.result); 
-                      }
-                      reader.readAsDataURL(this.files[0]);                     
-                     });
-                    </script>
+                $(".punchout_attendence").click(function () 
+                {
+                    var SITEURL = "{{ url('/') }}"; 
+                    var token = $('meta[name="csrf-token"]').attr('content');
+                    var type = '2';
+
+                  $.ajax({
+                            type: "POST",
+                            dataType: "json",
+                            url: SITEURL + "/auto_attendance",
+                            data: {
+                               type: type,
+                              _token: token
+                            },
+                            success: function(response) {
+                                  console.log(response);
+                                if (response.status == "success") 
+                                {
+                                  alert(response.msg);
+                                } 
+                                else 
+                                {
+                                  console.log(response.msg);
+                                }
+                                  }
+                          });
+                    });
+
+                  });
+           </script>

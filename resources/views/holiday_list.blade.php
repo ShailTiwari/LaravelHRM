@@ -61,9 +61,27 @@
                     aria-label="Close"
                   ></button>
                 </div>
-                 <form id="formAccountSettings" method="POST"action="{{ route('create_projects') }}" enctype="multipart/form-data">
+                 <form id="formAccountSettings" method="POST"action="{{ route('create_holiday') }}" enctype="multipart/form-data">
                           @csrf
-                 
+                      <div class="modal-body"> 
+                        <div class="row">
+                          <div class="mb-3 col-md-6">
+                            <label for="firstName" class="form-label">Name*</label> 
+                             <input class="form-control" type="hidden" name="id" id="editid" value="" />
+                             <input class="form-control" type="text" name="title" id="title" value="" />
+                          </div>
+                          <div class="mb-3 col-md-6">
+                            <label for="lastName" class="form-label">Date</label>
+                            <input class="form-control" type="date" name="start" id="start" value="" />
+                          </div>  
+                        </div>
+                          <div class="row">
+                            <div class="col mb-3">
+                              <label for="nameLarge" class="form-label">Description*</label>
+                             <textarea  name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                          </div>
+                      </div>                 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                     Close
@@ -75,7 +93,51 @@
             </div>
           </div>
 
- 
+   <!-- Large Edit Modal -->
+          <div class="modal fade" id="largeModaledit" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel3">Edit Holiday</h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                 <form id="formAccountSettings" method="POST"action="{{ route('update_department_profile') }}" enctype="multipart/form-data">
+                          @csrf
+                      <div class="modal-body"> 
+                        <div class="row">
+                          <div class="mb-3 col-md-6">
+                            <label for="firstName" class="form-label">Name*</label> 
+                             <input class="form-control" type="hidden" name="id" id="editid" value="" />
+                             <input class="form-control" type="text" name="title" id="edittitle" value="" />
+                          </div>
+                          <div class="mb-3 col-md-6">
+                            <label for="lastName" class="form-label">Date</label>
+                            <input class="form-control" type="date" name="start" id="editstart" value="" />
+                          </div>  
+                        </div>
+                          <div class="row">
+                            <div class="col mb-3">
+                              <label for="nameLarge" class="form-label">Description*</label>
+                             <textarea  name="description" class="form-control" id="editdescription" rows="3"></textarea>
+                            </div>
+                          </div>
+                      </div>   
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                          Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                      </div>
+                 </form>
+              </div>
+            </div>
+          </div>
+
 
       <div id="example-table"></div>
 
@@ -94,8 +156,7 @@
                       function delete_row(e,cell)                      
                       {
                        var id=cell.getRow().getData().id;
-                       let url = 'projects_delete/'+id+'';
-                      // document.location.href=url;
+                       let url = 'holiday_delete/'+id+'';
                         console.log(url);
                         swal({
                             title: 'Are you sure?',
@@ -104,7 +165,7 @@
                             buttons: ["Cancel", "Yes!"],
                         }).then(function(value) {
                             if (value) {
-                            //    window.location.href = url;
+                               window.location.href = url;
                             }
                         });
 
@@ -150,9 +211,9 @@
                           {title:"Date", field:"start",editor:"input"},
                           {title:"Holiday", field:"title",editor:"input"},
                           {title:"Status", field:"isactive", hozAlign:"center", formatter:"tickCross", headerSort:false, headerVertical:false},
-                         /* {formatter:editIcon, width:40, hozAlign:"center", headerSort:false, cellClick:function(e, cell){
+                          {formatter:editIcon, width:40, hozAlign:"center", headerSort:false, cellClick:function(e, cell){
                             edit_row(e,cell);
-                          }},*/
+                          }},
                           {formatter:deleteIcon, width:40, hozAlign:"center", headerSort:false, cellClick:function(e, cell){
                             delete_row(e,cell);
                           }},

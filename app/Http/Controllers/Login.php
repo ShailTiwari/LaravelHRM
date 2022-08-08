@@ -78,6 +78,10 @@ class Login extends Controller
                         $User= new User;
                         $User->name=$request->name;
                         $User->email=$request->email;
+                        $User->name=$request->name;
+                        $User->post=1;
+                        $User->isactive=1;
+                        $User->isactive=0;
                         $User->password= Hash::make($request->password);
                         $User->save();
 

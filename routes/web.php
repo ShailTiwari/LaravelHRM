@@ -41,6 +41,7 @@ Route::get('user', [Dashboard::class, 'user_list']);
 Route::get('department', [Departments::class, 'index']);
 Route::post('department_add', [Departments::class, 'create'])->name('department_add'); 
 Route::get('department_edit/{id}', [Departments::class, 'edit']);
+Route::post('update_department_profile', [Departments::class, 'update_department_profile'])->name('update_department_profile'); 
 Route::get('department_delete/{id}', [Departments::class, 'delete']);
 
 Route::get('payroll', [Payrolls::class, 'index']);
@@ -57,6 +58,7 @@ Route::get('employee_delete/{id}',[Employe::class, 'delete'] );
 
 Route::get('Attendance', [Attendances::class, 'Attendance_list']);
 Route::post('create_attendance', [Attendances::class, 'create_attendance'])->name('create_attendance'); 
+Route::post('auto_attendance', [Attendances::class, 'auto_attendance'])->name('auto_attendance'); 
 Route::get('Attendance_edit/{id}', [Attendances::class, 'Attendance_profile']); 
 Route::post('update_Attendance_profile', [Attendances::class, 'update_Attendance_profile'])->name('update_Attendance_profile'); 
 Route::get('Attendance_delete/{id}',[Attendances::class, 'delete'] );
@@ -68,10 +70,10 @@ Route::post('update_projects_profile', [Projects::class, 'update_projects_profil
 Route::get('projects_delete/{id}',[Projects::class, 'delete'] );
 
 Route::get('holiday', [Holidays::class, 'index']);
-/*Route::post('create_holiday_profile', [Holidays::class, 'create_employee_profile'])->name('create_employee_profile'); 
-Route::get('employee_edit/{id}', [Holidays::class, 'employee_profile']); 
-Route::post('update_employee_profile', [Holidays::class, 'update_employee_profile'])->name('update_employee_profile'); 
-Route::get('employee_delete/{id}',[Holidays::class, 'delete'] );*/
+Route::post('create_holiday', [Holidays::class, 'create'])->name('create_holiday'); 
+Route::get('holiday_edit/{id}', [Holidays::class, 'holiday_profile']); 
+Route::post('update_holiday_profile', [Holidays::class, 'update_holiday_profile'])->name('update_holiday_profile'); 
+Route::get('holiday_delete/{id}',[Holidays::class, 'delete'] );
 
 Route::get('event', [Events::class,'index'])->name('index');
 Route::post('event_save', [Events::class,'ajax_event_save'])->name('ajax_event_save');  

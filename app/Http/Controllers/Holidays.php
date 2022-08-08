@@ -16,4 +16,22 @@ class Holidays extends Controller
          $data= Holiday::all();
          return view('holiday_list',['page_name'=>$this->page_name,'members'=>$data]);
     }
+
+       public function create(Request $request)
+    { 
+         $data= new Holiday();
+         $data->title=$request->title;
+         $data->description=$request->description;
+         $data->start=$request->start;
+         $data->isactive=1;
+         $data->save();
+        return redirect('holiday');                      
+    }
+      public function delete($id)
+    { 
+        $date=Holiday::find($id);
+        $date->delete(); 
+        return redirect('holiday');
+    }
+
 }
