@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use PDF;
 use App\Models\Payroll;
 
 class Payrolls extends Controller
@@ -16,6 +17,17 @@ class Payrolls extends Controller
         $data= Payroll::all();
         return view('payroll_list',['page_name'=>$this->page_name,'members'=>$data]);
     }
+      public function print($id)
+    {
+         $data=Payroll::find($id);
+         $user=Payroll::where(['id'=>$id])->first();
+       //  return $user;
+        // return view('salary_slip',['member'=>$user]);
+
+               $pdf = PDF::loadView('salary_slip'); 
+        return $pdf->download('Salary_slip.pdf');
+    }
+
 
      public function create(Request $request)
     { 

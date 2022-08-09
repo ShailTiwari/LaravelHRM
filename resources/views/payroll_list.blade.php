@@ -49,7 +49,12 @@
 
 
                     <script type="text/javascript">  
-
+                      function print_row(e,cell)                      
+                      {
+                       var id=cell.getRow().getData().id;
+                       let url = 'payroll_print/'+id+'';
+                       document.location.href=url;
+                      } 
                       function edit_row(e,cell)                      
                       {
                        var id=cell.getRow().getData().id;
@@ -98,6 +103,10 @@
                     {
                     return "<i class='bx bx-edit-alt me-1'></i>"; 
                     };
+                        var printIcon = function(cell, formatterParams, onRendered)
+                    {
+                    return "<i class='bx bx-printer me-1'></i>"; 
+                    };
 
 
 
@@ -118,6 +127,9 @@
                           {title:"Name", field:"name",editor:"input"},
                           {title:"Email", field:"email",editor:"input"},
                           {title:"Status", field:"isactive", hozAlign:"center", formatter:"tickCross", headerSort:false, headerVertical:false},
+                          {formatter:printIcon, width:40, hozAlign:"center", headerSort:false, cellClick:function(e, cell){
+                            print_row(e,cell);
+                          }},
                           {formatter:editIcon, width:40, hozAlign:"center", headerSort:false, cellClick:function(e, cell){
                             edit_row(e,cell);
                           }},

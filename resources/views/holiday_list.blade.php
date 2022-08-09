@@ -67,7 +67,6 @@
                         <div class="row">
                           <div class="mb-3 col-md-6">
                             <label for="firstName" class="form-label">Name*</label> 
-                             <input class="form-control" type="hidden" name="id" id="editid" value="" />
                              <input class="form-control" type="text" name="title" id="title" value="" />
                           </div>
                           <div class="mb-3 col-md-6">
@@ -106,7 +105,7 @@
                     aria-label="Close"
                   ></button>
                 </div>
-                 <form id="formAccountSettings" method="POST"action="{{ route('update_department_profile') }}" enctype="multipart/form-data">
+                 <form id="formAccountSettings" method="POST"action="{{ route('update_holiday_profile') }}" enctype="multipart/form-data">
                           @csrf
                       <div class="modal-body"> 
                         <div class="row">
@@ -144,15 +143,25 @@
        <x-footer/> 
 
 
-                    <script type="text/javascript">  
-
-                      function edit_row(e,cell)                      
+                    <script type="text/javascript">   
+                    function edit_row(e,cell)                      
                       {
-                       var id=cell.getRow().getData().id;
-                       let url = 'projects_edit/'+id+'';
-                      // document.location.href=url;
-                        console.log(url);
-                      }   
+                        $("#editid").val();
+                        $("#editname").val();
+                        $("#editstart").val();
+                        $("#editdescription").val();
+                        var id=cell.getRow().getData().id;
+                        var title=cell.getRow().getData().title;
+                        var description=cell.getRow().getData().description;
+                        var start=cell.getRow().getData().start;
+
+                        $("#editid").val(id);
+                        $("#edittitle").val(title);
+                        $("#editstart").val(start);
+                        $("#editdescription").val(description);
+                        $("#largeModaledit").modal('show');
+                      } 
+                      
                       function delete_row(e,cell)                      
                       {
                        var id=cell.getRow().getData().id;

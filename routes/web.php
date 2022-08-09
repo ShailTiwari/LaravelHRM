@@ -47,6 +47,7 @@ Route::get('department_delete/{id}', [Departments::class, 'delete']);
 Route::get('payroll', [Payrolls::class, 'index']);
 Route::post('payroll_add', [Payrolls::class, 'create'])->name('payroll_add'); 
 Route::get('payroll_edit/{id}', [Payrolls::class, 'edit']);
+Route::get('payroll_print/{id}', [Payrolls::class, 'print']);
 Route::get('payroll_delete/{id}', [Payrolls::class, 'delete']);
 
 Route::get('employee', [Employe::class, 'employee_list']);
@@ -72,7 +73,7 @@ Route::get('projects_delete/{id}',[Projects::class, 'delete'] );
 Route::get('holiday', [Holidays::class, 'index']);
 Route::post('create_holiday', [Holidays::class, 'create'])->name('create_holiday'); 
 Route::get('holiday_edit/{id}', [Holidays::class, 'holiday_profile']); 
-Route::post('update_holiday_profile', [Holidays::class, 'update_holiday_profile'])->name('update_holiday_profile'); 
+Route::post('update_holiday_profile', [Holidays::class, 'update'])->name('update_holiday_profile'); 
 Route::get('holiday_delete/{id}',[Holidays::class, 'delete'] );
 
 Route::get('event', [Events::class,'index'])->name('index');
