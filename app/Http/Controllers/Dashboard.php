@@ -21,11 +21,20 @@ class Dashboard extends Controller
     {
          $data= User::all();
          $users = DB::table('employees')->count();
-         $maxComment = DB::table('activities')->max('order'); 
-         $bounce_rate=32.56;
-         $page_view=6859;
-         $new_session=64.25;
-         return view('welcome',['page_name'=>$this->page_name,'members'=>$data,'users_count'=>$users,'activities_count'=>$maxComment,'new_session'=>$new_session]);
+         $projects = DB::table('projects')->count();
+         $activities = DB::table('activities')->max('order'); 
+         $holidays = DB::table('holidays')->count();
+         $attendances = DB::table('attendances')->count();
+         return view('welcome',
+            [
+                'page_name'=>$this->page_name,
+                'members'=>$data,
+                'users_count'=>$users,
+                'projects'=>$projects,
+                'activities'=>$activities,
+                'holidays'=>$holidays,
+                'attendances'=>$attendances
+            ]);
     }
     
       public function profile($id)

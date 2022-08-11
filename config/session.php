@@ -155,7 +155,9 @@ return [
     |
     */
 
-    'domain' => env('SESSION_DOMAIN', null),
+  /*  'domain' => env('SESSION_DOMAIN', null),*/
+    'domain' => "http://127.0.0.1:8000/login",
+    
 
     /*
     |--------------------------------------------------------------------------

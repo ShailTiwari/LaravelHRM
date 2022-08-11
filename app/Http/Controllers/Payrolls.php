@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use PDF;
 use App\Models\Payroll;
+use Illuminate\Support\Facades\DB;
 
 class Payrolls extends Controller
 { 
@@ -12,20 +13,32 @@ class Payrolls extends Controller
     {
         $this->page_name="Payroll";
     }
-    public function index()
+
+     public function list()
     {
-        $data= Payroll::all();
-        return view('payroll_list',['page_name'=>$this->page_name,'members'=>$data]);
+        return view('payroll_list',['page_name'=>$this->page_name]);
     }
+      public function data()
+    {
+        $data = DB::select('SELECT * from employees');
+        return response($data);
+    }
+
       public function print($id)
     {
          $data=Payroll::find($id);
          $user=Payroll::where(['id'=>$id])->first();
-       //  return $user;
-        // return view('salary_slip',['member'=>$user]);
-
                $pdf = PDF::loadView('salary_slip'); 
         return $pdf->download('Salary_slip.pdf');
+    }
+
+       public function print_invoice($id)
+    {
+         $data=Payroll::find($id);
+         $user=Payroll::where(['id'=>$id])->first();
+               $pdf = PDF::loadView('invoice_slip'); 
+               $pdf->setPaper('A4', 'portrait');
+        return $pdf->download('invoice_slip.pdf');
     }
 
 

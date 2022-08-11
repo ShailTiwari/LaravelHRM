@@ -1,48 +1,69 @@
     <x-header  title={{$page_name}}/>
     <x-sidebar/>
-    <div class="container-xxl flex-grow-1 container-p-y">
-
-              <div class="card mb-4">
+     <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">                      
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
                 <div class="card-body">
-                  <div class="row gy-3">
-                     <!-- End Offcanvas -->
-                    <div class="col-lg-3 col-md-6">                      
-                      <div class="mt-3">
-                        <input
-                          class="form-control"
-                          type="text"
-                          placeholder="Search..."
-                        >                     
-                      </div>
-                    </div> 
-                    <div class="col-lg-2 col-md-6">
-                      <div class="mt-3">
-                        <button
-                          class="btn btn-primary"
-                          type="button"
-                          data-bs-toggle="offcanvas"
-                          data-bs-target="#offcanvasEnd"
-                          aria-controls="offcanvasEnd"
-                        >
-                          Show
-                        </button>                       
+                   <div class="home-tab d-sm-flex align-items-center justify-content-between border-bottom">
+                 <!--  <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active ps-0" id="home-tab" data-bs-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#audiences" role="tab" aria-selected="false">Audiences</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#demographics" role="tab" aria-selected="false">Demographics</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link border-0" id="more-tab" data-bs-toggle="tab" href="#more" role="tab" aria-selected="false">More</a>
+                    </li>
+                  </ul> -->
+                  <!--  <div class="form-group">
+                    <div class="input-group btn-wrapper">
+                       <input type="text" class="btn form-control" placeholder="Search." aria-label="Recipient's username">
+
+                      <input type="text" class="btn form-control" placeholder="Search..." aria-label="Recipient's username">
+                      <div class="input-group-append">
+                        <button class="btn btn-rounded btn-sm btn-primary" type="button">Search</button>
                       </div>
                     </div>
-                     <!-- Default Offcanvas -->
-                    <div class="col-lg-2 col-md-6">
-                      <div class="mt-3">
-                       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal">New</button>                      
-                      </div>
+                  </div> -->
+
+                  <div>
+                    <div class="btn-wrapper"> 
+                      <input type="text" class="btn btn-otline-dark align-items-center" placeholder="Search" aria-label="">
+                      <input type="text" class="btn btn-otline-dark align-items-center" placeholder="Search" aria-label="">
+                      <input type="text" class="btn btn-otline-dark align-items-center" placeholder="Search" aria-label="">
+                      <button class="btn btn-primary text-white align-items-center"><i class="icon-eye"></i> Show</button>
+
+
+
+                      
+
+                      <a href="#" class="btn btn-otline-dark align-items-center"><i class="icon-share"></i> Share</a> 
+                      <a href="#" class="btn btn-warning text-white align-items-center" type="button"  data-bs-toggle="modal" data-bs-target="#largeModal"><i class="icon-plus"></i> New</a>
+                      <button id="download-xlsx" class="btn btn-success text-white align-items-center btn-xs"><i class="icon-download"></i>Export</button>
                     </div>
                   </div>
                 </div>
+                  <div class="table-responsive">
+                    <div id="example-table"></div>
+                  </div>
+                </div>
               </div>
+            </div>
+          </div>
+        </div>
 
 
 
-        <!-- Large Modal -->
+        <!--Create New  Large Modal -->
           <div class="modal fade" id="largeModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog modal-md" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel3">Create New Department</h5>
@@ -84,9 +105,9 @@
 
 
 
-          <!-- Large Modal -->
+          <!--Edit Large Modal -->
           <div class="modal fade" id="largeModaledit" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog modal-md" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel3">Edit Department</h5>
@@ -129,10 +150,15 @@
 
 
 
- 
 
-      <div id="example-table"></div>
 
+
+
+
+
+
+
+    
        <x-footer/> 
 
 
@@ -195,11 +221,11 @@
                     <script type="text/javascript">
                     var deleteIcon = function(cell, formatterParams, onRendered)
                     {
-                    return "<i class='bx bx-trash-alt me-1'></i>"; 
+                    return "<i class='icon-trash'></i>"; 
                     };
                        var editIcon = function(cell, formatterParams, onRendered)
                     {
-                    return "<i class='bx bx-edit-alt me-1'></i>"; 
+                    return "<i class='icon-pencil'></i>"; 
                     };
 
 
@@ -220,14 +246,19 @@
                            urlPrefix:"{{ url('img/')}}",
                           }},*/
                           {title:"Name", field:"name",editor:"input"},
-                          {title:"Status", field:"isactive", hozAlign:"center", formatter:"tickCross", headerSort:false, headerVertical:false},
-                          {formatter:editIcon, width:40, hozAlign:"center", headerSort:false, cellClick:function(e, cell){
+                          {title:"Status", field:"isactive", hozAlign:"center", formatter:"tickCross"},
+                          {formatter:editIcon, width:20, hozAlign:"center", headerSort:false, cellClick:function(e, cell){
                             edit_row(e,cell);
                           }},
-                          {formatter:deleteIcon, width:40, hozAlign:"center", headerSort:false, cellClick:function(e, cell){
+                          { formatter:deleteIcon, width:20, hozAlign:"center", headerSort:false, cellClick:function(e, cell){
                             delete_row(e,cell);
                           }},
 
                           ],
                       });
+
+                        //trigger download of data.xlsx file
+                    document.getElementById("download-xlsx").addEventListener("click", function(){
+                        table.download("xlsx", "Department.xlsx", {sheetName:"Department Data"});
+                    });
                     </script>

@@ -1,8 +1,9 @@
-<?php
+ <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\login;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Departments;
+use App\Http\Controllers\Customers;
 use App\Http\Controllers\Employe;
 use App\Http\Controllers\Events;
 use App\Http\Controllers\Activitys;
@@ -20,6 +21,11 @@ use App\Http\Controllers\Projects;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('auth/google', [login::class, 'redirectToGoogle'])->name('redirectToGoogle');
+Route::get('auth/google/callback', [login::class, 'handleGoogleCallback'])->name('handleGoogleCallback');
+
+
 
 Route::get('/', [login::class, 'index'])->name('login');
 Route::get('login', [login::class, 'index'])->name('login');
@@ -44,11 +50,25 @@ Route::get('department_edit/{id}', [Departments::class, 'edit']);
 Route::post('update_department_profile', [Departments::class, 'update_department_profile'])->name('update_department_profile'); 
 Route::get('department_delete/{id}', [Departments::class, 'delete']);
 
-Route::get('payroll', [Payrolls::class, 'index']);
+Route::get('payroll', [Payrolls::class, 'list']);
+Route::get('payroll_data', [Payrolls::class, 'data']);
 Route::post('payroll_add', [Payrolls::class, 'create'])->name('payroll_add'); 
 Route::get('payroll_edit/{id}', [Payrolls::class, 'edit']);
 Route::get('payroll_print/{id}', [Payrolls::class, 'print']);
+Route::get('invoice_print/{id}', [Payrolls::class, 'print_invoice']);
 Route::get('payroll_delete/{id}', [Payrolls::class, 'delete']);
+
+
+
+Route::get('customer', [Customers::class, 'list']);
+Route::get('customer_data', [Customers::class, 'data']);
+Route::post('customer_create', [Customers::class, 'create'])->name('customer_create'); 
+Route::get('customer_edit/{id}', [Customers::class, 'edit']); 
+Route::post('customer_update', [Customers::class, 'update'])->name('update'); 
+Route::get('customer_delete/{id}',[Customers::class, 'delete'] );
+
+
+
 
 Route::get('employee', [Employe::class, 'employee_list']);
 Route::get('employee_data', [Employe::class, 'employee_data']);

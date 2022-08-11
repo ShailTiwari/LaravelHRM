@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon; 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 
 class Login extends Controller
 {
@@ -168,19 +169,69 @@ class Login extends Controller
 
 
 
-
-
-
-
-function tableData()
+    public function redirectToGoogle()
     {
-        $data= User::paginate(10);
-        return view('table_data',['members'=>$data]);
+        return Socialite::driver('google')->redirect();
+
     }
 
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
 
-    function getData()
+    public function handleGoogleCallback(Request $request)
     {
-         return User::paginate(10);
+        try {  
+            $googleUser = Socialite::driver('google')->user();
+           // return $googleUser ;
+            $finduser = User::where('google_id', $googleUser->id)->first();
+            if($finduser)
+            {      
+               $request->session()->put('user',$finduser); 
+                return redirect('home'); 
+            }
+            else
+            {
+
+                        $User= new User;
+                        $User->name=$googleUser->name;
+                        $User->email=$googleUser->email;
+                        $User->google_id=$googleUser->id;
+                        $User->post=1;
+                        $User->isactive=1;
+                        $User->isactive=0;
+                        $User->password= Hash::make('abc123');
+                        $User->save();
+
+                         $user=User::where(['google_id'=>$googleUser->id])->first();
+                            if (!$user) 
+                            {
+                               return redirect('login');
+                            }
+                            else
+                            {                    
+                             $request->session()->put('user',$user); 
+                             Mail::send('signup_email', ['username' =>$googleUser->name], 
+                                function($message) use($request){
+                                  $message->to($googleUser->email);
+                                  $message->subject('Signup Notification');
+                              });
+                              return redirect('home');
+                            }
+
+
+
+            }     
+
+        }
+         catch (Exception $e) 
+         {
+
+            dd($e->getMessage());
+
+        }
+
     }
 }

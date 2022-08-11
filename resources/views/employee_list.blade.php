@@ -1,72 +1,47 @@
     <x-header  title={{$page_name}}/>
     <x-sidebar/>
-    <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
-    <div class="container-xxl flex-grow-1 container-p-y">
-
-              <div class="card mb-4">
+     <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">                      
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
                 <div class="card-body">
-                  <div class="row gy-3">
-                     <!-- End Offcanvas -->
-                    <div class="col-lg-3 col-md-6">                      
-                      <div class="mt-3">
-                        <input
-                          class="form-control"
-                          type="text"
-                          placeholder="Search..."
-                        >                     
-                      </div>
-                    </div> 
+                   <div class="home-tab d-sm-flex align-items-center justify-content-between border-bottom">
+               
 
-                    <div class="col-lg-2 col-md-6">
-                      <div class="mt-3">
-                        <button
-                          class="btn btn-primary"
-                          type="button"
-                          data-bs-toggle="offcanvas"
-                          data-bs-target="#offcanvasEnd"
-                          aria-controls="offcanvasEnd"
-                        >
-                          Show
-                        </button>                       
-                      </div>
+                  <div>
+                    <div class="btn-wrapper"> 
+                      <input type="text" class="btn btn-otline-dark align-items-center" placeholder="Search" aria-label="">
+                      <input type="text" class="btn btn-otline-dark align-items-center" placeholder="Search" aria-label="">
+                      <input type="text" class="btn btn-otline-dark align-items-center" placeholder="Search" aria-label="">
+                      <button  id="ajax-trigger" class="btn btn-primary text-white align-items-center"><i class="icon-eye"></i> Show</button>
+
+
+
+                      
+
+                      <a href="#" class="btn btn-otline-dark align-items-center"><i class="icon-share"></i> Share</a> 
+                      <a href="#" class="btn btn-warning text-white align-items-center" type="button"  data-bs-toggle="modal" data-bs-target="#largeModal"><i class="icon-plus"></i> New</a>
+                      <button id="download-xlsx" class="btn btn-success text-white align-items-center btn-xs"><i class="icon-download"></i>Export</button>
                     </div>
-
-                     <!-- Default Offcanvas -->
-                    <div class="col-lg-2 col-md-6">
-                      <div class="mt-3">
-                       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal">New</button>                      
-                      </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6">
-                      <div class="mt-3">
-                       <button type="button" class="btn btn-primary" id="ajax-trigger">Data Show</button>                      
-                      </div>
-                    </div>
-
-
-                    <div class="col-lg-2 col-md-6">
-                      <div class="mt-3">
-                       <button type="button" class="btn btn-warning" id="download-xlsx">Export</button>                      
-                      </div>
-                    </div>
-
-
-                    
-
-
-
+                  </div>
+                </div>
+                  <div class="table-responsive">
+                    <div id="example-table"></div>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
 
 
 
-
-
-
-        <!-- Large Modal -->
+        <!--Create New  Large Modal -->
+           <!-- Large Modal -->
           <div class="modal fade" id="largeModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog modal-md" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel3">Add New</h5>
@@ -221,14 +196,16 @@
             </div>
           </div>
 
- 
 
-      <div id="example-table"></div>
 
+
+
+
+
+    
        <x-footer/> 
 
-
-                    <script type="text/javascript">  
+ <script type="text/javascript">  
 
                       function edit_row(e,cell)                      
                       {
@@ -269,36 +246,38 @@
 
 
 
-
-
                     <script type="text/javascript">
                     var deleteIcon = function(cell, formatterParams, onRendered)
                     {
-                    return "<i class='bx bx-trash-alt me-1'></i>"; 
+                    return "<i class='icon-trash'></i>"; 
                     };
-                      var editIcon = function(cell, formatterParams, onRendered)
+                       var editIcon = function(cell, formatterParams, onRendered)
                     {
-                    return "<i class='bx bx-edit-alt me-1'></i>"; 
+                    return "<i class='icon-pencil'></i>"; 
                     };
 
 
-                    //Build Tabulator
-                  var table = new Tabulator("#example-table", {
-                      height:"400px",
-                      layout:"fitColumns",
-                      placeholder:"No Data Set",
-                      pagination:true, //enable.
-                      paginationSize:50, // this option can take any positive integer value
+                      var table = new Tabulator("#example-table", {
+                      height:"450px",
+                      layout:"fitColumns", 
+                      pagination:"remote", //enable remote pagination
+                      ajaxURL:"http://127.0.0.1:8000/employee_data", //set url for ajax request
+                      paginationSize:20,
+                      paginationSizeSelector:[20, 40, 50, 100],
                       columns:[
-                          {title:"ID", field:"id", formatter:"rownum"},
+                         /* {title:"ID", field:"id", formatter:"rownum"},*/
                           {title:"Icon", field:"profile_picture", formatter:"image", formatterParams:{
                            height:"20px",
                            width:"20px",
-                           //urlPrefix:"{{ url('img/')}}/",
+                           urlPrefix:"{{ url('img/')}}/",
                           }},
-                          {title:"Name", field:"name",editor:"input"},
-                          {title:"Email", field:"email",editor:"input"},
-                          {title:"Status", field:"isactive", hozAlign:"center", formatter:"tickCross", headerSort:false, headerVertical:false},
+                          {title:"Name", field:"name", width:100},
+                          {title:"Last Name", field:"lastname", width:100},
+                          {title:"Email", field:"email", width:200},
+                          {title:"DOB", field:"dob", width:100},
+                          {title:"Phone", field:"phone_no", width:200},
+                          {title:"Company", field:"company", width:200},
+                          {title:"Status", field:"isactive", hozAlign:"center", formatter:"tickCross", headerSort:false, headerVertical:false, width:50},
                           {formatter:editIcon, width:40, hozAlign:"center", headerSort:false, cellClick:function(e, cell){
                             edit_row(e,cell);
                           }},
@@ -310,14 +289,13 @@
                     
                   
                   //trigger AJAX load on "Load Data via AJAX" button click
-                  $("#ajax-trigger").click(function(){
+                  /*$("#ajax-trigger").click(function(){
                       table.setData("http://127.0.0.1:8000/employee_data");
                       
-                  });
+                  });*/
 
                   //trigger download of data.xlsx file
                     document.getElementById("download-xlsx").addEventListener("click", function(){
                         table.download("xlsx", "data.xlsx", {sheetName:"Employee Data"});
                     });
-
                     </script>

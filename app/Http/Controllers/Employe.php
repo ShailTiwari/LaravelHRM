@@ -24,7 +24,7 @@ class Employe extends Controller
 
       public function employee_data()
     {
-        $data = DB::select('select * from employees limit 1000');
+        $data = DB::select('select * from employees ');
         return response($data);
     }
 
