@@ -26,6 +26,10 @@ Route::get('auth/google', [login::class, 'redirectToGoogle'])->name('redirectToG
 Route::get('auth/google/callback', [login::class, 'handleGoogleCallback'])->name('handleGoogleCallback');
 
 
+Route::get('auth/github', [login::class, 'redirectTogithub'])->name('redirectTogithub');
+Route::get('auth/github/callback', [login::class, 'handlegithubCallback'])->name('handlegithubCallback');
+
+
 
 Route::get('/', [login::class, 'index'])->name('login');
 Route::get('login', [login::class, 'index'])->name('login');
@@ -34,7 +38,7 @@ Route::post('post-login', [login::class, 'postLogin'])->name('login.post');
 Route::get('logout', [login::class, 'logout'])->name('logout');
 Route::post('post-signup', [login::class, 'ragister'])->name('ragister.post'); 
 Route::get('forgot_password', [login::class, 'forgot_password'])->name('forgot_password');
-Route::post('forgot_password_post', [login::class, 'forgot_password_post'])->name('forgot.post'); 
+Route::post('forgot_password_post', [login::class, 'forgot_password_post'])->name('forgot_password_post'); 
 Route::get('reset-password/{token}', [login::class, 'getPassword'])->name('getPassword');
 Route::post('reset-password', [login::class, 'updatePassword'])->name('updatePassword'); 
 

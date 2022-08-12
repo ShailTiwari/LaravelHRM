@@ -13,8 +13,8 @@
                             <div class="card bg-primary card-rounded">
                               <div class="card-body pb-0">
                                 <a href="projects/activity/{{$project->key}}/{{$project->id}}">
-                                <h4 class="card-title card-title-dash text-white mb-4">{{ $project->title }}</h4>
-                                <h4 class="card-title card-title-dash text-white mb-4">{{ $project->start }}</h4>
+                                <h4 class="card-title card-title-dash text-white">{{ $project->title }}</h4>
+                                <h4 class="card-title card-title-dash text-white">{{ $project->start }}</h4>
                               </a>
                                 <div class="row">
                                   <div class="col-sm-8">

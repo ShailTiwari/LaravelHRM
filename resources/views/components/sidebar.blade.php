@@ -9,22 +9,70 @@
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link" href="/department">
+              <i class="menu-icon mdi mdi-chart-line"></i>
+              <span class="menu-title">Department</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/employee">
+              <i class="menu-icon mdi  mdi-account-multiple"></i>
+              <span class="menu-title">Employee</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/project">
+              <i class="menu-icon mdi  mdi-animation"></i>
+              <span class="menu-title">Project</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/activity">
+              <i class="menu-icon mdi mdi-altimeter"></i>
+              <span class="menu-title">Activity</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/holiday">
+              <i class="menu-icon mdi mdi mdi-calendar"></i>
+              <span class="menu-title">holiday</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/event">
+              <i class="menu-icon mdi  mdi-brightness-auto"></i>
+              <span class="menu-title">Event</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/payroll">
+              <i class="mdi mdi-calculator  menu-icon"></i>
+              <span class="menu-title">Payroll</span>
+            </a>
+          </li>
+
+
+
           <li class="nav-item nav-category">UI Elements</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="menu-icon mdi mdi-floor-plan"></i>
-              <span class="menu-title">UI Elements</span>
+              <span class="menu-title">UI Elements For New Page</span>
               <i class="menu-arrow"></i> 
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu"> 
-                <li class="nav-item"> <a class="nav-link" href="/department">Department</a></li>
+                <!-- <li class="nav-item"> <a class="nav-link" href="/department">Department</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/employee">Employee</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/activity">Activity</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/holiday">holiday</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/event">Event</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/payroll">Payroll</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/project">Project</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/project">Project</a></li> -->
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>

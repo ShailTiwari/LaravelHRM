@@ -1,135 +1,177 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
-    />
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+<style type="text/css">
 
-    <title>Reset Password </title>
+body {
+  background-color: rgb(228, 229, 247);
+}
+.social-login img {
+  width: 24px;
+}
+a {
+  text-decoration: none;
+}
 
-    <meta name="description" content="" />
+.card {
+  font-family: sans-serif;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3em;
+  margin-bottom:3em;
+  border-radius: 10px;
+  background-color: #ffff;
+  padding: 1.8rem;
+  box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.1);
+}
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }} " />
+.title {
+  text-align: center;
+  font-weight: bold;
+  margin: 0;
+}
+.subtitle {
+  text-align: center;
+  font-weight: bold;
+}
+.btn-text {
+  margin: 0;
+}
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-      rel="stylesheet"
-    />
+.social-login {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
 
-    <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/boxicons.css') }}" />
+.google-btn {
+  background: #fff;
+  border: solid 2px rgb(245 239 239);
+  border-radius: 8px;
+  font-weight: bold;
+  display: flex;
+  padding: 10px 10px;
+  flex: auto;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+}
+.fb-btn {
+  background: #fff;
+  border: solid 2px rgb(69, 69, 185);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
 
-    <!-- Core CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/vendor/css/core.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/vendor/css/theme-default.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" />
+.or {
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 2px solid rgb(245 239 239);
+  line-height: 0.1em;
+  margin: 25px 0;
+}
+.or span {
+  background: #fff;
+  padding: 0 10px;
+}
 
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
+.email-login {
+  display: flex;
+  flex-direction: column;
+}
+.email-login label {
+  color: rgb(170 166 166);
+}
 
-    <!-- Page CSS -->
-    <!-- Page -->
-    <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-auth.css') }}" />
-    <!-- Helpers -->
-    <script src="stylesheet" href="{{ asset('assets/vendor/js/helpers.js') }}"></script>
+input[type="email"],
+input[type="text"],
+input[type="password"] {
+  padding: 15px 20px;
+  margin-top: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
 
-    <script src="{{ asset('assets/js/config.js') }}"></script>
-  </head>
+.cta-btn {
+  background-color: rgb(69, 69, 185);
+  color: white;
+  padding: 18px 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  border-radius: 10px;
+  border: none;
+}
 
-  <body>
-    <!-- Content -->
-
-    <div class="container-xxl">
-      <div class="authentication-wrapper authentication-basic container-p-y">
-        <div class="authentication-inner">
-          <!-- Register -->
-          <div class="card">
-            <div class="card-body">
-              <!-- Logo -->
-              <div class="app-brand justify-content-center">
-                <a href="index.html" class="app-brand-link gap-2">
-                  <span class="app-brand-logo demo">
-                     <img src="{{ asset('img/aloha.png') }}"  style="width: 185px;" alt="logo">                   
-                  </span>
-                </a>
-              </div>
-              <!-- /Logo --> 
-
-              <h4 class="mb-2">Reset Password? 🔒</h4>
-              <p class="mb-4">Enter your email and new password we'll set your password</p>
-              <form id="formAuthentication" class="mb-3"  method="post" action="{{ route('updatePassword') }}">
-                @csrf
-                 <input type="hidden" name="token" value="{{ $token }}">
-                <div class="mb-3">
-                  <label  for="email" class="form-label">Email</label>
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="email"
-                    name="email"
-                    placeholder="Enter your email or username"
-                    autofocus
-                  />
-                </div>
-
-                 <div class="mb-3 form-password-toggle">
-                  <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password">New Password</label>                   
-                  </div>
-                  <div class="input-group input-group-merge">
-                    <input
-                      type="password"
-                      id="password"
-                      class="form-control"
-                      name="password"
-                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                      aria-describedby="password"
-                    />
-                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                  </div>
-                </div>
-
-                 <div class="mb-3 form-password-toggle">
-                  <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password">Confirm Password</label>                   
-                  </div>
-                  <div class="input-group input-group-merge">
-                    <input
-                      type="password"
-                      id="password_confirmation"
-                      class="form-control"
-                      name="password_confirmation"
-                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                      aria-describedby="password_confirmation"
-                    />
-                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                  </div>
-                </div>
+.forget-pass {
+  text-align: center;
+  display: block;
+}
 
 
+</style>
+<body>
 
 
+<div class="card">
+    @if(Session::has('errors_msg'))
+                 <div
+                        class="bs-toast toast fade show  bg-danger top-0"
+                        data-role="alert"
+                        data-aria-live="assertive"
+                        data-animation="true"
+                        data-autohide="true"
+                        aria-atomic="true" 
+                        data-delay="10"
 
-                <button class="btn btn-primary d-grid w-100"  type="submit">Reset Password</button>
-              </form><div class="text-center">
-                <a href="/login" class="d-flex align-items-center justify-content-center">
-                  <i class="bx bx-chevron-left scaleX-n1-rtl bx-sm"></i>
-                  Back to login
-                </a>
-              </div>
-            </div>
-          </div>
-          <!-- /Register -->
-        </div>
+                        
+                      >
+                        <div class="toast-header">
+                          <i class="bx bx-bell me-2"></i>
+                          <div class="me-auto fw-semibold">Alert</div>
+                          <small>Just Now</small>
+                          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                          {{ Session::get('errors_msg') }}
+                    @php
+                        Session::forget('errors_msg');
+                    @endphp
+                        </div>
+                      </div>
+
+                @endif
+  
+      <h2 class="title">Reset Password? 🔒</h2>
+      <p class="subtitle">Enter your email and new password we'll set your password </p>
+
+        <form id="formAuthentication" class="mb-3"  method="post" action="{{ route('updatePassword') }}">
+         @csrf
+      <div class="email-login">
+         <label for="email"> <b>Password</b></label>
+         <input type="email" placeholder="Email" name="email" id="email" required>
+
+         <label for="email"> <b>Password</b></label>
+         <input type="password" placeholder="Password" name="password" id="password" required>
+
+         <label for="psw"><b>Confirm Password</b></label>
+         <input type="password" placeholder="Confirm Password" name="password_confirmation" id="password_confirmation" required>
+
       </div>
-    </div>
+      <button  type="submit" class="cta-btn">Reset Password</button>
+      <a class="forget-pass" href="/login">Back to login ?</a>
+   </form>
+</div>
 
-    <!-- / Content -->
-  </body>
+
+</body>
 </html>

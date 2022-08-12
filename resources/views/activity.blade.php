@@ -218,21 +218,21 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <div id="demo" class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
        @foreach($task_status as $status)
-  <div class="card col-4 mb-4 activity-secondary">
+  <div class="card col-4 mb-4 activity-secondary ">
    <h5 class="d-inline card-header">{{$status->title}}</h5>
      <div id="items-{{$status->id}}" class="list-group col">
        @foreach($posts as $post)
         @if($post->taskstatus==$status->id)    
                   <div id="{{ $post->id }}" data-id="{{ $post->id }}" data-myattr="{{ $post->id }}"  data-myatt="{{ $post->id }}"  class="">
                     <div class="col-lg-12 col-md-12 col-6 mb-12">
-                      <div class="card">
+                      <div class="card bg-primary card-rounded">
                         <div class="card-body">
-                          <div class="card-title d-flex align-items-start justify-content-between">
+                          <div class="card-title d-flex align-items-start justify-content-between grid-margin stretch-card">
                             <div class="avatar flex-shrink-0">
-                              <img
+                              <img 
+                              class="img-sm rounded-10"
                                 src="{{ url('img/project_img/'.$project->icon_picture) }}"
                                 alt="icon"
-                                class="rounded"
                               />
                             </div>
                             <div class="dropdown">
@@ -256,10 +256,10 @@
                             </div>
                           </div>
                           <a data-id="{{ $post->id }}"  data-bs-toggle="modal" class="select_activity" data-bs-target="#editlargeModal" >
-                          <span class="fw-semibold d-block mb-1">{{ $post->key }}</span>
-                          <h6 class="card-title mb-2">{{ $post->summary }}</h6>                            
+                          <span class="card-title card-title-dash text-white fw-semibold d-block mb-1">{{ $post->key }}</span>
+                          <h6 class="card-title card-title-dash text-white ">{{ $post->summary }}</h6>                            
                           </a>
-                          <small class="text-success fw-semibold"><i class="bx bx-calendar"></i>{{ $post->start }}</small>
+                          <small class="card-title card-title-dash text-white text-success fw-semibold"><i class="bx bx-calendar"></i>{{ $post->start }}</small>
                         </div>
                       </div>
                     </div>
@@ -361,8 +361,34 @@ function updatePostOrder()
     }
  var sort3 = attrs;
 
-   var sortnext = jQuery.merge( sort1, sort2 );
-   var sortnextt = jQuery.merge( sort3, sort4 );
+  var arr =  $('#items-4').sortable('toArray');
+    var i, n;
+    var attrs = [];
+    for (i = 0, n = arr.length; i < n; i++) {
+      attrs.push({
+                    orderid : i, 
+                    status : 4, 
+                    myattr : $('#' + arr[i]).data('myattr'), 
+                    myatt :$('#' + arr[i]).data('myatt'),
+                 });
+    }
+ var sort4 = attrs;
+
+  var arr =  $('#items-5').sortable('toArray');
+    var i, n;
+    var attrs = [];
+    for (i = 0, n = arr.length; i < n; i++) {
+      attrs.push({
+                    orderid : i, 
+                    status : 5, 
+                    myattr : $('#' + arr[i]).data('myattr'), 
+                    myatt :$('#' + arr[i]).data('myatt'),
+                 });
+    }
+ var sort5 = attrs;
+
+   var sortnext = jQuery.merge( sort1, sort2);
+   var sortnextt = jQuery.merge( sort3, sort4);
    var sortnexttt = jQuery.merge( sortnext, sortnextt );
    var sortarray = jQuery.merge( sortnexttt, sort5 );
    var SITEURL = "{{ url('/') }}"; 

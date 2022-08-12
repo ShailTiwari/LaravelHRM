@@ -13,13 +13,35 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
-        'google' => [
 
-        'client_id' => '799672610661-puk342bmgrc7fnic5cul36f78v8n4m6f.apps.googleusercontent.com',
-        'client_secret' => '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',
+   /*    'github' => [
+    'client_id' => 'c0b29942f139568d9a18',
+    'client_secret' => '507139b389e8355b69baf77b0a164806beade9be',
+    'redirect' => 'http://127.0.0.1:8000/auth/github/callback',
+  ], */
+
+       'github' => [
+        'client_id' => env('GITHUB_CLIENT_ID'),
+        'client_secret' => env('GITHUB_CLIENT_SECRET'),
+        'redirect' => 'http://127.0.0.1:8000/auth/github/callback',
+    ],
+    
+        'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => 'http://127.0.0.1:8000/auth/google/callback',
 
     ],
+
+        'facebook' => [
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect' => 'http://localhost:8000/auth/facebook/callback',
+
+    ],
+
+
+
 
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
