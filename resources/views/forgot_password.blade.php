@@ -155,6 +155,14 @@ input[type="password"] {
                       </div>
 
                 @endif
+
+                @if(session()->has('message'))
+                    <div class="alert alert-success">
+                        {{ session()->get('message') }}
+                    </div>
+                @endif
+
+
   
       <h2 class="title">Reset Password? 🔒</h2>
       <p class="subtitle">Enter your email and we'll send you instructions to reset your password</p>

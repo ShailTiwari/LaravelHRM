@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Setting;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon; 
@@ -135,7 +136,7 @@ class Login extends Controller
  public function forgot_password_post(Request $request)
   {
     $request->validate([
-        'email' => 'required|email|exists:users',
+        'email' => 'required|email|exists:employees'
     ]);
     //$token = str_random(64);
      $token = Str::random(40);
@@ -165,7 +166,7 @@ class Login extends Controller
   {
 
   $request->validate([
-      'email' => 'required|exists:users',
+      'email' => 'required|exists:employees',
       'password' => 'required|string|min:6|confirmed',
       'password_confirmation' => 'required',
 
@@ -187,6 +188,7 @@ class Login extends Controller
                 ->update(['password' => Hash::make($request->password)]);
 
     DB::table('password_resets')->where(['email'=> $request->email])->delete();
+   //  return back()->with('message', 'We have e-mailed your password reset link!');
 
     return redirect('/login')->with('message', 'Your password has been changed!');
   }
@@ -234,6 +236,7 @@ class Login extends Controller
                     {
                         User::create([
                                 'google_id' =>$googleUser->id,
+                                'email' =>$googleUser->email,
                                 'name' =>$googleUser->name,                      
                                 'password' =>Hash::make('abc123'),
                                 'isactive'=>1,
@@ -242,9 +245,9 @@ class Login extends Controller
                          $finduserr = User::where('google_id',$googleUser->id)->first();
                          $request->session()->put('user',$finduserr); 
                          Mail::send('signup_email', ['username' =>$googleUser->name], 
-                                function($message) use($request){
+                                function($message) use($googleUser){
                                   $message->to($googleUser->email);
-                                  $message->subject('Signup Notification');
+                                  $message->subject('Signup Notification  via Google');
                               });
                         return redirect('home');
                     }
@@ -302,6 +305,7 @@ class Login extends Controller
                     {
                         User::create([
                                 'github_id' =>$githubUser->id,
+                                'email' =>$githubUser->email,
                                 'name' =>$githubUser->name,                      
                                 'password' =>Hash::make('abc123'),
                                 'isactive'=>1,
@@ -310,9 +314,9 @@ class Login extends Controller
                          $finduserr = User::where('github_id',$githubUser->id)->first();
                         $request->session()->put('user',$finduserr); 
                          Mail::send('signup_email', ['username' =>$githubUser->name], 
-                                function($message) use($request){
+                                function($message) use($githubUser){
                                   $message->to($githubUser->email);
-                                  $message->subject('Signup Notification');
+                                  $message->subject('Signup Notification via Git');
                               });
                         return redirect('home');
                     }
@@ -328,4 +332,184 @@ class Login extends Controller
 
 
 
+
+    public function redirectTolinkedin()
+    {
+       //  return Socialite::driver('github')->redirect();
+        return Socialite::driver('linkedin')->redirect();
+
+    }  
+
+    public function handlelinkedinCallback(Request $request)
+    {
+        try {  
+            $linkedinuser = Socialite::driver('linkedin')->stateless()->user();      
+            $finduser = User::where('linkedin_id', $linkedinuser->id)->first();
+
+            if($finduser)
+            {      
+               $value = $request->session()->put('user',$finduser); 
+               return redirect('home'); 
+            }
+            else
+            {
+                    $finduserr = User::where('email', $linkedinuser->email)->first();
+                    if($finduserr)
+                    {  
+                        User::where('email', $linkedinuser->email)
+                            ->update([
+                                'linkedin_id'=>$linkedinuser->id,  
+                                'isactive'=>1,
+                                'isdelete'=>0
+                                ]);                       
+                                $finduser = User::where('github_id', $linkedinuser->id)->first();
+                                $value = $request->session()->put('user',$finduser); 
+                                return redirect('home'); 
+                     }
+                    else
+                    {
+                        User::create([
+                                'linkedin_id'=>$linkedinuser->id,
+                                'email' =>$linkedinuser->email,
+                                'name' =>$linkedinuser->name,                      
+                                'password' =>Hash::make('abc123'),
+                                'isactive'=>1,
+                                'isdelete'=>0
+                                ]);
+                         $finduserr = User::where('linkedin_id',$linkedinuser->id)->first();
+                                $value = $request->session()->put('user',$finduserr); 
+                         Mail::send('signup_email', ['username' =>$linkedinuser->name], 
+                                function($message) use($linkedinuser){
+                                  $message->to($linkedinuser->email);
+                                  $message->subject('Signup Notification via Linked in');
+                              });
+                        return redirect('home');
+                    }
+            }     
+
+        }
+         catch (Exception $e) 
+         {
+            dd($e->getMessage());
+        }
+
+    }
+
+
+
+
+
+    public function redirectToamazon()
+    {
+         return Socialite::driver('amazon')->redirect();
+
+    } 
+
+
+    public function handleamazonCallback(Request $request)
+    {
+        try {  
+            $amazonUser = Socialite::driver('amazon')->stateless()->user();
+            $finduser = User::where('google_id', $amazonUser->id)->first();
+
+            if($finduser)
+            {      
+               $value = $request->session()->put('user',$finduser); 
+               return redirect('home'); 
+            }
+            else
+            {
+                 $finduserr = User::where('email', $amazonUser->email)->first();
+                    if($finduserr)
+                    {  
+                        User::where('email', $amazonUser->email)
+                            ->update(['amazon_id'=>$amazonUser->id, 
+                                      'isactive'=>1,
+                                      'isdelete'=>0
+                                ]);                       
+                                $finduser = User::where('amazon_id', $amazonUser->id)->first();
+                                $value = $request->session()->put('user',$finduser); 
+                                return redirect('home'); 
+                     }
+                    else
+                    {
+                        User::create([
+                                'amazon_id' =>$amazonUser->id,
+                                'email' =>$amazonUser->email,
+                                'name' =>$amazonUser->name,                      
+                                'password' =>Hash::make('abc123'),
+                                'isactive'=>1,
+                                'isdelete'=>0
+                                ]);
+                         $finduserr = User::where('amazon_id',$amazonUser->id)->first();
+                         $request->session()->put('user',$finduserr); 
+                         Mail::send('signup_email', ['username' =>$amazonUser->name], 
+                                function($message) use($amazonUser){
+                                  $message->to($amazonUser->email);
+                                  $message->subject('Signup Notification  via Google');
+                              });
+                        return redirect('home');
+                    }
+            }     
+
+        }
+         catch (Exception $e) 
+         {
+            dd($e->getMessage());
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+public function setting()
+    {
+         $id=1;
+         $page_name="Settings";
+         $data=Setting::find($id);
+         $user=Setting::where(['id'=>$id])->first();
+         return view('settings',['page_name'=>$page_name,'member'=>$user]);
+    }
+
+       public function update_setting(Request $request)
+    { 
+         $data= new Setting();
+        // return $request->input();
+
+         $data=Setting::find($request->id);
+        if($request->file('logo')){
+            $file= $request->file('logo');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('images'), $filename);
+            //$data['profile_picture']= $filename;
+            $data->logo=$filename;
+        }
+        if($request->file('invoice_logo')){
+            $file= $request->file('invoice_logo');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('images'), $filename);
+            //$data['profile_picture']= $filename;
+            $data->invoice_image=$filename;
+        }
+         $data->site_name=$request->site_name;
+         $data->company_name=$request->company_name;
+         $data->sort_name=$request->sort_name;
+         $data->description=$request->description;
+         $data->pan_no=$request->pan_no;
+         $data->gst_no=$request->gst_no;
+         $data->est_info=$request->est_info;
+         $data->phone=$request->phone;
+         $data->owner=$request->owner;
+         $data->state=$request->state;
+         $data->zipCode=$request->zipCode;
+         $data->save();
+        return redirect('setting');   
+
+    }
 }

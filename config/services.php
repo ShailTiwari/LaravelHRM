@@ -23,21 +23,34 @@ return [
        'github' => [
         'client_id' => env('GITHUB_CLIENT_ID'),
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
-        'redirect' => 'http://127.0.0.1:8000/auth/github/callback',
+        'redirect'      => env('GITHUB_LOGIN_REDIRECT'),
     ],
     
         'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => 'http://127.0.0.1:8000/auth/google/callback',
+        'redirect'      => env('GOOGLE_LOGIN_REDIRECT'),
 
     ],
 
         'facebook' => [
         'client_id' => env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect'      => env('FACEBOOK_LOGIN_REDIRECT'),
         'redirect' => 'http://localhost:8000/auth/facebook/callback',
 
+    ],
+
+     'linkedin' => [
+        'client_id' => env('LINKEDIN_CLIENT_ID'),
+        'client_secret' => env('LINKEDIN_CLIENT_SECRET'),
+        'redirect'      => env('LINKEDIN_LOGIN_REDIRECT'),
+    ],
+
+    'amazon' => [
+        'client_id'     => env('AMAZON_LOGIN_ID'),
+        'client_secret' => env('AMAZON_LOGIN_SECRET'),
+        'redirect'      => env('AMAZON_LOGIN_REDIRECT'),
     ],
 
 

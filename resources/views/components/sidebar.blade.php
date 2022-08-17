@@ -54,6 +54,13 @@
               <span class="menu-title">Payroll</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/setting">
+              <i class="mdi mdi-settings  menu-icon"></i>
+              <span class="menu-title">Settings</span>
+            </a>
+          </li>
+
 
 
 

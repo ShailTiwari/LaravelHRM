@@ -3,7 +3,7 @@
 
   <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card mb-4">
-                    <h5 class="card-header">Profile Details</h5>
+                    <h5 class="card-header">Details</h5>
                     <!-- Account -->
 
                     <div class="card-body">

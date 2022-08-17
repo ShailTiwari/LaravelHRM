@@ -25,9 +25,14 @@ use App\Http\Controllers\Projects;
 Route::get('auth/google', [login::class, 'redirectToGoogle'])->name('redirectToGoogle');
 Route::get('auth/google/callback', [login::class, 'handleGoogleCallback'])->name('handleGoogleCallback');
 
-
 Route::get('auth/github', [login::class, 'redirectTogithub'])->name('redirectTogithub');
 Route::get('auth/github/callback', [login::class, 'handlegithubCallback'])->name('handlegithubCallback');
+
+Route::get('auth/linkedin', [login::class, 'redirectTolinkedin'])->name('redirectTolinkedin');
+Route::get('auth/linkedin/callback', [login::class, 'handlelinkedinCallback'])->name('handlelinkedinCallback');
+
+Route::get('auth/amazon', [login::class, 'redirectToamazon'])->name('redirectToamazon');
+Route::get('auth/amazon/callback', [login::class, 'handleamazonCallback'])->name('handleamazonCallback');
 
 
 
@@ -41,6 +46,10 @@ Route::get('forgot_password', [login::class, 'forgot_password'])->name('forgot_p
 Route::post('forgot_password_post', [login::class, 'forgot_password_post'])->name('forgot_password_post'); 
 Route::get('reset-password/{token}', [login::class, 'getPassword'])->name('getPassword');
 Route::post('reset-password', [login::class, 'updatePassword'])->name('updatePassword'); 
+
+
+Route::get('setting', [login::class, 'setting'])->name('setting');
+Route::post('update_setting', [login::class, 'update_setting'])->name('update_setting'); 
 
 
 Route::group(['middleware'=>['logincheck']],function()

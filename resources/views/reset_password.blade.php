@@ -148,7 +148,12 @@ input[type="password"] {
                     @endphp
                         </div>
                       </div>
+                @endif
 
+                  @if(session()->has('message'))
+                    <div class="alert alert-success">
+                        {{ session()->get('message') }}
+                    </div>
                 @endif
   
       <h2 class="title">Reset Password? 🔒</h2>
@@ -157,14 +162,24 @@ input[type="password"] {
         <form id="formAuthentication" class="mb-3"  method="post" action="{{ route('updatePassword') }}">
          @csrf
       <div class="email-login">
-         <label for="email"> <b>Password</b></label>
+         <label for="email"> <b>Email</b></label>
+                 <input type="hidden" name="token" value="{{ $token }}">
          <input type="email" placeholder="Email" name="email" id="email" required>
+          @if ($errors->has('email'))
+            <span class="text-danger">{{ $errors->first('email') }}</span>
+          @endif
 
          <label for="email"> <b>Password</b></label>
          <input type="password" placeholder="Password" name="password" id="password" required>
+          @if ($errors->has('password'))
+            <span class="text-danger">{{ $errors->first('password') }}</span>
+          @endif
 
          <label for="psw"><b>Confirm Password</b></label>
          <input type="password" placeholder="Confirm Password" name="password_confirmation" id="password_confirmation" required>
+          @if ($errors->has('password_confirmation'))
+            <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
+          @endif
 
       </div>
       <button  type="submit" class="cta-btn">Reset Password</button>

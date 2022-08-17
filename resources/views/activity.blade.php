@@ -280,121 +280,46 @@
   <script src="https://unpkg.com/sortablejs-make/Sortable.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery-sortablejs@latest/jquery-sortable.js"></script>  
   <script type="text/javascript">    
-// List 1
-$('#items-1').sortable({
-    group: 'list',
-    animation: 200,
-    ghostClass: 'ghost',
-    onSort: reportActivity,
-});
-// List 2
-$('#items-2').sortable({
-    group: 'list',
-    animation: 200,
-    ghostClass: 'ghost',
-    onSort: reportActivity,
-});
-// List 2
-$('#items-3').sortable({
-    group: 'list',
-    animation: 200,
-    ghostClass: 'ghost',
-    onSort: reportActivity,
-});
 
 
-// List 4
-$('#items-4').sortable({
-    group: 'list',
-    animation: 200,
-    ghostClass: 'ghost',
-    onSort: reportActivity,
-});
+  var get_task_status = <?php echo json_encode($task_status); ?>;
+  for (let i = 1; i <= get_task_status.length; i++) 
+  {
+    $('#items-'+i).sortable({
+        group: 'list',
+        animation: 200,
+        ghostClass: 'ghost',
+        onSort: reportActivity,
+    });
+  }
 
 
-// List 5
-$('#items-5').sortable({
-    group: 'list',
-    animation: 200,
-    ghostClass: 'ghost',
-    onSort: reportActivity,
-});
 /*Update status in database start*/
 function updatePostOrder() 
 {
-  var arr =  $('#items-1').sortable('toArray');
+  var get_task_status = <?php echo json_encode($task_status); ?>;
+  var markers = [];
+
+  for (let post_order = 1; post_order <= get_task_status.length; post_order++) 
+  {
+    var arr =  $('#items-'+post_order).sortable('toArray');
     var i, n;
     var attrs = [];
-    for (i = 0, n = arr.length; i < n; i++) {
-     // attrs.push($('#Todo' + arr[i]).data('myattr'));
-
-      attrs.push({
+    for (i = 0, n = arr.length; i < n; i++) 
+    {
+      markers.push({
                     orderid : i, 
-                    status : 1, 
+                    status : post_order, 
                     myattr : $('#' + arr[i]).data('myattr'), 
                     myatt :$('#' + arr[i]).data('myatt'),
                  });
     }
-    var sort1 = attrs;
-    var arr =  $('#items-2').sortable('toArray');
-    var i, n;
-    var attrs = [];
-    for (i = 0, n = arr.length; i < n; i++) {
-       attrs.push({
-                     orderid : i, 
-                    status : 2, 
-                     myattr : $('#' + arr[i]).data('myattr'), 
-                     myatt :$('#' + arr[i]).data('myatt'),
-                 });
-    }
-  var sort2 = attrs;
-  var arr =  $('#items-3').sortable('toArray');
-    var i, n;
-    var attrs = [];
-    for (i = 0, n = arr.length; i < n; i++) {
-      attrs.push({
-                    orderid : i, 
-                    status : 3, 
-                    myattr : $('#' + arr[i]).data('myattr'), 
-                    myatt :$('#' + arr[i]).data('myatt'),
-                 });
-    }
- var sort3 = attrs;
-
-  var arr =  $('#items-4').sortable('toArray');
-    var i, n;
-    var attrs = [];
-    for (i = 0, n = arr.length; i < n; i++) {
-      attrs.push({
-                    orderid : i, 
-                    status : 4, 
-                    myattr : $('#' + arr[i]).data('myattr'), 
-                    myatt :$('#' + arr[i]).data('myatt'),
-                 });
-    }
- var sort4 = attrs;
-
-  var arr =  $('#items-5').sortable('toArray');
-    var i, n;
-    var attrs = [];
-    for (i = 0, n = arr.length; i < n; i++) {
-      attrs.push({
-                    orderid : i, 
-                    status : 5, 
-                    myattr : $('#' + arr[i]).data('myattr'), 
-                    myatt :$('#' + arr[i]).data('myatt'),
-                 });
-    }
- var sort5 = attrs;
-
-   var sortnext = jQuery.merge( sort1, sort2);
-   var sortnextt = jQuery.merge( sort3, sort4);
-   var sortnexttt = jQuery.merge( sortnext, sortnextt );
-   var sortarray = jQuery.merge( sortnexttt, sort5 );
+  }
+    //console.log(markers);
    var SITEURL = "{{ url('/') }}"; 
    var order = []; 
    var token = $('meta[name="csrf-token"]').attr('content');
-   $.each(sortarray, function( index, value ) {
+   $.each(markers, function( index, value ) {
             order.push({
               id:value.myatt,
               head_id:index, 
@@ -403,9 +328,7 @@ function updatePostOrder()
               order:value.orderid,
             });
           });
-    console.log(order);
-
-
+   // console.log(order);
     $.ajax({
             type: "POST",
             dataType: "json",
@@ -415,10 +338,11 @@ function updatePostOrder()
               _token: token
             },
             success: function(response) {
-                if (response.status == "success") {
+                if (response.status == "success") 
+                {
                   console.log(response);
                 } else {
-                  console.log(response);
+                 // console.log(response);
                 }
             }
           });
@@ -429,138 +353,19 @@ function updatePostOrder()
 
 
 
-
-
-
-
-
-// Arrays of "data-id"
-$('#get-order').click(function() 
-{
-   
-    var arr =  $('#items-1').sortable('toArray');
-    var i, n;
-    var attrs = [];
-    for (i = 0, n = arr.length; i < n; i++) {
-     // attrs.push($('#Todo' + arr[i]).data('myattr'));
-
-      attrs.push({
-                    orderid : i, 
-                    status : 1, 
-                    myattr : $('#' + arr[i]).data('myattr'), 
-                    myatt :$('#' + arr[i]).data('myatt'),
-                 });
-
-
-    }
- var sort1 = attrs;
-
-
-  var arr =  $('#items-2').sortable('toArray');
-    var i, n;
-    var attrs = [];
-    for (i = 0, n = arr.length; i < n; i++) {
-       attrs.push({
-                     orderid : i, 
-                    status : 2, 
-                     myattr : $('#' + arr[i]).data('myattr'), 
-                     myatt :$('#' + arr[i]).data('myatt'),
-                 });
-    }
- var sort2 = attrs;
-
-
-  var arr =  $('#items-3').sortable('toArray');
-    var i, n;
-    var attrs = [];
-    for (i = 0, n = arr.length; i < n; i++) {
-      attrs.push({
-                    orderid : i, 
-                    status : 3, 
-                    myattr : $('#' + arr[i]).data('myattr'), 
-                    myatt :$('#' + arr[i]).data('myatt'),
-                 });
-    }
- var sort3 = attrs;
-
-  var arr =  $('#items-4').sortable('toArray');
-    var i, n;
-    var attrs = [];
-    for (i = 0, n = arr.length; i < n; i++) {
-      attrs.push({
-                    orderid : i, 
-                    status : 4, 
-                    myattr : $('#' + arr[i]).data('myattr'), 
-                    myatt :$('#' + arr[i]).data('myatt'),
-                 });
-    }
-   var sort4 = attrs;
-
-
-  var arr =  $('#items-5').sortable('toArray');
-    var i, n;
-    var attrs = [];
-    for (i = 0, n = arr.length; i < n; i++) {
-      attrs.push({
-                    orderid : i, 
-                    status : 5, 
-                    myattr : $('#' + arr[i]).data('myattr'), 
-                    myatt :$('#' + arr[i]).data('myatt'),
-                 });
-    }
-   var sort5 = attrs;
-
-   var sortnext = jQuery.merge( sort1, sort2 );
-   var sortarray = jQuery.merge( sortnext, sort3 );
-   var SITEURL = "{{ url('/') }}"; 
-   var order = []; 
-   var token = $('meta[name="csrf-token"]').attr('content');
-   $.each(sortarray, function( index, value ) {
-            order.push({
-              id:value.myatt,
-              head_id:index, 
-              status:value.status,
-              ticketid:value.myatt,
-              order:value.orderid,
-            });
-          });
-    console.log(order);
-
-
-    $.ajax({
-            type: "POST",
-            dataType: "json",
-            url: SITEURL + "/activity_save",
-            data: {
-              order: order,
-              _token: token
-            },
-            success: function(response) {
-                if (response.status == "success") {
-                  console.log(response);
-                } else {
-                  console.log(response);
-                }
-            }
-          });
-
-
-
-
-    
-    /**/
-}); 
-
 // Report when the sort order has changed
 function reportActivity() 
 {
   updatePostOrder();
-    console.log('The sort order has changed and update in databse');
+   // console.log('The sort order has changed and update in databse');
 };
   </script>
 
 
 
+
+
+<!-- Sekect Activity Information in Form and update -->
    <script>
             $(function () {
                      // ON SELECTING ROW
@@ -589,10 +394,10 @@ function reportActivity()
                             },
                             success: function(response) {
                                 if (response.status == "success") {
-                                  console.log(response.description);
+                                //  console.log(response.description);
                                 } 
                                 else {
-                                  console.log(response.description);
+                                //  console.log(response.description);
                                   $("#id").val(response.id);
                                   $("#type").val(response.type);
                                   $("#project").val(response.project);

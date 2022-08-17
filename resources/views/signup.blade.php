@@ -167,8 +167,8 @@ input[type="password"] {
           <a href="{{ url('auth/github') }}" class="google-btn">
             <img src="{{ asset('images/github.png') }}">
           </a> 
-          <a href="{{ url('auth/github') }}" class="google-btn">
-            <img src="{{ asset('images/facebook.svg') }}">
+          <a href="{{ url('auth/linkedin') }}" class="google-btn">
+            <img src="{{ asset('images/linkedin.svg') }}">
           </a>
       </div>
 
