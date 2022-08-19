@@ -7,26 +7,19 @@
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                   <div class="home-tab d-sm-flex align-items-center justify-content-between border-bottom">
-               
-
-                  <div>
-                    <div class="btn-wrapper"> 
-                      <input type="text" class="btn btn-otline-dark align-items-center" placeholder="Search" aria-label="">
-                      <input type="text" class="btn btn-otline-dark align-items-center" placeholder="Search" aria-label="">
-                      <input type="text" class="btn btn-otline-dark align-items-center" placeholder="Search" aria-label="">
-                      <button  id="ajax-trigger" class="btn btn-primary text-white align-items-center"><i class="icon-eye"></i> Show</button>
-
-
-
-                      
-
-                      <a href="#" class="btn btn-otline-dark align-items-center"><i class="icon-share"></i> Share</a> 
-                      <a href="#" class="btn btn-warning text-white align-items-center" type="button"  data-bs-toggle="modal" data-bs-target="#largeModal"><i class="icon-plus"></i> New</a>
-                      <button id="download-xlsx" class="btn btn-success text-white align-items-center btn-xs"><i class="icon-download"></i>Export</button>
+                   <div class="home-tab d-sm-flex align-items-center justify-content-between border-bottom"> 
+                    <div>
+                      <div class="btn-wrapper"> 
+                       <!--  <input type="text" class="btn btn-otline-dark align-items-center" placeholder="Search" aria-label="">
+                        <input type="text" class="btn btn-otline-dark align-items-center" placeholder="Search" aria-label="">
+                        <input type="text" class="btn btn-otline-dark align-items-center" placeholder="Search" aria-label="">
+                        <a href="#" class="btn btn-otline-dark align-items-center"><i class="icon-share"></i> Share</a>  -->
+                        <button  id="ajax-trigger" class="btn btn-primary text-white align-items-center"><i class="icon-eye"></i> Show</button>
+                        <a href="#" class="btn btn-warning text-white align-items-center" type="button"  data-bs-toggle="modal" data-bs-target="#largeModal"><i class="icon-plus"></i> New</a>
+                        <button id="download-xlsx" class="btn btn-success text-white align-items-center btn-xs"><i class="icon-download"></i>Export</button>
+                      </div>
                     </div>
                   </div>
-                </div>
                   <div class="table-responsive">
                     <div id="example-table"></div>
                   </div>
@@ -59,8 +52,8 @@
 
                       <div class="d-flex align-items-start align-items-sm-center gap-4">
                         <img
-                        id="preview-image"
-                          src="{{ url('img/1.png') }}"
+                          id="preview-image"
+                          src="{{ url('images/faces/profile/1.png') }}"
                           alt="user-avatar"
                           class="d-block rounded"
                           height="100"
@@ -269,7 +262,7 @@
                           {title:"Icon", field:"profile_picture", formatter:"image", formatterParams:{
                            height:"20px",
                            width:"20px",
-                           urlPrefix:"{{ url('img/')}}/",
+                           urlPrefix:"{{ url('images/faces/profile/')}}/",
                           }},
                           {title:"Name", field:"name", width:100},
                           {title:"Last Name", field:"lastname", width:100},

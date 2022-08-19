@@ -5,18 +5,20 @@
      
     <div class="card mb-4">
                     <h5 class="card-header">Project Details</h5>
-                    <!-- Account -->
-
-                   
+                    <!-- Account -->                   
                     <hr class="my-0" />
                     <div class="card-body">
-                      <form id="formAccountSettings" method="POST"action="{{ route('update_employee_profile') }}" enctype="multipart/form-data">
+                      <form id="formAccountSettings" method="POST"action="{{ route('update_projects_profile') }}" enctype="multipart/form-data">
                           @csrf
+                          <h4 class="mb-0">Add project details</h4>
+                           <h6 class="mb-0">You can change these details anytime in your project settings.</h6>
+                         </hr>
 
-                      <div class="d-flex align-items-start align-items-sm-center gap-4">
+
+                            <div class="d-flex align-items-start align-items-sm-center gap-4">
                         <img
                         id="preview-image"
-                          src="{{ url('img/'.$member['profile_picture']) }}"
+                          src="{{ url('img/project_img/'.$member['icon_picture']) }}"
                           alt="user-avatar"
                           class="d-block rounded"
                           height="100"
@@ -24,8 +26,8 @@
 
                         />
                         <div class="button-wrapper">
-                          <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-                            <span class="d-none d-sm-block">Upload new photo</span>
+                          <label for="upload" class="me-2 mb-8" tabindex="0">
+                            <span class="d-none d-sm-block">Project Icon</span>
                             <i class="bx bx-upload d-block d-sm-none"></i>
                             <input
                               type="file"
@@ -35,113 +37,72 @@
                               accept="image/png, image/jpeg"
                             />
                           </label>
-                          <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
-                            <i class="bx bx-reset d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Reset</span>
-                          </button>
-
                           <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
                         </div>
                       </div>
 
 
+
+
                         <div class="row">
                           <div class="mb-3 col-md-6">
-                            <label for="firstName" class="form-label">First Name</label> <input
-                              class="form-control"
-                              type="hidden"
-                              id="id"
-                              name="id"
-                               value="{{$member['id']}}"
-                              autofocus
-                            />
+                            <label for="firstName" class="form-label">Name*</label> 
+                            <input class="form-control" type="hidden" id="id" name="id" value="{{$member['id']}}" />
                             <input
                               class="form-control"
                               type="text"
-                              id="name"
-                              name="name"
-                               value="{{$member['name']}}"
+                              id="title"
+                              name="title"
+                              value="{{$member['title']}}" 
                               autofocus
                             />
                           </div>
                           <div class="mb-3 col-md-6">
-                            <label for="lastName" class="form-label">Last Name</label>
-                            <input class="form-control" type="text" name="lastName" id="lastName" value="{{$member['lastname']}}" />
+                            <label for="lastName" class="form-label">Key*</label>
+                            <input class="form-control" type="text" name="key" id="key" value="{{$member['key']}}" />
                           </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="email" class="form-label">E-mail</label>
-                            <input
-                              class="form-control"
-                              type="text"
-                              id="email"
-                              name="email"
-                               value="{{$member['email']}}"
-                              placeholder=""
-                            />
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="organization" class="form-label">Organization</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="organization"
-                              name="organization"
-                              value="Aloha"
-                            />
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label class="form-label" for="phoneNumber">Phone Number</label>
-                            <div class="input-group input-group-merge">
-                              <span class="input-group-text"></span>
-                              <input
-                                type="text"
-                                id="phoneNumber"
-                                name="phoneNumber"
-                                class="form-control"
-                                placeholder=""
-                              />
-                            </div>
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="address" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="address" name="address" placeholder="Address" value="{{$member['address']}}" />
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="state" class="form-label">State</label>
-                            <input class="form-control" type="text" id="state" name="state" placeholder="California" />
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="zipCode" class="form-label">Zip Code</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="zipCode"
-                              name="zipCode"
-                              placeholder="231465"
-                              maxlength="6"
-                            />
-                          </div>
+                         
+
+
                            <div class="mb-3 col-md-6">
-                            <label class="form-label" for="department">Department</label>
-                            <select id="department" name="department" class="select2 form-select">
-                              <option value="0">Select</option>
-                              <option value="1">IT/Software</option>
-                              <option value="2">Accounts</option>
-                            </select>
-                          </div>
-                           <div class="mb-3 col-md-6">
-                            <label class="form-label" for="department">Post</label>
-                            <select id="post" name="post" class="select2 form-select">
-                              <option value="0">Select</option>
-                              <option value="1">Developer</option>
-                              <option value="2">QA</option>
-                              <option value="3">Accountent</option>
-                              <option value="4">HR</option>
-                              <option value="5">other</option>
+                            <label class="form-label" for="category">Category</label>
+                            <select id="category" name="category" class="select2 form-select">
+                               @foreach($project_category as $category)
+                                <option value="{{$category->id}}"  @if($category->id == $member['category']) selected @endif >{{$category->title}}</option>
+                               @endforeach
                             </select>
                           </div>
 
+                           <div class="mb-3 col-md-6">
+                            <label class="form-label" for="lead">Project lead</label>
+                            <select id="lead" name="lead" class="select2 form-select">
+                               @foreach($assignee as $lead)
+                                <option value="{{$lead->id}}"  @if($lead->id == $member['lead']) selected @endif>{{$lead->name}}</option>
+                               @endforeach
+                            </select>
+                          </div>
+
+                           <div class="mb-3 col-md-6">
+                            <label class="form-label" for="default_assigned">Default assignee</label>
+                            <select id="default_assigned" name="default_assigned" class="select2 form-select">
+                              <option value="0">Unassigneed</option>
+                              @foreach($assignee as $lead)
+                                <option value="{{$lead->id}}"  @if($lead->id == $member['default_assigned']) selected @endif>{{$lead->name}}</option>
+                               @endforeach
+                            </select>
+                          </div>
+                            <div class="mb-3">
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
+                              <label class="form-check-label" for="terms-conditions">
+                                Connect repositories, documents, and more
+                                <a href="javascript:void(0);">Sync your team's work from other tools with this project for better visibility, access, and automation.</a>
+                              </label>
+                            </div>
+                          </div>
                         </div>
+
+                     
                         <div class="mt-2">
                           <button type="submit" class="btn btn-primary me-2">Save changes</button>
                           <button type="reset" class="btn btn-outline-secondary">Cancel</button>

@@ -410,7 +410,7 @@ class Login extends Controller
     {
         try {  
             $amazonUser = Socialite::driver('amazon')->stateless()->user();
-            $finduser = User::where('google_id', $amazonUser->id)->first();
+            $finduser = User::where('amazon_id', $amazonUser->id)->first();
 
             if($finduser)
             {      

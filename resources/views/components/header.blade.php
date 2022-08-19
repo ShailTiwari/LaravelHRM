@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Aloha</title>
+  <title>{{$main_settings[0]->site_name}}</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="{{ asset('vendors/feather/feather.css') }}">
   <link rel="stylesheet" href="{{ asset('vendors/mdi/css/materialdesignicons.min.css') }}">
@@ -21,7 +21,7 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="{{ asset('css/vertical-layout-light/style.css') }}">
   <!-- endinject -->
-  <link rel="shortcut icon" href="{{ asset('images/aloha.png') }}" />  
+  <link rel="shortcut icon" href="{{ url('images/'.$main_settings[0]->logo) }}" />  
 
   <!-- Tabulator -->
   <!-- <link href="{{ asset('tabulator/dist/css/tabulator_bootstrap4.min.css') }}" rel="stylesheet"> -->
@@ -45,7 +45,7 @@
         </div>
         <div>
           <a class="navbar-brand brand-logo" href="/home">
-            <img src="{{ asset('images/aloha.png') }}" alt="logo" />
+            <img  src="{{ url('images/'.$main_settings[0]->logo) }}"  alt="{{$main_settings[0]->site_name}}" />
           </a>
           <a class="navbar-brand brand-logo-mini" href="/home">
             
@@ -60,29 +60,6 @@
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
-          <!-- <li class="nav-item dropdown d-none d-lg-block">
-            <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false"> Select Category </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
-              <a class="dropdown-item py-3" >
-                <p class="mb-0 font-weight-medium float-left">Select category</p>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-item-content flex-grow py-2">
-                  <p class="preview-subject ellipsis font-weight-medium text-dark">Bootstrap Bundle </p>
-                  <p class="fw-light small-text mb-0">This is a Bundle featuring 16 unique dashboards</p>
-                </div>
-              </a>
-            </div>
-          </li>
-          <li class="nav-item d-none d-lg-block">
-            <div id="datepicker-popup" class="input-group date datepicker navbar-date-picker">
-              <span class="input-group-addon input-group-prepend border-right">
-                <span class="icon-calendar input-group-text calendar-icon"></span>
-              </span>
-              <input type="text" class="form-control">
-            </div>
-          </li> -->
           <li class="nav-item">
             <form class="search-form" action="#">
               <i class="icon-search"></i>
@@ -98,7 +75,7 @@
                 <p class="mb-0 font-weight-medium float-left">You have 4 new notifications </p>
                 <span class="badge badge-pill badge-primary float-right">View all</span>
               </a>
-              <a class="dropdown-item preview-item py-3">
+              <!-- <a class="dropdown-item preview-item py-3">
                 <div class="preview-thumbnail">
                   <i class="mdi mdi-alert m-auto text-primary"></i>
                 </div>
@@ -106,7 +83,7 @@
                   <h6 class="preview-subject fw-normal text-dark mb-1">Application Error</h6>
                   <p class="fw-light small-text mb-0"> Just now </p>
                 </div>
-              </a>
+              </a> -->
             </div>
           </li>
           <li class="nav-item dropdown"> 
@@ -114,7 +91,7 @@
               <i class="icon-bell"></i>
               <span class="count"></span>
             </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="countDropdown">
+            <!-- <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="countDropdown">
               <a class="dropdown-item py-3">
                 <p class="mb-0 font-weight-medium float-left">You have 7 unread mails </p>
                 <span class="badge badge-pill badge-primary float-right">View all</span>
@@ -147,22 +124,19 @@
                   <p class="fw-light small-text mb-0"> The meeting is cancelled </p>
                 </div>
               </a>
-            </div>
+            </div> -->
           </li>
           <li class="nav-item dropdown d-none d-lg-block user-dropdown">
             <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-              <img class="img-xs rounded-circle" src="images/faces/face8.jpg" alt="Profile image"> </a>
+              <img class="img-xs rounded-circle"  src="{{ url('images/faces/profile/1.jpg') }}" alt="Profile image"> </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <div class="dropdown-header text-center">
-                <img class="img-md rounded-circle" src="images/faces/face8.jpg" alt="Profile image">
+                <img class="img-md rounded-circle" src="{{ url('images/faces/profile/1.jpg') }}" alt="Profile image">
                 <p class="mb-1 mt-3 font-weight-semibold">{{session()->get('user')['name']}}</p>
                 <p class="fw-light text-muted mb-0"></p>
               </div>
-              <a class="dropdown-item" href="/profile/{{session()->get('user')['id']}}"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
-              <!-- <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i> Messages</a>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-calendar-check-outline text-primary me-2"></i> Activity</a>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a> -->
-              <a class="dropdown-item" href="logout"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
+              <a class="dropdown-item" href="/employee_edit/{{session()->get('user')['id']}}"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
+              <a class="dropdown-item" href="/logout"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
             </div>
           </li>
         </ul>

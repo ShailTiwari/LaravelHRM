@@ -30,7 +30,11 @@ class Projects extends Controller
         //return $id;
          $data=Project::find($id);
          $user=Project::where(['id'=>$id])->first();
-         return view('project_profile',['page_name'=>$this->page_name,'member'=>$user]);
+        $project_category = DB::select('select * from project_category');
+        $assignee = DB::select('select * from employees');
+         return view('project_profile',['page_name'=>$this->page_name,'member'=>$user,
+            'project_category'=>$project_category,
+            'assignee'=>$assignee]);
     }
 
       public function create_project_profile(Request $request)
@@ -60,28 +64,32 @@ class Projects extends Controller
         return redirect('project');                      
     }
 
-      public function update_Project_profile(Request $request)
+      public function update_projects_profile(Request $request)
     { 
          $data= new Project();
-         
+                  
          $data=Project::find($request->id);
-        if($request->file('image')){
+         if($request->file('image'))
+        {
             $file= $request->file('image');
             $filename= date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path('img'), $filename);
+            $file-> move(public_path('img/project_img'), $filename);
             //$data['profile_picture']= $filename;
-
-         $data->profile_picture=$filename;
+            $data->icon_picture=$filename;
         }
 
-
-         $data->name=$request->name;
-         $data->email=$request->email;
-         $data->address=$request->address;
-         $data->department=$request->department;
-         $data->post=$request->post;
+         $data->title=$request->title;
+         $data->key=$request->key;
+         $data->start=date('Y-m-d');
+         $data->description='';
+         $data->category=$request->category;
+         $data->lead=$request->lead;
+         $data->default_assigned=$request->default_assigned;
+         $data->options='1';
+         $data->isconfirm='1';
+         $data->remarks='';
          $data->save();
-        return redirect('project');                      
+        return redirect('project');   
     }
 
       public function delete($id)

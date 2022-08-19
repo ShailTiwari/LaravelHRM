@@ -1,5 +1,6 @@
  <?php
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Home;
 use App\Http\Controllers\login;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Departments;
@@ -22,6 +23,10 @@ use App\Http\Controllers\Projects;
 |
 */
 
+
+Route::get('/', [Home::class, 'index']);
+
+
 Route::get('auth/google', [login::class, 'redirectToGoogle'])->name('redirectToGoogle');
 Route::get('auth/google/callback', [login::class, 'handleGoogleCallback'])->name('handleGoogleCallback');
 
@@ -36,7 +41,7 @@ Route::get('auth/amazon/callback', [login::class, 'handleamazonCallback'])->name
 
 
 
-Route::get('/', [login::class, 'index'])->name('login');
+//Route::get('/', [login::class, 'index']);
 Route::get('login', [login::class, 'index'])->name('login');
 Route::get('signup', [login::class, 'signup'])->name('signup');
 Route::post('post-login', [login::class, 'postLogin'])->name('login.post'); 

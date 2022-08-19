@@ -52,6 +52,7 @@ class Activitys extends Controller
         $labels = DB::select('select * from labels');
         $flagges = DB::select('select * from flagges');
         $posts = Activity::where('project', $id)
+                             ->where('isactive', 1)
                              ->orderBy('order','asc')
                              ->get();
         return view('activity',
@@ -134,6 +135,7 @@ public function get_activity_info(Request $request)
          $data->reporter=$request->reporter;
          $data->labels=$request->labels;
          $data->flagged=$request->flagged;
+         $data->isactive=$request->isactive;
          $data->start=date('Y-m-d');
          $data->options='1';
          $data->isconfirm='1';

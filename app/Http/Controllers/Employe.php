@@ -36,8 +36,10 @@ class Employe extends Controller
     {
         //return $id;
          $data=Employee::find($id);
-         $user=Employee::where(['id'=>$id])->first();
-         return view('employee_profile',['page_name'=>$this->page_name,'member'=>$user]);
+         $user=Employee::where(['id'=>$id])->first();         
+         $department = DB::select('SELECT * from departments where isactive=1 and inuse=1 and isdelete=0 order by name ASC');
+         $post = DB::select('SELECT * from posts where isactive=1 and inuse=1 and isdelete=0 order by name ASC');
+         return view('employee_profile',['page_name'=>$this->page_name,'member'=>$user,'departments'=>$department,'posts'=>$post]);
     }
 
       public function create_employee_profile(Request $request)
@@ -47,7 +49,7 @@ class Employe extends Controller
         if($request->file('image')){
             $file= $request->file('image');
             $filename= date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path('img'), $filename);
+            $file-> move(public_path('images/faces/profile/'), $filename);
             //$data['profile_picture']= $filename;
 
          $data->profile_picture=$filename;
@@ -73,15 +75,19 @@ class Employe extends Controller
         if($request->file('image')){
             $file= $request->file('image');
             $filename= date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path('img'), $filename);
+            $file-> move(public_path('images/faces/profile/'), $filename);
             //$data['profile_picture']= $filename;
 
          $data->profile_picture=$filename;
         }
 
          $data->name=$request->name;
+         $data->lastname=$request->lastname;
          $data->email=$request->email;
+         $data->phone_no=$request->phone_no;
+         $data->company=$request->company;
          $data->address=$request->address;
+         $data->salary=$request->salary;
          $data->department=$request->department;
          $data->post=$request->post;
          $data->save();

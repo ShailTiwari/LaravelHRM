@@ -15,7 +15,7 @@
                       <div class="d-flex align-items-start align-items-sm-center gap-4">
                         <img
                         id="preview-image"
-                          src="{{ url('img/'.$member['profile_picture']) }}"
+                          src="{{ url('images/faces/profile/'.$member['profile_picture']) }}"
                           alt="user-avatar"
                           class="d-block rounded"
                           height="100"
@@ -46,99 +46,52 @@
 
                         <div class="row">
                           <div class="mb-3 col-md-6">
-                            <label for="firstName" class="form-label">First Name</label> <input
-                              class="form-control"
-                              type="hidden"
-                              id="id"
-                              name="id"
-                               value="{{$member['id']}}"
-                              autofocus
-                            />
-                            <input
-                              class="form-control"
-                              type="text"
-                              id="name"
-                              name="name"
-                               value="{{$member['name']}}"
-                              autofocus
-                            />
+                            <label for="firstName" class="form-label">First Name</label> 
+                            <input class="form-control" type="hidden" id="id" name="id" value="{{$member['id']}}" />
+                            <input class="form-control" type="text" id="name" name="name" value="{{$member['name']}}"  autofocus/>
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="lastName" class="form-label">Last Name</label>
-                            <input class="form-control" type="text" name="lastName" id="lastName" value="{{$member['lastname']}}" />
+                            <input class="form-control" type="text" name="lastname" id="lastname" value="{{$member['lastname']}}" />
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="email" class="form-label">E-mail</label>
-                            <input
-                              class="form-control"
-                              type="text"
-                              id="email"
-                              name="email"
-                               value="{{$member['email']}}"
-                              placeholder=""
-                            />
+                            <input class="form-control" type="email" id="email" name="email" value="{{$member['email']}}" />
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="organization" class="form-label">Organization</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="organization"
-                              name="organization"
-                              value="{{$member['company']}}"
-                            />
+                            <input class="form-control" type="text" id="company" name="company" value="{{$member['company']}}" />
                           </div>
                           <div class="mb-3 col-md-6">
                             <label class="form-label" for="phoneNumber">Phone Number</label>
                             <div class="input-group input-group-merge">
                               <span class="input-group-text"></span>
-                              <input
-                                type="text"
-                                id="phoneNumber"
-                                name="phoneNumber"
-                                class="form-control"
-                                value="{{$member['phone_no']}}"
-                                placeholder=""
-                              />
+                            <input class="form-control" type="text" id="phone_no" name="phone_no" value="{{$member['phone_no']}}" />
                             </div>
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="address" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="address" name="address" placeholder="Address" value="{{$member['address']}}" />
+                            <input type="text" class="form-control" id="address" name="address"  value="{{$member['address']}}" />
                           </div>
                           <div class="mb-3 col-md-6">
-                            <label for="state" class="form-label">State</label>
-                            <input class="form-control" type="text" id="state" name="state" placeholder="California" />
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="zipCode" class="form-label">Salary</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="zipCode"
-                              name="zipCode"
-                              placeholder="231465"
-                              maxlength="10" 
-                              value="{{$member['salary']}}" 
+                            <label for="salary" class="form-label">Salary</label>
+                            <input  type="text" class="form-control" id="salary" name="salary"  maxlength="10"  value="{{$member['salary']}}" 
                             />
                           </div>
                            <div class="mb-3 col-md-6">
                             <label class="form-label" for="department">Department</label>
                             <select id="department" name="department" class="select2 form-select">
-                              <option value="0">Select</option>
-                              <option value="1">IT/Software</option>
-                              <option value="2">Accounts</option>
+                                 @foreach($departments as $department)
+                                   <option value="{{$department->id}}" @if($department->id == $member['department']) selected @endif>{{$department->name}}</option>                          
+                                 @endforeach
                             </select>
                           </div>
                            <div class="mb-3 col-md-6">
                             <label class="form-label" for="department">Post</label>
-                            <select id="post" name="post" class="select2 form-select">
-                              <option value="0">Select</option>
-                              <option value="1">Developer</option>
-                              <option value="2">QA</option>
-                              <option value="3">Accountent</option>
-                              <option value="4">HR</option>
-                              <option value="5">other</option>
+                            <select id="post" name="post" class="select2 form-select"> 
+                              @foreach($posts as $post)
+                                   <option value="{{$post->id}}" @if($post->id == $member['post']) selected @endif>{{$post->name}}</option>
+                                 @endforeach
                             </select>
                           </div>
 
