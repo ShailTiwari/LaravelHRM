@@ -21,8 +21,10 @@ class Login extends Controller
           return redirect('home');
         }
 
-       return view('login');
+       return view('Login.login');
     }
+
+
 
      public function postLogin(Request $request)
     { 
@@ -56,17 +58,10 @@ class Login extends Controller
           return redirect('home');
         }
 
-        return view('signup');
+        return view('Login.signup');
     }
 
-       public function logout()
-    {
-        if(session()->has('user'))
-        {
-         session()->pull('user');
-        }
-        return redirect('login');
-    }
+
 
 
    
@@ -128,7 +123,7 @@ class Login extends Controller
 
      public function forgot_password()
     {
-       return view('forgot_password');
+       return view('Login.forgot_password');
     }
 
 
@@ -256,7 +251,7 @@ class Login extends Controller
         }
          catch (Exception $e) 
          {
-            dd($e->getMessage());
+            //dd($e->getMessage());
         }
 
     }
@@ -325,7 +320,7 @@ class Login extends Controller
         }
          catch (Exception $e) 
          {
-            dd($e->getMessage());
+            //dd($e->getMessage());
         }
 
     }
@@ -460,6 +455,15 @@ class Login extends Controller
 
     }
 
+
+       public function logout()
+    {
+        if(session()->has('user'))
+        {
+         session()->pull('user');
+        }
+        return redirect('login');
+    }
 
 
 

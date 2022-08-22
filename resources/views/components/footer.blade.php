@@ -23,7 +23,7 @@
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="{{ asset('js/jquery.cookie.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('js/dashboard.js') }}"></script>
+  <!-- <script src="{{ asset('js/dashboard.js') }}"></script> -->
   <script src="{{ asset('js/Chart.roundedBarCharts.js') }}"></script>
   <!-- End custom js for this page-->
 </body>
