@@ -1,55 +1,24 @@
     <x-header  title={{$page_name}}/>
-    <x-sidebar/>
-     <!-- partial -->
+    <x-sidebar/> 
       <div class="main-panel">
-        <div class="content-wrapper">
-          <div class="row">                      
-            <div class="col-lg-12 grid-margin stretch-card">
+        <div class="">
+          <div class="row">
+            <div class="col-sm-12">
               <div class="card">
                 <div class="card-body">
-                   <div class="home-tab d-sm-flex align-items-center justify-content-between border-bottom">
-                 <!--  <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item">
-                      <a class="nav-link active ps-0" id="home-tab" data-bs-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#audiences" role="tab" aria-selected="false">Audiences</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#demographics" role="tab" aria-selected="false">Demographics</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link border-0" id="more-tab" data-bs-toggle="tab" href="#more" role="tab" aria-selected="false">More</a>
-                    </li>
-                  </ul> -->
-                  <!--  <div class="form-group">
-                    <div class="input-group btn-wrapper">
-                       <input type="text" class="btn form-control" placeholder="Search." aria-label="Recipient's username">
-
-                      <input type="text" class="btn form-control" placeholder="Search..." aria-label="Recipient's username">
-                      <div class="input-group-append">
-                        <button class="btn btn-rounded btn-sm btn-primary" type="button">Search</button>
-                      </div>
-                    </div>
-                  </div> -->
-
-                  <div>
-                    <div class="btn-wrapper"> 
+                   <div class="home-tab d-sm-flex align-items-center justify-content-between border-bottom"> 
+                    <div>
+                       <div class="btn-wrapper"> 
+                      <!-- <input type="text" class="btn btn-otline-dark align-items-center" placeholder="Search" aria-label="">
                       <input type="text" class="btn btn-otline-dark align-items-center" placeholder="Search" aria-label="">
-                      <input type="text" class="btn btn-otline-dark align-items-center" placeholder="Search" aria-label="">
-                      <input type="text" class="btn btn-otline-dark align-items-center" placeholder="Search" aria-label="">
+                      <input type="text" class="btn btn-otline-dark align-items-center" placeholder="Search" aria-label=""> -->
                       <button  id="ajax-trigger" class="btn btn-primary text-white align-items-center"><i class="icon-eye"></i> Show</button>
-
-
-
-                      
-
                       <a href="#" class="btn btn-otline-dark align-items-center"><i class="icon-share"></i> Share</a> 
                       <a href="#" class="btn btn-warning text-white align-items-center" type="button"  data-bs-toggle="modal" data-bs-target="#largeModal"><i class="icon-plus"></i> New</a>
                       <button id="download-xlsx" class="btn btn-success text-white align-items-center btn-xs"><i class="icon-download"></i>Export</button>
                     </div>
+                    </div>
                   </div>
-                </div>
                   <div class="table-responsive">
                     <div id="example-table"></div>
                   </div>
@@ -58,8 +27,7 @@
             </div>
           </div>
         </div>
-
-
+    <x-footer/>
 
       
         <!-- Large Modal -->
@@ -171,11 +139,7 @@
             </div>
           </div>
 
-    
-       <x-footer/> 
-
- <script type="text/javascript">  
-  
+ <script type="text/javascript"> 
                     function edit_row(e,cell)                      
                       {
                         $("#editid").val();

@@ -100,7 +100,7 @@ class Login extends Controller
                             { 
 
                              $request->session()->put('user',$user); 
-                             Mail::send('signup_email', ['username' =>$request->name], 
+                             Mail::send('Login.signup_email', ['username' =>$request->name], 
                                 function($message) use($request){
                                   $message->to($request->email);
                                   $message->subject('Signup Notification');

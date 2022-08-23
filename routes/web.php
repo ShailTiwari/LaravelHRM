@@ -65,6 +65,7 @@ Route::group(['middleware'=>['logincheck']],function()
 {    
 Route::get('home', [Dashboard::class,'index'])->name('welcome');
 Route::get('get_graph', [Dashboard::class,'Get_graph_data']);
+Route::get('get_attendence_graph', [Dashboard::class,'Get_Attendence_graph_data']);
 
 
 Route::get('user', [Dashboard::class, 'user_list']);

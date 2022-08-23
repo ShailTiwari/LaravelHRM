@@ -101,8 +101,10 @@
 
   <script type="text/javascript">
   $(document).ready(function(){
+
+   var SITEURL = "{{ url('get_graph') }}"; 
   $.ajax({
-    url: "http://127.0.0.1:8000/get_graph",
+    url:SITEURL,
     method: "GET",
     dataType: "json",
     success: function(data) {
@@ -212,7 +214,10 @@
 
 /*Performance line graph*/
 
-      var graphGradient = document.getElementById("performaneLine").getContext('2d');
+ $(document).ready(function(){
+
+   var SITEURL = "{{ url('get_attendence_graph') }}"; 
+   var graphGradient = document.getElementById("performaneLine").getContext('2d');
       var graphGradient2 = document.getElementById("performaneLine").getContext('2d');
       var saleGradientBg = graphGradient.createLinearGradient(5, 0, 5, 100);
       saleGradientBg.addColorStop(0, 'rgba(26, 115, 232, 0.18)');
@@ -220,11 +225,35 @@
       var saleGradientBg2 = graphGradient2.createLinearGradient(100, 0, 50, 150);
       saleGradientBg2.addColorStop(0, 'rgba(0, 208, 255, 0.19)');
       saleGradientBg2.addColorStop(1, 'rgba(0, 208, 255, 0.03)');
-      var salesTopData = {
-          labels: ["SUN","sun", "MON", "mon", "TUE","tue", "WED", "wed", "THU", "thu", "FRI", "fri", "SAT"],
-          datasets: [{
+
+
+
+  $.ajax({
+    url:SITEURL,
+    method: "GET",
+    dataType: "json",
+    success: function(data) {
+      var name = [];
+      var value = [];
+      var bgcolor = [];
+      var pointBorderColor = [];
+
+      for(var i in data) 
+        { 
+        name.push(data[i].name);
+        value.push(data[i].value);
+        bgcolor.push('#1F3BB3');
+        pointBorderColor.push('#fff');
+        }
+
+
+          var salesTopData = {
+          labels: name,
+          datasets: [
+
+          {
               label: 'This week',
-              data: [50, 110, 60, 290, 200, 115, 130, 170, 90, 210, 240, 280, 200],
+              data:value,
               backgroundColor: saleGradientBg,
               borderColor: [
                   '#1F3BB3',
@@ -232,11 +261,13 @@
               borderWidth: 1.5,
               fill: true, // 3: no fill
               pointBorderWidth: 1,
-              pointRadius: [4, 4, 4, 4, 4,4, 4, 4, 4, 4,4, 4, 4],
-              pointHoverRadius: [2, 2, 2, 2, 2,2, 2, 2, 2, 2,2, 2, 2],
-              pointBackgroundColor: ['#1F3BB3)', '#1F3BB3', '#1F3BB3', '#1F3BB3','#1F3BB3)', '#1F3BB3', '#1F3BB3', '#1F3BB3','#1F3BB3)', '#1F3BB3', '#1F3BB3', '#1F3BB3','#1F3BB3)'],
-              pointBorderColor: ['#fff','#fff','#fff','#fff','#fff','#fff','#fff','#fff','#fff','#fff','#fff','#fff','#fff',],
-          },{
+              pointRadius: [4, 4],
+              pointHoverRadius: [2, 2],
+              pointBackgroundColor:bgcolor,
+              pointBorderColor:pointBorderColor,
+          },
+
+          /*{
             label: 'Last week',
             data: [30, 150, 190, 250, 120, 150, 130, 20, 30, 15, 40, 95, 180],
             backgroundColor: saleGradientBg2,
@@ -250,9 +281,9 @@
             pointHoverRadius: [0, 0, 0, 2, 0],
             pointBackgroundColor: ['#52CDFF)', '#52CDFF', '#52CDFF', '#52CDFF','#52CDFF)', '#52CDFF', '#52CDFF', '#52CDFF','#52CDFF)', '#52CDFF', '#52CDFF', '#52CDFF','#52CDFF)'],
               pointBorderColor: ['#fff','#fff','#fff','#fff','#fff','#fff','#fff','#fff','#fff','#fff','#fff','#fff','#fff',],
-        }]
+        }*/]
       };
-  
+
       var salesTopOptions = {
         responsive: true,
         maintainAspectRatio: false,
@@ -316,4 +347,30 @@
           options: salesTopOptions
       });
       document.getElementById('performance-line-legend').innerHTML = salesTop.generateLegend();
+
+
+
+
+
+
+
+
+
+        },
+        error: function(data) 
+          {
+          console.log(data);
+          }
+        });
+        });
+
+
+
+
+
+
+     
+    
+  
+      
             </script>

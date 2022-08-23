@@ -24,8 +24,8 @@
   <link rel="shortcut icon" href="{{ url('images/'.$main_settings[0]->logo) }}" />  
 
   <!-- Tabulator -->
-  <!-- <link href="{{ asset('tabulator/dist/css/tabulator_bootstrap4.min.css') }}" rel="stylesheet"> -->
-  <link href="{{ asset('tabulator/dist/css/tabulator.min.css') }}" rel="stylesheet">
+   <link href="{{ asset('tabulator/dist/css/tabulator_bootstrap3.min.css') }}" rel="stylesheet"> 
+  <!-- <link href="{{ asset('tabulator/dist/css/tabulator.min.css') }}" rel="stylesheet"> -->
   <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
   <script type="text/javascript" src="{{ asset('tabulator/dist/js/tabulator.js') }}"></script>
   <!-- Sweet Alert  -->    
@@ -55,7 +55,10 @@
       <div class="navbar-menu-wrapper d-flex align-items-top"> 
         <ul class="navbar-nav">
           <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-            <h6 class="welcome-text">Hi, <span class="text-black fw-bold">{{session()->get('user')['name']}} </span></h6>
+            <h6 class="welcome-text">Hi, <span class="text-black fw-bold">
+         <!-- {{print_r($user_info)}} -->
+
+         {{session()->get('user')['name']}} </span></h6>
             <!-- <h3 class="welcome-sub-text">Your performance summary this week </h3> -->
           </li>
         </ul>

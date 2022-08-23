@@ -1,15 +1,15 @@
-    <x-header  title={{$page_name}}/>
-    <x-sidebar/>
-     <!-- partial -->
+     <x-header  title={{$page_name}}/>
+    <x-sidebar/> 
       <div class="main-panel">
-        <div class="content-wrapper">                    
-            <div class="col-lg-12 grid-margin stretch-card">
+        <div class="">
+          <div class="row">
+            <div class="col-sm-12">
               <div class="card">
                 <div class="card-body">
-                  <div class="row">  
+                    <div class="row">  
 
                           @foreach($projects as $project)
-                            <div class="col-md-4 col-lg-4 grid-margin stretch-card">
+                            <div class="col-md-3 col-lg-3 grid-margin stretch-card">
                             <div class="card bg-primary card-rounded">
                               <div class="card-body pb-0">
                                 <a href="projects/activity/{{$project->key}}/{{$project->id}}">
@@ -33,10 +33,15 @@
                           </div>
                            @endforeach
                          </div>
-                       </div>
-                     </div>
-                   </div>
-                 </div>
-               </div>
+                  <div class="table-responsive">
+                    <div id="example-table"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    <x-footer/>
 
-    <x-footer/> 
+
+

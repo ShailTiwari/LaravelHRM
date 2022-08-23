@@ -1,10 +1,12 @@
     <x-header  title={{$page_name}}/>
-    <x-sidebar/>
+    <x-sidebar/> 
+    <!-- Content wrapper -->
      <!-- partial -->
+      <!-- partial -->
       <div class="main-panel">
-        <div class="content-wrapper">
-          <div class="row">                      
-            <div class="col-lg-12 grid-margin stretch-card">
+        <div class="">
+          <div class="row">
+            <div class="col-sm-12">
               <div class="card">
                 <div class="card-body">
                    <div class="home-tab d-sm-flex align-items-center justify-content-between border-bottom"> 
@@ -250,11 +252,12 @@
                     };
 
 
+                      var APP_URL = {!! json_encode(url('employee_data')) !!}
                       var table = new Tabulator("#example-table", {
                       height:"450px",
                       layout:"fitColumns", 
                       pagination:"remote", //enable remote pagination
-                      ajaxURL:"http://127.0.0.1:8000/employee_data", //set url for ajax request
+                      ajaxURL:APP_URL,    //set url for ajax request
                       paginationSize:20,
                       paginationSizeSelector:[20, 40, 50, 100],
                       columns:[
@@ -279,16 +282,4 @@
                           }},
                       ],
                   });
-                    
-                  
-                  //trigger AJAX load on "Load Data via AJAX" button click
-                  /*$("#ajax-trigger").click(function(){
-                      table.setData("http://127.0.0.1:8000/employee_data");
-                      
-                  });*/
-
-                  //trigger download of data.xlsx file
-                    document.getElementById("download-xlsx").addEventListener("click", function(){
-                        table.download("xlsx", "data.xlsx", {sheetName:"Employee Data"});
-                    });
                     </script>

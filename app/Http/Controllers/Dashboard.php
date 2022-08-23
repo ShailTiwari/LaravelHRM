@@ -22,10 +22,10 @@ class Dashboard extends Controller
          $data= User::all();
          $users = DB::table('employees')->count();
          $projects = DB::table('projects')->count();
-         $activities = DB::table('activities')->max('order'); 
+         $activities = DB::table('activities')->count();
          $holidays = DB::table('holidays')->count();
          $attendances = DB::table('attendances')->count();
-         return view('welcome',
+         return view('dashboard',
             [
                 'page_name'=>$this->page_name,
                 'members'=>$data,
@@ -74,6 +74,12 @@ class Dashboard extends Controller
     {
           $data = DB::select('SELECT count(a.id) as value,b.title as name from activities as a left join projects as b on a.project=b.id  group by a.project;
 ');
+         echo json_encode($data);
+    }
+
+    public function Get_Attendence_graph_data()
+    {
+          $data = DB::select('SELECT count(id) as value,start  as name from attendances group by start order by start desc limit 7');
          echo json_encode($data);
     }
      

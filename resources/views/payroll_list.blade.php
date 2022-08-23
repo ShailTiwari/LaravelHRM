@@ -1,32 +1,24 @@
     <x-header  title={{$page_name}}/>
-    <x-sidebar/>
-     <!-- partial -->
+    <x-sidebar/> 
       <div class="main-panel">
-        <div class="content-wrapper">
-          <div class="row">                      
-            <div class="col-lg-12 grid-margin stretch-card">
+        <div class="">
+          <div class="row">
+            <div class="col-sm-12">
               <div class="card">
                 <div class="card-body">
-                   <div class="home-tab d-sm-flex align-items-center justify-content-between border-bottom">
-               
-
-                  <div>
-                    <div class="btn-wrapper"> 
+                   <div class="home-tab d-sm-flex align-items-center justify-content-between border-bottom"> 
+                    <div>
+                       <div class="btn-wrapper"> 
+                      <!-- <input type="text" class="btn btn-otline-dark align-items-center" placeholder="Search" aria-label="">
                       <input type="text" class="btn btn-otline-dark align-items-center" placeholder="Search" aria-label="">
-                      <input type="text" class="btn btn-otline-dark align-items-center" placeholder="Search" aria-label="">
-                      <input type="text" class="btn btn-otline-dark align-items-center" placeholder="Search" aria-label="">
+                      <input type="text" class="btn btn-otline-dark align-items-center" placeholder="Search" aria-label=""> -->
                       <button  id="ajax-trigger" class="btn btn-primary text-white align-items-center"><i class="icon-eye"></i> Show</button>
-
-
-
-                      
-
                       <a href="#" class="btn btn-otline-dark align-items-center"><i class="icon-share"></i> Share</a> 
                       <a href="#" class="btn btn-warning text-white align-items-center" type="button"  data-bs-toggle="modal" data-bs-target="#largeModal"><i class="icon-plus"></i> New</a>
                       <button id="download-xlsx" class="btn btn-success text-white align-items-center btn-xs"><i class="icon-download"></i>Export</button>
                     </div>
+                    </div>
                   </div>
-                </div>
                   <div class="table-responsive">
                     <div id="example-table"></div>
                   </div>
@@ -35,6 +27,8 @@
             </div>
           </div>
         </div>
+    <x-footer/>
+
 
 
 
@@ -198,12 +192,6 @@
 
 
 
-
-
-
-
-    
-       <x-footer/> 
                     <script type="text/javascript">  
                       function print_row(e,cell)                      
                       {
@@ -283,11 +271,13 @@
                     };
 
 
+                      
+                      var APP_URL = {!! json_encode(url('payroll_data')) !!}
                       var table = new Tabulator("#example-table", {
                       height:"450px",
                       layout:"fitColumns", 
                       pagination:"remote", //enable remote pagination
-                      ajaxURL:"http://127.0.0.1:8000/payroll_data", //set url for ajax request
+                      ajaxURL:APP_URL, //set url for ajax request
                       paginationSize:20,
                       paginationSizeSelector:[20, 40, 50, 100],
                       columns:[
@@ -316,12 +306,6 @@
                           ],
                   });
                     
-                  
-                  //trigger AJAX load on "Load Data via AJAX" button click
-                  /*$("#ajax-trigger").click(function(){
-                      table.setData("http://127.0.0.1:8000/employee_data");
-                      
-                  });*/
 
                   //trigger download of data.xlsx file
                     document.getElementById("download-xlsx").addEventListener("click", function(){
