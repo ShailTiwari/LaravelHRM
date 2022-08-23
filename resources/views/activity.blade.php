@@ -231,7 +231,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <div id="demo" class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
        @foreach($task_status as $status)
-  <div class="card col-4 mb-4 activity-secondary ">
+  <div class="card col-3 mb-3 activity-secondary ">
    <h5 class="d-inline card-header">{{$status->title}}</h5>
      <div id="items-{{$status->id}}" class="list-group col">
        @foreach($posts as $post)
@@ -242,21 +242,10 @@
                         <div class="card-body">
                           <div class="card-title d-flex align-items-start justify-content-between grid-margin stretch-card">
                             <div class="avatar flex-shrink-0">
-                              <img 
-                              class="img-sm rounded-10"
-                                src="{{ url('img/project_img/'.$project->icon_picture) }}"
-                                alt="icon"
-                              />
+                              <img class="img-sm rounded-10" src="{{ url('img/project_img/'.$project->icon_picture) }}" alt="icon"/>
                             </div>
                             <div class="dropdown">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="cardOpt3"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                              >
+                              <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="bx bx-dots-vertical-rounded"></i>
                               </button>
                               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
@@ -280,7 +269,7 @@
          @endif
          @endforeach
       </div>
-      <div class="card card-body btn-outline-info gap-10 d-flex">
+      <div class="card card-body  gap-10 d-flex">
          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#largeModal">
             Add Task
           </button>

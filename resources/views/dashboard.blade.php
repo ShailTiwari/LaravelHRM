@@ -252,7 +252,7 @@
           datasets: [
 
           {
-              label: 'This week',
+              label: 'Attendence',
               data:value,
               backgroundColor: saleGradientBg,
               borderColor: [

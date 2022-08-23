@@ -72,8 +72,7 @@ class Dashboard extends Controller
 
     public function Get_graph_data()
     {
-          $data = DB::select('SELECT count(a.id) as value,b.title as name from activities as a left join projects as b on a.project=b.id  group by a.project;
-');
+          $data = DB::select('SELECT count(a.id) as value,b.title as name from activities as a left join projects as b on a.project=b.id where b.isactive=1 group by a.project');
          echo json_encode($data);
     }
 

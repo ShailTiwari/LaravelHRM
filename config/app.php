@@ -53,7 +53,7 @@ return [
     */
 
    // 'url' => env('APP_URL', 'http://localhost'),
-    'url' => env('APP_URL', '127.0.0.1:8000/'),
+    'url' => env('APP_URL', 'http://3.6.147.92/hrm/'),
 
     
 
