@@ -210,7 +210,7 @@
 
                      var tabledata = '<?php echo $members ;?>';
                       var table = new Tabulator("#example-table", {
-                          height:"411px",
+                          height:"450px",
                           pagination:true, //enable.
                           paginationSize:100, // this option can take any positive integer value  
                           data:tabledata, //assign data to table

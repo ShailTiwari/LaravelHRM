@@ -15,9 +15,14 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();           
-            $table->string('title');
-            $table->date('start');
-            $table->date('end');
+            $table->string('title')->nullable();
+            $table->date('start')->nullable();
+            $table->date('end')->nullable();
+            $table->integer('isactive')->default(1);
+            $table->integer('isdelete')->default(0);
+            $table->integer('created_by')->default(1);
+            $table->integer('updated_by')->default(1);
+            $table->integer('inuse')->default(1);
             $table->timestamps();
         });
     }

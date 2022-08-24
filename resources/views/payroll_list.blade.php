@@ -285,7 +285,7 @@
                           {title:"Icon", field:"profile_picture", formatter:"image", formatterParams:{
                            height:"20px",
                            width:"20px",
-                           urlPrefix:"{{ url('img/')}}/",
+                           urlPrefix:"{{ url('images/faces/profile/')}}/",
                           }},
                           {title:"Name", field:"name",editor:"input"},
                           {title:"Email", field:"email",editor:"input"},

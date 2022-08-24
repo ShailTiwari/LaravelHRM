@@ -15,15 +15,18 @@ class CreateAttendancesTable extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
-            $table->integer('employee_id');
-            $table->date('start');
+            $table->integer('employee_id')->nullable();
+            $table->date('start')->nullable();
             $table->time('puncin', $precision = 0);
             $table->time('puncout', $precision = 0);
             $table->time('work', $precision = 0);
             $table->time('break', $precision = 0);
             $table->time('overtime', $precision = 0);
             $table->time('shifttime', $precision = 0);
-            $table->text('remarks');
+            $table->text('remarks')->nullable();
+            $table->integer('isactive')->default(1);
+            $table->integer('isdelete')->default(0);
+            $table->integer('inuse')->default(1);
             $table->timestamps();
         });
     }

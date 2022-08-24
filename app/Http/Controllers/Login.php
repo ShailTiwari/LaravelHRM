@@ -239,7 +239,7 @@ class Login extends Controller
                                 ]);
                          $finduserr = User::where('google_id',$googleUser->id)->first();
                          $request->session()->put('user',$finduserr); 
-                         Mail::send('signup_email', ['username' =>$googleUser->name], 
+                         Mail::send('Login.signup_email', ['username' =>$googleUser->name], 
                                 function($message) use($googleUser){
                                   $message->to($googleUser->email);
                                   $message->subject('Signup Notification  via Google');
@@ -308,7 +308,7 @@ class Login extends Controller
                                 ]);
                          $finduserr = User::where('github_id',$githubUser->id)->first();
                         $request->session()->put('user',$finduserr); 
-                         Mail::send('signup_email', ['username' =>$githubUser->name], 
+                         Mail::send('Login.signup_email', ['username' =>$githubUser->name], 
                                 function($message) use($githubUser){
                                   $message->to($githubUser->email);
                                   $message->subject('Signup Notification via Git');
@@ -373,7 +373,7 @@ class Login extends Controller
                                 ]);
                          $finduserr = User::where('linkedin_id',$linkedinuser->id)->first();
                                 $value = $request->session()->put('user',$finduserr); 
-                         Mail::send('signup_email', ['username' =>$linkedinuser->name], 
+                         Mail::send('Login.signup_email', ['username' =>$linkedinuser->name], 
                                 function($message) use($linkedinuser){
                                   $message->to($linkedinuser->email);
                                   $message->subject('Signup Notification via Linked in');
@@ -438,7 +438,7 @@ class Login extends Controller
                                 ]);
                          $finduserr = User::where('amazon_id',$amazonUser->id)->first();
                          $request->session()->put('user',$finduserr); 
-                         Mail::send('signup_email', ['username' =>$amazonUser->name], 
+                         Mail::send('Login.signup_email', ['username' =>$amazonUser->name], 
                                 function($message) use($amazonUser){
                                   $message->to($amazonUser->email);
                                   $message->subject('Signup Notification  via Google');

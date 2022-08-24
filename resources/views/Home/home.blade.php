@@ -42,8 +42,8 @@
   <div id="topbar" class="fixed-top d-flex align-items-center ">
     <div class="container d-flex align-items-center justify-content-center justify-content-md-between">
       <div class="contact-info d-flex align-items-center">
-        <i class="bi bi-envelope-fill"></i><a href="mailto:contact@example.com">info@example.com</a>
-        <i class="bi bi-phone-fill phone-icon"></i> +{{$main_settings[0]->phone}}
+        <i class="bi bi-envelope-fill"></i><a href="mailto:contact@example.com">{{$main_settings[0]->email}}</a>
+        <i class="bi bi-phone-fill phone-icon"></i> {{$main_settings[0]->phone}}
       </div>
       <div class="cta d-none d-md-block">
         <a href="{{url('login')}}" class="scrollto">Get Started</a>
@@ -159,7 +159,7 @@
 
 
     <!-- ======= About Us Section ======= -->
-     <!-- {{$main_settings[0]->about_us}} -->
+     <!-- {{$main_settings[0]->description}} -->
 
 
     <section id="about" class="about">
@@ -275,7 +275,7 @@
     </section><!-- End Why Us Section -->
 
     <!-- ======= Services Section ======= -->
-    <section id="services" class="services">
+    <!-- <section id="services" class="services">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -329,10 +329,11 @@
         </div>
 
       </div>
-    </section><!-- End Services Section -->
-
+    </section> -->
+    <!-- End Services Section -->
+    
     <!-- ======= Cta Section ======= -->
-    <section id="cta" class="cta">
+    <!-- <section id="cta" class="cta">
       <div class="container">
 
         <div class="row" data-aos="zoom-in">
@@ -346,10 +347,11 @@
         </div>
 
       </div>
-    </section><!-- End Cta Section -->
+    </section> -->
+    <!-- End Cta Section -->
 
     <!-- ======= Portfoio Section ======= -->
-    <section id="portfolio" class="portfoio">
+    <!-- <section id="portfolio" class="portfoio">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -463,10 +465,11 @@
         </div>
 
       </div>
-    </section><!-- End Portfoio Section -->
+    </section> -->
+    <!-- End Portfoio Section -->
 
     <!-- ======= Team Section ======= -->
-    <section id="team" class="team section-bg">
+    <!-- <section id="team" class="team section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -547,10 +550,11 @@
         </div>
 
       </div>
-    </section><!-- End Team Section -->
+    </section> -->
+    <!-- End Team Section -->
 
     <!-- ======= Pricing Section ======= -->
-    <section id="pricing" class="pricing">
+    <!-- <section id="pricing" class="pricing">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -632,10 +636,11 @@
         </div>
 
       </div>
-    </section><!-- End Pricing Section -->
+    </section> -->
+    <!-- End Pricing Section -->
 
     <!-- ======= Frequently Asked Questions Section ======= -->
-    <section id="faq" class="faq section-bg">
+    <!-- <section id="faq" class="faq section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -693,7 +698,8 @@
         </div>
 
       </div>
-    </section><!-- End Frequently Asked Questions Section -->
+    </section> -->
+    <!-- End Frequently Asked Questions Section -->
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
@@ -710,19 +716,19 @@
               <div class="address">
                 <i class="bi bi-geo-alt"></i>
                 <h4>Location:</h4>
-                <p>A108 Adam Street, New York, NY 535022</p>
+                <p>{{$main_settings[0]->address}} {{$main_settings[0]->state}} {{$main_settings[0]->zipCode}}</p>
               </div>
 
               <div class="email">
                 <i class="bi bi-envelope"></i>
                 <h4>Email:</h4>
-                <p>info@example.com</p>
+                <p>{{$main_settings[0]->email}}</p>
               </div>
 
               <div class="phone">
                 <i class="bi bi-phone"></i>
                 <h4>Call:</h4>
-                <p>+1 5589 55488 55s</p>
+                <p>{{$main_settings[0]->phone}}</p>
               </div>
 
             </div>
@@ -811,18 +817,18 @@
           <div class="col-lg-3 col-md-6 footer-contact">
             <h4>Contact Us</h4>
             <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br><br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
+              {{$main_settings[0]->address}} <br>
+               {{$main_settings[0]->zipCode}}<br>
+              {{$main_settings[0]->state}} <br><br>
+              <strong>Phone:</strong> {{$main_settings[0]->phone}}<br>
+              <strong>Email:</strong> {{$main_settings[0]->email}}<br>
             </p>
 
           </div>
 
           <div class="col-lg-3 col-md-6 footer-info">
-            <h3>About Anyar</h3>
-            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
+            <h3>About </h3>
+            <p>{{$main_settings[0]->remarks}}.</p>
             <div class="social-links mt-3">
               <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
               <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
@@ -845,7 +851,7 @@
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/anyar-free-multipurpose-one-page-bootstrap-theme/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        Designed by <a href="https://bootstrapmade.com/">{{$main_settings[0]->site_name}}</a>
       </div>
     </div>
   </footer><!-- End Footer -->
